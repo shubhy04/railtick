@@ -1,0 +1,60 @@
+body {
+	background-color: #DDE6ED;
+}
+
+.navbar-brand {
+	display: inline-block;
+	padding-top: 0.3125rem;
+	padding-bottom: 0.3125rem;
+	margin-right: 1rem;
+	font-size: 2rem;
+	line-height: inherit;
+	white-space: nowrap;
+}
+
+.navbar-light .navbar-brand {
+	color: #DDE6ED;
+}
+
+h3 {
+	color: red;
+}
+
+.btn-outline-success {
+	color: #DDE6ED;
+	background-color: transparent;
+	background-image: none;
+	border-color: #526D82;
+}
+
+.btn-outline-secondary {
+	color: #DDE6ED;
+	background-color: transparent;
+	background-image: none;
+	border-color: #526D82;
+}
+
+.navbar .form-inline .btn:hover {
+	background-color: #526D82;
+	border-color: #526D82;
+}
+
+.card {
+	border-color: #27374D;
+	color: #27374D;
+	background-color: #9DB2BF;
+	border-radius: 1.25rem;
+}
+
+.btn {
+	background-color: #27374D;
+	color: #DDE6ED;
+}
+
+.fa-regular fa-eye-slash {
+	text-align: center;
+	display: flex;
+	margin: auto;
+	color: red;
+
+}
