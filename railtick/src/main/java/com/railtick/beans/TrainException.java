@@ -2,6 +2,7 @@ package com.railtick.beans;
 
 import java.io.IOException;
 
+
 import com.railtick.constants.ResponseCode;
 
 

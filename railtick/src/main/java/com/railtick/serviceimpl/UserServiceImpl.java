@@ -13,6 +13,7 @@ import com.railtick.constants.ResponseCode;
 import com.railtick.constants.UserRole;
 import com.railtick.entity.DatabaseConnection;
 import com.railtick.service.UserService;
+
 import com.railtick.beans.TrainException;
 
 public class UserServiceImpl implements UserService {
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserBean getUserByEmailId(String customerEmailId) throws TrainException {
 		UserBean customer = null;
-		String query = "SELECT * FROM " + TABLE_NAME + "WHERE EMAILID = ?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE MAILID=?";
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement ps = con.prepareStatement(query);
@@ -36,50 +37,13 @@ public class UserServiceImpl implements UserService {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				customer = new UserBean();
-				customer.setFname(rs.getString("Fname"));
-				customer.setLname(rs.getString("Lname"));
-				customer.setEmailID(rs.getString("EmailID"));
-				customer.setPass(rs.getString("Pass"));
-				customer.setPhno(rs.getLong("Phno"));
-				customer.setGender(rs.getString("Gender"));
-				customer.setAddress(rs.getString("Address"));
-
+				customer.setFName(rs.getString("fname"));
+				customer.setLName(rs.getString("lname"));
+				customer.setAddr(rs.getString("addr"));
+				customer.setMailId(rs.getString("mailid"));
+				customer.setPhNo(rs.getLong("phno"));
 			} else {
 				throw new TrainException(ResponseCode.NO_CONTENT);
-			}
-			ps.close();
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			throw new TrainException(e.getMessage());
-
-		}
-		return customer;
-
-	}
-
-	@Override
-	public UserBean loginUser(String username, String password) throws TrainException {
-		UserBean customer = null;
-		String query = "SELECT * FROM " + TABLE_NAME + " WHERE EMAILID=? AND PASS=?";
-		try {
-			Connection con = DatabaseConnection.getConnection();
-			PreparedStatement ps = con.prepareStatement(query);
-			ps.setString(1, username);
-			ps.setString(2, password);
-			ResultSet rs = ps.executeQuery(); 
-			if (rs.next()) {
-				customer = new UserBean();
-				customer.setFname(rs.getString("Fname"));
-				customer.setLname(rs.getString("Lname"));
-				customer.setEmailID(rs.getString("Email"));
-				customer.setPass(rs.getString("Pass"));
-				customer.setPhno(rs.getLong("Phno"));
-				customer.setGender(rs.getString("Gender"));
-				customer.setAddress(rs.getString("Address"));
-
-			} else {
-				throw new TrainException(ResponseCode.UNAUTHORIZED);
 			}
 			ps.close();
 		} catch (SQLException e) {
@@ -92,7 +56,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserBean> getAllUsers() throws TrainException {
 		List<UserBean> customers = null;
-		String query = "SELECT * FROM" + TABLE_NAME;
+		String query = "SELECT * FROM  " + TABLE_NAME;
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement ps = con.prepareStatement(query);
@@ -100,27 +64,123 @@ public class UserServiceImpl implements UserService {
 			customers = new ArrayList<UserBean>();
 			while (rs.next()) {
 				UserBean customer = new UserBean();
-				customer.setFname(rs.getString("Fname"));
-				customer.setLname(rs.getString("Lname"));
-				customer.setEmailID(rs.getString("EmailID"));
-				customer.setPass(rs.getString("Pass"));
-				customer.setPhno(rs.getLong("Phno"));
-				customer.setGender(rs.getString("Gender"));
-				customer.setAddress(rs.getString("Address"));
+				customer.setFName(rs.getString("fname"));
+				customer.setLName(rs.getString("lname"));
+				customer.setAddr(rs.getString("addr"));
+				customer.setMailId(rs.getString("mailid"));
+				customer.setPhNo(rs.getLong("phno"));
 				customers.add(customer);
-
 			}
+
 			if (customers.isEmpty()) {
 				throw new TrainException(ResponseCode.NO_CONTENT);
 			}
-
+			ps.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			throw new TrainException(e.getMessage());
-
 		}
-
 		return customers;
+	}
+
+	@Override
+	public String updateUser(UserBean customer) {
+		String responseCode = ResponseCode.FAILURE.toString();
+		String query = "UPDATE  " + TABLE_NAME + " SET FNAME=?,LNAME=?,ADDR=?,PHNO=? WHERE MAILID=?";
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, customer.getFName());
+			ps.setString(2, customer.getLName());
+			ps.setString(3, customer.getAddr());
+			ps.setLong(4, customer.getPhNo());
+			ps.setString(5, customer.getMailId());
+			int response = ps.executeUpdate();
+			if (response > 0) {
+				responseCode = ResponseCode.SUCCESS.toString();
+			}
+			ps.close();
+		} catch (SQLException e) {
+			responseCode += " : " + e.getMessage();
+		}
+		return responseCode;
+	}
+
+	@Override
+	public String deleteUser(UserBean customer) {
+		String responseCode = ResponseCode.FAILURE.toString();
+		String query = "DELETE FROM " + TABLE_NAME + " WHERE MAILID=?";
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, customer.getMailId());
+
+			int response = ps.executeUpdate();
+			if (response > 0) {
+				responseCode = ResponseCode.SUCCESS.toString();
+			}
+			ps.close();
+		} catch (SQLException e) {
+			responseCode += " : " + e.getMessage();
+		}
+		return responseCode;
+	}
+
+	@Override
+	public String registerUser(UserBean customer) {
+		String responseCode = ResponseCode.FAILURE.toString();
+		String query = "INSERT INTO " + TABLE_NAME + " VALUES(?,?,?,?,?,?)";
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, customer.getMailId());
+			ps.setString(2, customer.getPWord());
+			ps.setString(3, customer.getFName());
+			ps.setString(4, customer.getLName());
+			ps.setString(5, customer.getAddr());
+			ps.setLong(6, customer.getPhNo());
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				responseCode = ResponseCode.SUCCESS.toString();
+			}
+			ps.close();
+		} catch (SQLException e) {
+			if (e.getMessage().toUpperCase().contains("ORA-00001")) {
+				responseCode += " : " + "User With Id: " + customer.getMailId() + " is already registered ";
+			} else {
+				responseCode += " : " + e.getMessage();
+			}
+		}
+		return responseCode;
+	}
+
+	@Override
+	public UserBean loginUser(String username, String password) throws TrainException {
+		UserBean customer = null;
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE MAILID=? AND PWORD=?";
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, username);
+			ps.setString(2, password);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				customer = new UserBean();
+				customer.setFName(rs.getString("fname"));
+				customer.setLName(rs.getString("lname"));
+				customer.setAddr(rs.getString("addr"));
+				customer.setMailId(rs.getString("mailid"));
+				customer.setPhNo(rs.getLong("phno"));
+				customer.setPWord(rs.getString("pword"));
+			} else {
+				throw new TrainException(ResponseCode.UNAUTHORIZED);
+			}
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new TrainException(e.getMessage());
+		}
+		return customer;
 	}
 
 }

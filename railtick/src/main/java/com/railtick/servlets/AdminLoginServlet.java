@@ -1,11 +1,6 @@
 package com.railtick.servlets;
 
 import java.io.IOException;
-
-
-
-
-
 import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
@@ -18,10 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.railtick.constants.UserRole;
 import com.railtick.entity.TrainUtil;
+import com.railtick.beans.TrainException;
 
 
 
-@WebServlet("/AdminLoginServlet")
+@WebServlet("/adminlogin")
 public class AdminLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -29,22 +25,24 @@ public class AdminLoginServlet extends HttpServlet {
 
 		PrintWriter pw = res.getWriter();
 		res.setContentType("text/html");
-		String Email = req.getParameter("email");
-		String Pass = req.getParameter("pass");
+		String uName = req.getParameter("uname");
+		String pWord = req.getParameter("pword");
 		try {
-			String message = TrainUtil.login(req, res, UserRole.ADMIN, Email, Pass);
+			String message = TrainUtil.login(req, res, UserRole.ADMIN, uName, pWord);
 			if ("SUCCESS".equalsIgnoreCase(message)) {
 				RequestDispatcher rd = req.getRequestDispatcher("AdminHomePage.jsp");
-				rd.include(req, res);				
-				pw.println("welcome" + Email);
+				rd.include(req, res);
+				pw.println("<div class='login-section'><p class='error-message'>Hello, " + uName + " ! Welcome </p></div>");
+				pw.println("<div class='login-section'>Hi ! Here You can Manage Train Information as per Your Requirement</div>");
+
 			} else {
 				RequestDispatcher rd = req.getRequestDispatcher("AdminLogin.jsp");
 				rd.include(req, res);
-				pw.println(message);
+				pw.println("<div class='login-section'><p class='error-message'>" + message + "</p></div>");
+
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());
 		}
-
 	}
 }

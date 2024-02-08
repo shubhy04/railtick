@@ -20,7 +20,7 @@ import com.railtick.service.TrainService;
 import com.railtick.serviceimpl.TrainServiceImpl;
 
 
-@WebServlet("/UserViewTrainfwd")
+@WebServlet("/userviewtrainfwd")
 public class UserViewTrainfwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	TrainService trainService = new TrainServiceImpl();

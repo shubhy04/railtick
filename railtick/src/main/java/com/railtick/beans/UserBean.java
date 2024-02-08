@@ -2,75 +2,59 @@ package com.railtick.beans;
 
 public class UserBean {
 	//private static final long serialVersionUID = 1L;
+	private String fName;
+	private String lName;
+	private String pWord;
+	private String addR;
+	private String mailId;
+	private long phNo;
 
-	private String Fname;
-	private String Lname;
-	private String EmailID;
-	private String Pass;
-	private long Phno;
-	private String Gender;
-	private String Address;
-	private String RePass;
-
-	public void setFname(String Fname) {
-		this.Fname = Fname;
+	public void setPWord(String pWord) {
+		this.pWord = pWord;
 	}
 
-	public void setLname(String Lname) {
-		this.Lname = Lname;
+	public String getPWord() {
+		return pWord;
 	}
 
-	public void setEmailID(String EmailID) {
-		this.EmailID = EmailID;
+	public void setFName(String fName) {
+		this.fName = fName;
 	}
 
-	public void setPass(String Pass) {
-		this.Pass = Pass;
+	public String getFName() {
+		return fName;
 	}
 
-	public void setPhno(long Phno) {
-		this.Phno = Phno;
+	public void setLName(String lName) {
+		this.lName = lName;
 	}
 
-	public void setGender(String Gender) {
-		this.Gender = Gender;
+	public String getLName() {
+		return lName;
 	}
 
-	public void setAddress(String Address) {
-		this.Address = Address;
+	public void setAddr(String addR) {
+		this.addR = addR;
 	}
 
-	public String getFname() {
-		return Fname;
+	public String getAddr() {
+		return addR;
 	}
 
-	public String getLname() {
-		return Lname;
+	public void setMailId(String mailId) {
+		this.mailId = mailId;
 	}
 
-	public String getEmailID() {
-		return EmailID;
+	public String getMailId() {
+		return mailId;
 	}
 
-	public String getPass() {
-		return Pass;
+	public void setPhNo(long phNo) {
+		this.phNo = phNo;
 	}
 
-	public long getPhno() {
-		return Phno;
+	public long getPhNo() {
+		return phNo;
 	}
 
-	public String getGender() {
-		return Gender;
-	}
-
-	public String getAddress() {
-		return Address;
-	}
-	public void setRePass(String RePass) {
-		this.RePass = RePass;
-	}
-	public String getRePass() {
-		return RePass;
-	}
 }

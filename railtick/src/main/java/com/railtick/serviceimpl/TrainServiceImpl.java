@@ -2,6 +2,7 @@ package com.railtick.serviceimpl;
 
 import java.sql.*;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import com.railtick.beans.TrainBean;
 import com.railtick.beans.TrainException;
 import com.railtick.entity.DatabaseConnection;
 import com.railtick.service.TrainService;
+
 
 public class TrainServiceImpl implements TrainService {
 	public List<TrainBean> getAllTrains() throws TrainException {
@@ -36,6 +38,31 @@ public class TrainServiceImpl implements TrainService {
 			throw new TrainException(e.getMessage());
 		}
 		return trains;
+	}
+	@Override
+	public TrainBean getTrainById(String trainNo) throws TrainException {
+		TrainBean train = null;
+		String query = "SELECT * FROM TRAIN WHERE TR_NO=?";
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, trainNo);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				train = new TrainBean();
+				train.setFare(rs.getDouble("fare"));
+				train.setFrom_stn(rs.getString("from_stn"));
+				train.setTo_stn(rs.getString("to_stn"));
+				train.setTr_name(rs.getString("tr_name"));
+				train.setTr_no(rs.getLong("tr_no"));
+				train.setSeats(rs.getInt("seats"));
+			}
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new TrainException(e.getMessage());
+		}
+		return train;
 	}
 
 }

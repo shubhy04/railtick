@@ -27,7 +27,7 @@ public class UserProfileServlet extends HttpServlet {
 
 		TrainUtil.validateUserAuthorization(request, UserRole.CUSTOMER);
 
-		RequestDispatcher rd = request.getRequestDispatcher("UserHome.html");
+		RequestDispatcher rd = request.getRequestDispatcher("HomePage.jsp");
 		rd.include(request, response);
 		pw.println("<div class='tab'>" + "		<p1 class='menu'>" + "	Hello " + TrainUtil.getCurrentUsername(request)
 				+ " ! Welcome to our new NITRTC Website" + "		</p1>" + "	</div>");

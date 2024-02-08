@@ -7,6 +7,7 @@ import com.railtick.beans.TrainBean;
 import com.railtick.beans.TrainException;
 
 public interface TrainService {
+	public TrainBean getTrainById(String trainNo) throws TrainException;
 	public List<TrainBean> getAllTrains() throws TrainException;
 
 }

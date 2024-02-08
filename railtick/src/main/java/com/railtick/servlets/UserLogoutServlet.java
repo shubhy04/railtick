@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.railtick.constants.UserRole;
 import com.railtick.entity.TrainUtil;
 
-@WebServlet("/UserlogoutServlet")
+@WebServlet("/userlogout")
 public class UserLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
