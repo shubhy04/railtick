@@ -9,6 +9,7 @@ public class TrainBean {
 	private String to_stn;
 	private Integer seats;
 	private Double fare;
+	
 
 	public Long getTr_no() {
 		return tr_no;

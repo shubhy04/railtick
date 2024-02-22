@@ -2,7 +2,6 @@ package com.railtick.entity;
 
 import java.util.Arrays;
 
-
 import java.util.Optional;
 import java.util.UUID;
 
@@ -16,7 +15,7 @@ import com.railtick.constants.ResponseCode;
 import com.railtick.constants.UserRole;
 import com.railtick.service.UserService;
 import com.railtick.serviceimpl.UserServiceImpl;
-
+ 
 
 public class TrainUtil {
 	public static Optional<String> readCookie(HttpServletRequest request, String key) {
@@ -44,7 +43,6 @@ public class TrainUtil {
 			// Add the sessionId to the cookie with key as sessionId
 			Cookie cookie = new Cookie("sessionIdFor" + userRole.toString(), UUID.randomUUID().toString());
 
-			
 			cookie.setMaxAge(900); // Expires after 20 MIN
 
 			// add the cookie to the response
@@ -85,19 +83,16 @@ public class TrainUtil {
 
 	}
 
-	public static String getCurrentUsername(HttpServletRequest request) {
-		return (String) request.getSession().getAttribute("Fname");
-
+	public static String getCurrentUserName(HttpServletRequest req) {
+		return (String) req.getSession().getAttribute("uName");
 	}
 
-	public static String getCurrentUserEmail(HttpServletRequest request) {
-		return (String) request.getSession().getAttribute("EmailID");
-
+	public static String getCurrentUserEmail(HttpServletRequest req) {
+		return (String) req.getSession().getAttribute("mailid");
 	}
 
-	public static UserBean getCurrentCustomer(HttpServletRequest request) {
-		return (UserBean) request.getServletContext().getAttribute(UserRole.CUSTOMER.toString());
-
+	public static UserBean getCurrentCustomer(HttpServletRequest req) {
+		return (UserBean) req.getServletContext().getAttribute(UserRole.CUSTOMER.toString());
 	}
 
 }
