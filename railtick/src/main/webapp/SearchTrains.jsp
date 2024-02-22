@@ -69,8 +69,7 @@ body {
             <label for="destination">Destination Station:</label>
             <input type="text" id="destination" name="destination" required>
  -->
-			<label for="journeyDate">Journey Date:</label> <input type="date"
-				id="journeyDate" name="journeydate" required> <input
+			<input
 				type="submit" value="SEARCH TRAIN">
 		</form>
 	</div>

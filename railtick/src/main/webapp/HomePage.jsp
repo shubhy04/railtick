@@ -97,14 +97,14 @@ i {
     <header>
         <h1>Welcome to RailTick - Railway Ticket Booking</h1>
 
-        <!-- Booking Section -->
+        <!-- Booking Section 
         <div class="booking-section">
             <h2>Book Your Ticket Now!</h2>
             <p>Explore our trains and secure your journey with RailTick.</p>
             <button class="booking-button"
                 onclick="location.href='usersearchtrain'">Start Booking</button>
         </div>
-
+-->
         <!-- Other Sections -->
         <div class="section">
             <h2>Search Trains</h2>
