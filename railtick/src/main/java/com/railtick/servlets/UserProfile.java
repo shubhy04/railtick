@@ -14,30 +14,28 @@ import com.railtick.constants.UserRole;
 import com.railtick.entity.TrainUtil;
 
 /**
- * Servlet implementation class UserProfileServlet
+ * Servlet implementation class UserProfile
  */
-@WebServlet("/UserProfileServlet")
-public class UserProfileServlet extends HttpServlet {
+@WebServlet("/userprofile")
+public class UserProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter pw = response.getWriter();
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		res.setContentType("text/html");
+		PrintWriter pw = res.getWriter();
 
-		TrainUtil.validateUserAuthorization(request, UserRole.CUSTOMER);
+		TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
 
-		RequestDispatcher rd = request.getRequestDispatcher("HomePage.jsp");
-		rd.include(request, response);
-		pw.println("<div class='tab'>" + "		<p1 class='menu'>" + "	Hello " + TrainUtil.getCurrentUsername(request)
+		RequestDispatcher rd = req.getRequestDispatcher("UserProfile.jsp");
+		rd.include(req, res);
+		pw.println("<div class='tab'>" + "		<p1 class='menu'>" + "	Hello " + TrainUtil.getCurrentUserName(req)
 				+ " ! Welcome to our new NITRTC Website" + "		</p1>" + "	</div>");
 		pw.println("<div class='main'><p1 class='menu'><a href='viewuserprofile'>View Profile</a></p1>&nbsp;"
 				+ "<p1 class='menu'><a href='edituserprofile'>Edit Profile</a></p1>&nbsp;"
 				+ "<p1 class='menu'><a href='changeuserpassword'>Change Password</a></p1>" + "</div>");
-		pw.println("<div class='tab yellow'>Hey ! " + TrainUtil.getCurrentUsername(request)
+		pw.println("<div class='tab yellow'>Hey ! " + TrainUtil.getCurrentUserName(req)
 				+ ",Welcome to NITRTC<br/><br/>Here You can Edit,View Your Profile and change your PassWord.<br/>"
 				+ "<br/>Thanks For Being Connected With Us!" + "</div>");
-
 	}
 
 }

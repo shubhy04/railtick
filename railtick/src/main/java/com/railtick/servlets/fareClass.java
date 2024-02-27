@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ForgetPasswordServlet
+ * Servlet implementation class fareClass
  */
-@WebServlet("/ForgetPasswordServlet")
-public class ForgetPasswordServlet extends HttpServlet {
+@WebServlet("/fareClass")
+public class fareClass extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ForgetPasswordServlet() {
+    public fareClass() {
         super();
         // TODO Auto-generated constructor stub
     }
