@@ -13,6 +13,51 @@ import com.railtick.service.TrainService;
 import com.railtick.constants.ResponseCode;
 
 public class TrainServiceImpl implements TrainService {
+
+	@Override
+	public String addTrain(TrainBean train) {
+		String responseCode = ResponseCode.FAILURE.toString();
+		String query = "INSERT INTO TRAIN VALUES(?,?,?,?,?,?)";
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setLong(1, train.getTr_no());
+			ps.setString(2, train.getTr_name());
+			ps.setString(3, train.getFrom_stn());
+			ps.setString(4, train.getTo_stn());
+			ps.setLong(5, train.getSeats());
+			ps.setDouble(6, train.getFare());
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				responseCode = ResponseCode.SUCCESS.toString();
+			}
+			ps.close();
+		} catch (SQLException e) {
+			responseCode += " : " + e.getMessage();
+		}
+		return responseCode;
+	}
+
+	@Override
+	public String deleteTrainById(String trainNo) {
+		String responseCode = ResponseCode.FAILURE.toString();
+		String query = "DELETE FROM TRAIN WHERE TR_NO=?";
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, trainNo);
+			int response = ps.executeUpdate();
+			if (response > 0) {
+				responseCode = ResponseCode.SUCCESS.toString();
+			}
+			ps.close();
+		} catch (SQLException e) {
+			responseCode += " : " + e.getMessage();
+		}
+		return responseCode;
+	}
+
+	@Override
 	public List<TrainBean> getAllTrains() throws TrainException {
 		List<TrainBean> trains = null;
 		String query = "SELECT * FROM TRAIN";

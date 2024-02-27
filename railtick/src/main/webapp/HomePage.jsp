@@ -131,13 +131,13 @@ i {
             <p>Get information about the fare for your desired journey.</p>
             <a href="fareenqfwd" class="booking-button">Check Fare</a>
         </div>
-        <!-- 
+        
         <div class="section">
             <h2>Seat Availability</h2>
             <p>Ensure the availability of seats for your chosen train.</p>
             <a href="useravailfwd" class="booking-button">Check Availability</a>
         </div>
-         -->
+         
         <div class="section">
             <h2>User Profile</h2>
             <p>Manage your account details and preferences.</p>

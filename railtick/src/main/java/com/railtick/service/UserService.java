@@ -12,6 +12,8 @@ public interface UserService {
 	public List<UserBean> getAllUsers() throws TrainException;
 
 	public String updateUser(UserBean customer);
+	
+	public String updateUserP(UserBean customer);
 
 	public String deleteUser(UserBean customer);
 

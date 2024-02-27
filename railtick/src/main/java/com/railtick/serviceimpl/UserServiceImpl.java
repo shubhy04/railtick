@@ -105,6 +105,30 @@ public class UserServiceImpl implements UserService {
 		}
 		return responseCode;
 	}
+	@Override
+	public String updateUserP(UserBean customer) {
+		String responseCode = ResponseCode.FAILURE.toString();
+		String query = "UPDATE  " + TABLE_NAME + " SET FNAME=?,LNAME=?,ADDR=?,PHNO=? PWORD=? WHERE MAILID=?";
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, customer.getFName());
+			ps.setString(2, customer.getLName());
+			ps.setString(3, customer.getAddr());
+			ps.setLong(4, customer.getPhNo());
+			ps.setString(5, customer.getPWord());
+			ps.setString(6, customer.getMailId());
+			
+			int response = ps.executeUpdate();
+			if (response > 0) {
+				responseCode = ResponseCode.SUCCESS.toString();
+			}
+			ps.close();
+		} catch (SQLException e) {
+			responseCode += " : " + e.getMessage();
+		}
+		return responseCode;
+	}
 
 	@Override
 	public String deleteUser(UserBean customer) {

@@ -7,13 +7,17 @@ import com.railtick.beans.TrainBean;
 import com.railtick.beans.TrainException;
 
 public interface TrainService {
-	public TrainBean getTrainById(String trainNo) throws TrainException;
+	public String addTrain(TrainBean train);
+
+	public String deleteTrainById(String trainNo);
 
 	public String updateTrain(TrainBean train);
-	
-	public String getFare(Farebean fare);
+
+	public TrainBean getTrainById(String trainNo) throws TrainException;
 
 	public List<TrainBean> getAllTrains() throws TrainException;
+
+	public String getFare(Farebean fare);
 
 	public List<TrainBean> getTrainsBetweenStations(String fromStation, String toStation) throws TrainException;
 

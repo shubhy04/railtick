@@ -10,12 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import com.railtick.constants.UserRole;
 import com.railtick.entity.TrainUtil;
 import com.railtick.beans.TrainException;
-
-
 
 @WebServlet("/adminlogin")
 public class AdminLoginServlet extends HttpServlet {
@@ -30,11 +27,9 @@ public class AdminLoginServlet extends HttpServlet {
 		try {
 			String message = TrainUtil.login(req, res, UserRole.ADMIN, uName, pWord);
 			if ("SUCCESS".equalsIgnoreCase(message)) {
-				RequestDispatcher rd = req.getRequestDispatcher("AdminHomePage.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("AdminHome.jsp");
 				rd.include(req, res);
-				pw.println("<div class='login-section'><p class='error-message'>Hello, " + uName + " ! Welcome </p></div>");
-				pw.println("<div class='login-section'>Hi ! Here You can Manage Train Information as per Your Requirement</div>");
-
+				
 			} else {
 				RequestDispatcher rd = req.getRequestDispatcher("AdminLogin.jsp");
 				rd.include(req, res);
