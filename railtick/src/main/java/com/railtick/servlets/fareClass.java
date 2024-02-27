@@ -7,10 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class fareClass
- */
-@WebServlet("/fareClass")
+@WebServlet("/fare")
 public class fareClass extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

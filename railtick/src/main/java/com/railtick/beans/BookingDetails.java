@@ -9,6 +9,7 @@ public class BookingDetails implements Serializable {
 	private String date;
 	private String from_stn;
 	private String to_stn;
+	private String berth;
 	private int seats;
 	
 	private Double amount;
@@ -68,5 +69,12 @@ public class BookingDetails implements Serializable {
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
+	public String getBerth() {
+		return berth;
+	}
+	public void setBerth(String berth) {
+		this.berth = berth;
+	}
+
 
 }

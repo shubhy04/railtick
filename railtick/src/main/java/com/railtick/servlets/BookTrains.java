@@ -71,6 +71,7 @@ public class BookTrains extends HttpServlet {
 			String trainNo = (String) sct.getAttribute("trainnumber");
 			String journeyDate = (String) sct.getAttribute("journeydate");
 			String seatClass = (String) sct.getAttribute("class");
+			String Berth = (String) sct.getAttribute("berth");
 
 			String userMailId = TrainUtil.getCurrentUserEmail(req);
 
@@ -102,6 +103,7 @@ public class BookTrains extends HttpServlet {
 						bookingDetails.setTo_stn(train.getTo_stn());
 						bookingDetails.setTr_no(trainNo);
 						bookingDetails.setSeats(seat);
+					
 						bookingDetails.setMailId(userMailId);
 						bookingDetails.setDate(date);
 
@@ -118,6 +120,7 @@ public class BookTrains extends HttpServlet {
 								+ "</td></tr><tr><td>Booked From: </td><td>" + transaction.getFrom_stn()
 								+ "</td><td>To Station: </td><td>" + transaction.getTo_stn() + "</td></tr>"
 								+ "<tr><td>Date Of Journey:</td><td>" + transaction.getDate()
+								+ "<tr><td>Berth:</td><td>" + Berth
 								+ "</td><td>Time(HH:MM):</td><td>11:23</td></tr><tr><td>Passengers: </td><td>"
 								+ transaction.getSeats() + "</td><td>Class: </td><td>" + seatClass + "</td></tr>"
 								+ "<tr><td>Booking Status: </td><td style='color:" + bookingStatus.getColor() + ";'>"
