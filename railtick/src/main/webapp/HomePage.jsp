@@ -126,11 +126,11 @@ i {
             <p>Review your past ticket bookings and travel history.</p>
             <a href="bookingdetails" class="booking-button">View History</a>
         </div>
-        <div class="section">
-            <h2>Fare Enquiry</h2>
-            <p>Get information about the fare for your desired journey.</p>
-            <a href="fareenqfwd" class="booking-button">Check Fare</a>
-        </div>
+<!--         <div class="section"> -->
+<!--             <h2>Fare Enquiry</h2> -->
+<!--             <p>Get information about the fare for your desired journey.</p> -->
+<!--             <a href="Fare.jsp" class="booking-button">Check Fare</a> -->
+<!--         </div> -->
         
         <div class="section">
             <h2>Seat Availability</h2>

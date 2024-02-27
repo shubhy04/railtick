@@ -19,50 +19,41 @@ import com.railtick.service.TrainService;
 import com.railtick.serviceimpl.TrainServiceImpl;
 import com.railtick.entity.TrainUtil;
 
-
 @WebServlet("/fareenq")
 public class FareEnq extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
 	TrainService trainService = new TrainServiceImpl();
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		res.setContentType("text/html");
 		PrintWriter pw = res.getWriter();
 
 		TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
 
 		try {
-			String fromStation = req.getParameter("fromstation");
-			String toStation = req.getParameter("tostation");
-			List<TrainBean> trains = trainService.getTrainsBetweenStations(fromStation, toStation);
-			if (trains != null && !trains.isEmpty()) {
+			String trainNo = req.getParameter("trainNo");
+	
+			TrainBean train = trainService.getFareDetails(trainNo);
+			if (train != null) {
 				RequestDispatcher rd = req.getRequestDispatcher("FareDisplay.jsp");
 				rd.include(req, res);
-				pw.println("<div class='main'><p1 class='menu'>Fare for Trains BetWeen Station " + fromStation + " and "
-						+ toStation + " is as below</p1></div>");
-				pw.println("<div class='tab'><table><tr><th>Train Name</th><th>Train No</th>"
-						+ "<th>From Stn</th><th>To Stn</th><th>Time</th><th>Seats</th><th>Fare (INR)</th><th>Action</th></tr>");
-				for (TrainBean train : trains) {
-					int hr = (int) (Math.random() * 24);
-					int min = (int) (Math.random() * 60);
-					String time = (hr < 10 ? ("0" + hr) : hr) + ":" + ((min < 10) ? "0" + min : min);
-
-					pw.println("" + "<tr><td>" + train.getTr_name() + "</td>" + "<td>" + train.getTr_no() + "</td>"
-							+ "<td>" + train.getFrom_stn() + "</td>" + "<td>" + train.getTo_stn() + "</td>" + "<td>"
-							+ time + "</td>" + "<td>" + train.getSeats() + "</td>" + "<td>" + train.getFare()
-							+ " RS</td><td><a href='booktrainbyref?trainNo=" + train.getTr_no() + "&fromStn="
-							+ train.getFrom_stn() + "&toStn=" + train.getTo_stn()
-							+ "'><div class='red'>Book Now</div></a></td>" + "</tr>");
-				}
-				pw.println("</table></div>");
+				pw.println("<div class='main'><p1 class='menu'>Fare Detail</p1></div>");
+				pw.println("<div class='tab'>" + "<table>" + "<tr><td class='blue'>Train Number :</td><td>"
+						+ train.getTr_no() + "</td></tr>" + "<tr><td class='blue'>Sleeper:</td><td>"
+						+ train.getSleeper() + "</td></tr>" + "<tr><td class='blue'>General:</td><td>"
+						+ train.getGeneral() + "</td></tr>" + "<tr><td class='blue'>Ac Tier :</td><td>"
+						+ train.getAc_tier() + "</td></tr>" + "<tr><td class='blue'>Ac 2 Tier :</td><td>"
+						+ train.getAc_2_tier() + "</td></tr>" + "</table>" + "</div>");
 			} else {
-				RequestDispatcher rd = req.getRequestDispatcher("TrainBwStn.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("FareDisplay.jsp");
 				rd.include(req, res);
-				pw.println("<div class='tab'><p1 class='menu'>There are no trains Between " + fromStation + " and "
-						+ toStation + "</p1></div>");
+				pw.println("<div class='tab'><p1 class='menu'>Train No." + req.getParameter("trainnumber")
+						+ " is Not Available !</p1></div>");
 			}
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());
 		}
 

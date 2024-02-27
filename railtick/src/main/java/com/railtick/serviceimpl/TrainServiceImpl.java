@@ -112,6 +112,31 @@ public class TrainServiceImpl implements TrainService {
 	}
 
 	@Override
+	public TrainBean getFareDetails(String trainNo) throws TrainException {
+		TrainBean train = null;
+		String query = "SELECT * FROM FARE WHERE TR_NO=?";
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, trainNo);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				train = new TrainBean();
+				train.setTr_no(rs.getLong("tr_no"));
+				train.setSleeper(rs.getLong("sleeper"));
+				train.setGeneral(rs.getLong("general"));
+				train.setAc_tier(rs.getLong("ac_tier"));
+				train.setAc_2_tier(rs.getLong("ac_2_tier"));
+			}
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new TrainException(e.getMessage());
+		}
+		return train;
+	}
+
+	@Override
 	public List<TrainBean> getTrainsBetweenStations(String fromStation, String toStation) throws TrainException {
 		List<TrainBean> trains = null;
 		String query = "SELECT * FROM TRAIN WHERE UPPER(FROM_STN) LIKE UPPER(?) AND UPPER(TO_STN) LIKE UPPER(?)";
@@ -166,26 +191,26 @@ public class TrainServiceImpl implements TrainService {
 		return responseCode;
 	}
 
-	@Override
-	public String getFare(Farebean fare) {
-		String responseCode = ResponseCode.FAILURE.toString();
-		String query = "SELECT * FROM FARE";
-		try {
-			Connection con = DatabaseConnection.getConnection();
-			PreparedStatement ps = con.prepareStatement(query);
-			ps.setDouble(1, fare.getSleeper());
-			ps.setDouble(2, fare.getSecond());
-			ps.setDouble(3, fare.getAcfirst());
-			ps.setDouble(4, fare.getAc2tier());
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				responseCode = ResponseCode.SUCCESS.toString();
-			}
-			ps.close();
-		} catch (SQLException e) {
-			responseCode += " : " + e.getMessage();
-		}
-		return responseCode;
-	}
+//	@Override
+//	public String getFare(Farebean fare) {
+//		String responseCode = ResponseCode.FAILURE.toString();
+//		String query = "SELECT * FROM FARE";
+//		try {
+//			Connection con = DatabaseConnection.getConnection();
+//			PreparedStatement ps = con.prepareStatement(query);
+//			ps.setDouble(1, fare.getSleeper());
+//			ps.setDouble(2, fare.getSecond());
+//			ps.setDouble(3, fare.getAcfirst());
+//			ps.setDouble(4, fare.getAc2tier());
+//			ResultSet rs = ps.executeQuery();
+//			if (rs.next()) {
+//				responseCode = ResponseCode.SUCCESS.toString();
+//			}
+//			ps.close();
+//		} catch (SQLException e) {
+//			responseCode += " : " + e.getMessage();
+//		}
+//		return responseCode;
+//	}
 
 }

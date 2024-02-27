@@ -17,7 +17,7 @@ public interface TrainService {
 
 	public List<TrainBean> getAllTrains() throws TrainException;
 
-	public String getFare(Farebean fare);
+	public TrainBean getFareDetails(String trainNo) throws TrainException;
 
 	public List<TrainBean> getTrainsBetweenStations(String fromStation, String toStation) throws TrainException;
 

@@ -66,18 +66,19 @@ th {
 	<div class="tab">
 		<p class="menu">Fare Enquiry for Trains Between Stations</p>
 	</div>
-	<form action="fareenq" class="tab red" method="post">
-		From Station: <input type="text" name="fromstation"><br /> <br />
-		To Station: <input type="text" name="tostation"><br /> <br />
-		Select Class <select name='class' required>
-			<option value='Sleeper(SL)'>Sleeper(SL)</option>
-			<option value='Second Sitting(2S)'>Second Sitting(2S)</option>
-			<option value='AC First Class(1A)'>AC First Class(1A)</option>
-			<option value='AC 2 Tier(2A)'>AC 2 Tier(2A)</option>
-		</select> <input type="submit" value=" Get Fare "><br />
-	</form>
-	<br />
+	<div class="form-container">
+		<form action="fare" method="post">
+			<label for="trainNumber">Train Number:</label> <input type="text"
+				id="trainNumber" name="trainnumber" required>
+			<!-- 
+            <label for="source">Source Station:</label>
+            <input type="text" id="source" name="source" required>
 
-
+            <label for="destination">Destination Station:</label>
+            <input type="text" id="destination" name="destination" required>
+ -->
+			<input type="submit" value="SEARCH TRAIN">
+		</form>
+		</div>
 </body>
 </html>

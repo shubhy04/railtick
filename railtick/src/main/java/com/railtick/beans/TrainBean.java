@@ -10,6 +10,13 @@ public class TrainBean {
 	private Integer seats;
 	private Double fare;
 	
+	// fARE
+	private Long sleeper;
+	private Long general;
+	private Long ac_tier;
+	private Long ac_2_tier;
+	
+	
 
 	public Long getTr_no() {
 		return tr_no;
@@ -58,5 +65,32 @@ public class TrainBean {
 	public void setFare(Double fare) {
 		this.fare = fare;
 	}
+	
+	//fare
+	public Long getSleeper() {
+		return sleeper;
+	}
+	public void setSleeper(Long sleeper) {
+		this.sleeper = sleeper;
+	}
+	public Long getGeneral() {
+		return general;
+	}
+	public void setGeneral(Long general) {
+		this.general = general;
+	}
+	public Long getAc_tier() {
+		return ac_tier;
+	}
+	public void setAc_tier (Long ac_tier) {
+		this.ac_tier = ac_tier;
+	}
+	public Long getAc_2_tier() {
+		return ac_2_tier;
+	}
+	public void setAc_2_tier(Long ac_2_tier) {
+		this.ac_2_tier = ac_2_tier;
+	}
+
 
 }
