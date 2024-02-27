@@ -17,35 +17,34 @@ import com.railtick.beans.TrainBean;
 import com.railtick.beans.TrainException;
 import com.railtick.constants.ResponseCode;
 import com.railtick.constants.UserRole;
-import com.railtick.entity.TrainUtil;
 import com.railtick.service.TrainService;
 import com.railtick.serviceimpl.TrainServiceImpl;
+import com.railtick.entity.TrainUtil;
+import com.railtick.beans.HistoryBean;
+import com.railtick.service.BookingService;
+import com.railtick.serviceimpl.BookingServiceImpl;
 
-@WebServlet("/payment")
-public class BookTrainPayment extends HttpServlet {
+@WebServlet("/booktrainsconfirm")
+public class BookTrainConfirm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TrainService trainService = new TrainServiceImpl();
+//	private BookingService bookingService = new BookingServiceImpl();
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		PrintWriter pw = res.getWriter();
 		res.setContentType("text/html");
 		TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
-		PrintWriter pw = res.getWriter();
-		int seat = Integer.parseInt(req.getParameter("seats"));
-		String trainNo = req.getParameter("trainnumber");
-		String journeyDate = req.getParameter("journeydate");
-		String seatClass = req.getParameter("class");
+
+		RequestDispatcher rd = req.getRequestDispatcher("Bill.jsp");
+		rd.include(req, res);
+
 		ServletContext sct = req.getServletContext();
-		sct.setAttribute("seats", seat);
-		sct.setAttribute("trainnumber", trainNo);
-		sct.setAttribute("journeydate", journeyDate);
-		sct.setAttribute("class", seatClass);
-		//pw.println(req.getParameter("seats"));
 
 		try {
-//			int seat = (int) sct.getAttribute("seats");
-//			String trainNo = (String) sct.getAttribute("trainnumber");
-//			String journeyDate = (String) sct.getAttribute("journeydate");
-//			String seatClass = (String) sct.getAttribute("class");
+			int seat = (int) sct.getAttribute("seats");
+			String trainNo = (String) sct.getAttribute("trainnumber");
+			String journeyDate = (String) sct.getAttribute("journeydate");
+			String seatClass = (String) sct.getAttribute("class");
 
 			String userMailId = TrainUtil.getCurrentUserEmail(req);
 
@@ -87,11 +86,10 @@ public class BookTrainPayment extends HttpServlet {
 								+ train.getSeats() + "</td><td>Class: </td><td>" + seatClass + "</td></tr>"
 								+ "</td><td>Amount Paid:</td><td>&#8377; " + totalAmount + "</td></tr>" + "</table>"
 								+ "</p></div>");
-						pw.println("<button onclick="
-								+ "location.href='Payment.jsp'>"
-								+ "Start Booking</button>"
-							);
-						
+						pw.println("<form action='booktrains' method='post'>"
+								+ "<input type='submit' value='Confirm Payment'/>"
+								+ "</form>");
+
 					} else {
 						pw.println(
 								"<div class='tab'><p1 class='menu red'>Transaction Declined. Try Again !</p1></div>");
@@ -111,9 +109,6 @@ public class BookTrainPayment extends HttpServlet {
 		sct.removeAttribute("trainNo");
 		sct.removeAttribute("journeyDate");
 		sct.removeAttribute("class");
-
-//		RequestDispatcher rd = req.getRequestDispatcher("ConfirmPayment.jsp");
-//		rd.forward(req, res);
-
 	}
+
 }

@@ -3,6 +3,7 @@ package com.railtick.servlets;
 import java.io.IOException;
 
 
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -25,6 +26,7 @@ import com.railtick.entity.TrainUtil;
 import com.railtick.beans.HistoryBean;
 import com.railtick.service.BookingService;
 import com.railtick.serviceimpl.BookingServiceImpl;
+
 
 
 @WebServlet("/booktrains")
@@ -59,7 +61,7 @@ public class BookTrains extends HttpServlet {
 		res.setContentType("text/html");
 		TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
 
-		RequestDispatcher rd = req.getRequestDispatcher("Bill.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("Reciept.jsp");
 		rd.include(req, res);
 
 		ServletContext sct = req.getServletContext();
