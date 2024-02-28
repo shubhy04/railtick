@@ -51,6 +51,7 @@ public class BookTrainPayment extends HttpServlet {
 			date = outputFormat.format(utilDate);
 
 			TrainBean train = trainService.getTrainById(trainNo);
+			TrainBean fair = trainService.getFareDetails(trainNo);
 
 			if (train != null) {
 				int avail = train.getSeats();
@@ -99,3 +100,5 @@ public class BookTrainPayment extends HttpServlet {
 		// sct.removeAttribute("class");
 	}
 }
+
+//if the user select general class then the fare will be fair.getGeneral if the user select sleeper class then the fare will be fair.getSleeper if the user select Actier class then the fair will be fair.getAc_tier if the user select Ac2tier class then the fare will be fair.getAc_2_tier

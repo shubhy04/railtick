@@ -15,36 +15,37 @@
 </head>
 <body>
 	<%@include file="global/navbar.jsp"%>
-	<section class="registration-section">
-		<h2>New User Registration</h2>
-		<%
-		String errorMessage = (String) request.getAttribute("errorMessage");
-		if (errorMessage != null && !errorMessage.isEmpty()) {
-		%>
-		<p class="error-message"><%=errorMessage%></p>
-		<%
-		}
-		%>
-		<form action="userreg" method="post" enctype="multipart/form-data">
-			<label for="email">Email Id:</label> <input type="email" id="email"
-				name="mailid" placeholder="Enter your Email" required> <label
-				for="password">Password:</label> <input type="password"
-				id="password" name="pword" placeholder="Enter your Password"
-				required> <label for="firstname">First Name:</label> <input
-				type="text" id="firstname" name="firstname"
-				placeholder="Enter your First Name" required> <label
-				for="lastname">Last Name:</label> <input type="text" id="lastname"
-				name="lastname" placeholder="Enter your Last Name" required>
-			<label for="address">Address:</label> <input type="text" id="address"
-				name="address" placeholder="Enter your Address" required> <label
-				for="phoneno">Phone No:</label> <input type="tel" id="phoneno"
-				name="phoneno" pattern="[0-9]{10}" placeholder="Enter your Contact"
-				required> <label for="userphoto">Photo:</label> <input
-				type="file" id="userphoto" name="userphoto"> <input
-				type="submit"
-				value="I AGREE FOR ALL TERMS & CONDITIONS! REGISTER ME">
-		</form>
-	</section>
+
+	<table class="tab brown hd">
+		<tr>
+			<td>New User Registration</td>
+		</tr>
+	</table>
+
+	<table class="tab green">
+
+		<tr>
+			<td>
+				<form action="userreg" method="post">
+					Email Id : <input type="email" name="mailid"
+						placeholder="Enter your emailId" required><br /> <br />
+					Password : <input type="password" name="pword" required><br />
+					<br /> FirstName: <input type="text" name="firstname" required><br />
+					<br /> Last Name: <input type="text" name="lastname" required><br />
+					<br /> Address : <input type="text" name="address" required><br />
+					<br /> Phone No : <input type="number" name="phoneno" required><br />
+<!-- 					<br /> Photo : <input type="file" name="userphoto"><br /> -->
+					<br /> <input type="submit"
+						value=" I AGREE FOR ALL TERMS & CONDITIONS ! REGISTER ME "
+						style="text-align: center">
+				</form>
+			</td>
+
+		</tr>
+	</table>
+
+
+
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.railtick.servlets;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
@@ -39,12 +40,12 @@ public class UserRegServlet extends HttpServlet {
 			if ("SUCCESS".equalsIgnoreCase(message)) {
 				RequestDispatcher rd = req.getRequestDispatcher("Login.jsp");
 				rd.include(req, res);
-				pw.println("<div class='registration-section'><p class='error-message'>User Registered Successfully !</p></div>");
+				pw.println("<div class='tab'><p1 class='menu'>User Registered Successfully !</p1></div>");
 
 			} else {
 				RequestDispatcher rd = req.getRequestDispatcher("Register.jsp");
 				rd.include(req, res);
-				pw.println("<div class='registration-section'><p class='error-message'>" + message + "</p></div>");
+				pw.println("<div class='tab'><p1 class='menu'>" + message + "</p1></div>");
 
 			}
 
