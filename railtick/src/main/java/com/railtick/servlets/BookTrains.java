@@ -2,8 +2,6 @@ package com.railtick.servlets;
 
 import java.io.IOException;
 
-
-
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -26,8 +24,6 @@ import com.railtick.entity.TrainUtil;
 import com.railtick.beans.HistoryBean;
 import com.railtick.service.BookingService;
 import com.railtick.serviceimpl.BookingServiceImpl;
-
-
 
 @WebServlet("/booktrains")
 public class BookTrains extends HttpServlet {
@@ -83,21 +79,45 @@ public class BookTrains extends HttpServlet {
 			date = outputFormat.format(utilDate);
 
 			TrainBean train = trainService.getTrainById(trainNo);
+            TrainBean fare = trainService.getFareDetails(trainNo);
 
-			if (train != null) {
+
+			if (train != null && fare != null) {
 				int avail = train.getSeats();
 				if (seat > avail) {
 					pw.println("<div class='tab'><p1 class='menu red'>Only " + avail
 							+ " Seats are Available in this Train!</p1></div>");
 
-				} else if (seat <= avail) {
+				} 
+				
+				else if (seat <= avail) {
 					avail = avail - seat;
 					train.setSeats(avail);
+					
+					Long classFare = 0L;
+                    switch (seatClass) {
+                        case "Second Sitting(2S)":
+                            classFare = fare.getGeneral();
+                            break;
+                        case "Sleeper(SL)":
+                            classFare = fare.getSleeper();
+                            break;
+                        case "AC First Class(1A)":
+                            classFare = fare.getAc_tier();
+                            break;
+                        case "AC 2 Tier(2A)":
+                            classFare = fare.getAc_2_tier();
+                            break;
+                        default:
+                            pw.println("<div class='tab'><p1 class='menu red'>Invalid Seat Class!</p1></div>");
+                            return;
+                    }
+                    
 					String responseCode = trainService.updateTrain(train);
 					if (ResponseCode.SUCCESS.toString().equalsIgnoreCase(responseCode)) {
 
 						HistoryBean bookingDetails = new HistoryBean();
-						Double totalAmount = train.getFare() * seat;
+						Double totalAmount = (double) (classFare * seat);
 						bookingDetails.setAmount(totalAmount);
 						bookingDetails.setFrom_stn(train.getFrom_stn());
 						bookingDetails.setTo_stn(train.getTo_stn());
