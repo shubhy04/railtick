@@ -15,14 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.railtick.beans.TrainBean;
 import com.railtick.beans.TrainException;
+import com.railtick.beans.HistoryBean;
 import com.railtick.constants.ResponseCode;
 import com.railtick.constants.UserRole;
+import com.railtick.service.BookingService;
 import com.railtick.service.TrainService;
+import com.railtick.serviceimpl.BookingServiceImpl;
 import com.railtick.serviceimpl.TrainServiceImpl;
 import com.railtick.entity.TrainUtil;
-import com.railtick.beans.HistoryBean;
-import com.railtick.service.BookingService;
-import com.railtick.serviceimpl.BookingServiceImpl;
 
 @WebServlet("/booktrains")
 public class BookTrains extends HttpServlet {
@@ -127,19 +127,24 @@ public class BookTrains extends HttpServlet {
                         pw.println("<div class='tab'><p class='menu green'>" + seat
                                 + " Seats Booked Successfully!<br/><br/> Your Transaction Id is: "
                                 + transaction.getTransId() + "</p>" + "</div>");
-                        pw.println("<div class='tab'>" + "<p class='menu'>" + "<table>"
-                                + "<tr><td>PNR No: </td><td colspan='3' style='color:blue;'>"
-                                + transaction.getTransId() + "</td></tr><tr><td>Train Name: </td><td>"
-                                + train.getTr_name() + "</td><td>Train No: </td><td>" + transaction.getTr_no()
-                                + "</td></tr><tr><td>Booked From: </td><td>" + transaction.getFrom_stn()
-                                + "</td><td>To Station: </td><td>" + transaction.getTo_stn() + "</td></tr>"
-                                + "<tr><td>Date Of Journey:</td><td>" + transaction.getDate()
-                                + "<tr><td>Berth:</td><td>" + Berth
-                                + "</td><td>Time(HH:MM):</td><td>11:23</td></tr><tr><td>Passengers: </td><td>"
-                                + transaction.getSeats() + "</td><td>Class: </td><td>" + seatClass + "</td></tr>"
-                                + "<tr><td>Booking Status: </td><td style='color:" + bookingStatus.getColor() + ";'>"
-                                + bookingStatus.getStatus() + "</td><td>Amount Paid:</td><td>&#8377; "
-                                + transaction.getAmount() + "</td></tr>" + "</table>" + "</p></div>");
+
+                        // Set ticket details as request attributes
+                        req.setAttribute("transId", transaction.getTransId());
+                        req.setAttribute("tr_name", train.getTr_name());
+                        req.setAttribute("tr_no", transaction.getTr_no());
+                        req.setAttribute("from_stn", transaction.getFrom_stn());
+                        req.setAttribute("to_stn", transaction.getTo_stn());
+                        req.setAttribute("date", transaction.getDate());
+                        req.setAttribute("berth", Berth);
+                        req.setAttribute("seats", transaction.getSeats());
+                        req.setAttribute("class", seatClass);
+                        req.setAttribute("statusColor", bookingStatus.getColor());
+                        req.setAttribute("bookingStatus", bookingStatus.getStatus());
+                        req.setAttribute("amount", transaction.getAmount());
+
+                        // Forward the request to the Ticket.jsp page
+                        RequestDispatcher ticketDispatcher = req.getRequestDispatcher("Ticket.jsp");
+                        ticketDispatcher.forward(req, res);
 
                     } else {
                         pw.println("<div class='tab'><p1 class='menu red'>Transaction Declined. Try Again !</p1></div>");
@@ -188,19 +193,24 @@ public class BookTrains extends HttpServlet {
                         pw.println("<div class='tab'><p class='menu green'>" + seat
                                 + " Seats Booked Successfully!<br/><br/> Your Transaction Id is: "
                                 + transaction.getTransId() + "</p>" + "</div>");
-                        pw.println("<div class='tab'>" + "<p class='menu'>" + "<table>"
-                                + "<tr><td>PNR No: </td><td colspan='3' style='color:blue;'>"
-                                + transaction.getTransId() + "</td></tr><tr><td>Train Name: </td><td>"
-                                + train.getTr_name() + "</td><td>Train No: </td><td>" + transaction.getTr_no()
-                                + "</td></tr><tr><td>Booked From: </td><td>" + transaction.getFrom_stn()
-                                + "</td><td>To Station: </td><td>" + transaction.getTo_stn() + "</td></tr>"
-                                + "<tr><td>Date Of Journey:</td><td>" + transaction.getDate()
-                                + "<tr><td>Berth:</td><td>" + Berth
-                                + "</td><td>Time(HH:MM):</td><td>11:23</td></tr><tr><td>Passengers: </td><td>"
-                                + transaction.getSeats() + "</td><td>Class: </td><td>" + seatClass + "</td></tr>"
-                                + "<tr><td>Booking Status: </td><td style='color:" + bookingStatus.getColor() + ";'>"
-                                + bookingStatus.getStatus() + "</td><td>Amount Paid:</td><td>&#8377; "
-                                + transaction.getAmount() + "</td></tr>" + "</table>" + "</p></div>");
+
+                        // Set ticket details as request attributes
+                        req.setAttribute("transId", transaction.getTransId());
+                        req.setAttribute("tr_name", train.getTr_name());
+                        req.setAttribute("tr_no", transaction.getTr_no());
+                        req.setAttribute("from_stn", transaction.getFrom_stn());
+                        req.setAttribute("to_stn", transaction.getTo_stn());
+                        req.setAttribute("date", transaction.getDate());
+                        req.setAttribute("berth", Berth);
+                        req.setAttribute("seats", transaction.getSeats());
+                        req.setAttribute("class", seatClass);
+                        req.setAttribute("statusColor", bookingStatus.getColor());
+                        req.setAttribute("bookingStatus", bookingStatus.getStatus());
+                        req.setAttribute("amount", transaction.getAmount());
+
+                        // Forward the request to the Ticket.jsp page
+                        RequestDispatcher ticketDispatcher = req.getRequestDispatcher("Ticket.jsp");
+                        ticketDispatcher.forward(req, res);
 
                     } else {
                         pw.println("<div class='tab'><p1 class='menu red'>Transaction Declined. Try Again !</p1></div>");
@@ -239,5 +249,4 @@ public class BookTrains extends HttpServlet {
             }
         }
     }
-
 }
