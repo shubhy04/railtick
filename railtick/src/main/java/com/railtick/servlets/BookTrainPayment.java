@@ -55,10 +55,14 @@ public class BookTrainPayment extends HttpServlet {
 
             if (train != null && fare != null) {
                 int avail = train.getSeats();
-                if (seat > avail) {
-                    pw.println("<div class='tab'><p1 class='menu red'>Only " + avail
-                            + " Seats are Available in this Train!</p1></div>");
-                } else if (seat <= avail) {
+//                if (seat > avail) {
+//                    pw.println("<div class='tab'><p1 class='menu red'>Only " + avail
+//                            + " Seats are Available in this Train!</p1></div>");
+//                }
+//                
+//                else
+                	
+                	if (seat > avail || seat <= avail) {
                     avail = avail - seat;
 
                     Long classFare = 0L;
@@ -92,7 +96,7 @@ public class BookTrainPayment extends HttpServlet {
                                 + "</td><td>To Station: </td><td>" + train.getTo_stn() + "</td></tr>"
                                 + "<tr><td>Date Of Journey:</td><td>" + date
                                 + "<tr><td>Berth:</td><td>" + Berth
-                                + "</td><td>Time(HH:MM):</td><td>11:23</td></tr><tr><td>Passengers: </td><td>"
+                                + "</td><td>Time(HH:MM):</td><td>11:23</td></tr><tr><td>Seats: </td><td>"
                                 + train.getSeats() + "</td><td>Class: </td><td>" + seatClass + "</td></tr>"
                                 + "</td><td>Amount:</td><td>&#8377; " + totalAmount + "</td></tr>" + "</table>"
                                 + "</p></div>");

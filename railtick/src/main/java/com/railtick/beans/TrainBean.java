@@ -7,7 +7,7 @@ public class TrainBean {
 	private String tr_name;
 	private String from_stn;
 	private String to_stn;
-	private Integer seats;
+	private int seats;
 	private Double fare;
 	
 	// fARE
@@ -34,7 +34,7 @@ public class TrainBean {
 		return to_stn;
 	}
 
-	public Integer getSeats() {
+	public int getSeats() {
 		return seats;
 	}
 
@@ -58,8 +58,8 @@ public class TrainBean {
 		this.to_stn = to_stn;
 	}
 
-	public void setSeats(Integer seats) {
-		this.seats = seats;
+	public void setSeats(int i) {
+		this.seats = i;
 	}
 
 	public void setFare(Double fare) {
