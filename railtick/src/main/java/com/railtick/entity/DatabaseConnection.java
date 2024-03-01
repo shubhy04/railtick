@@ -1,8 +1,8 @@
 package com.railtick.entity;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -37,9 +37,21 @@ public class DatabaseConnection {
 
 	public static Connection getConnection() {
 		if (conn == null) {
-			System.out.println("Something went wrong");		
+			System.out.println("Something went wrong");
 		}
 		return conn;
 	}
-	
+
+	public static void closeResources(Connection connection, PreparedStatement preparedStatement) {
+		try {
+			if (preparedStatement != null) {
+				preparedStatement.close();
+			}
+			if (connection != null) {
+				connection.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
