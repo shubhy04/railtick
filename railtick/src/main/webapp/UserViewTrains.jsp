@@ -62,7 +62,7 @@
 <body>
    <%@include file="global/navbar_home.jsp"%>
     <div class="container">
-        <div class='menu'>View Train Details</div>
+        <div class='menu'>ViewTrainDetails</div>
         <table>
             <!-- Table content-->
         </table>
