@@ -1,4 +1,5 @@
 package com.railtick.beans;
+
 import java.io.Serializable;
 
 public class BookingDetails implements Serializable {
@@ -11,7 +12,10 @@ public class BookingDetails implements Serializable {
 	private String to_stn;
 	private String berth;
 	private int seats;
-	
+
+	private String razorpay_payment_id;
+	private String razorpay_signature;
+
 	private Double amount;
 
 	public String getMailId() {
@@ -69,12 +73,29 @@ public class BookingDetails implements Serializable {
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
+
 	public String getBerth() {
 		return berth;
 	}
+
 	public void setBerth(String berth) {
 		this.berth = berth;
 	}
 
+	public String getRazorpay_payment_id() {
+		return razorpay_payment_id;
+	}
+
+	public void setRazorpay_payment_id(String razorpay_payment_id) {
+		this.razorpay_payment_id = razorpay_payment_id;
+	}
+
+	public String getRazorpay_signature() {
+		return razorpay_signature;
+	}
+
+	public void setRazorpay_signature(String razorpay_signature) {
+		this.razorpay_signature = razorpay_signature;
+	}
 
 }

@@ -36,7 +36,11 @@ public class BookingServiceImpl implements BookingService {
 				transaction.setSeats(rs.getInt("seats"));
 				transaction.setAmount(rs.getDouble("amount"));
 				transaction.setTr_no(rs.getString("tr_no"));
+				transaction.setRazorpay_payment_id(rs.getString("razorpay_payment_id"));
+				transaction.setRazorpay_signature(rs.getString("razorpay_signature"));
+				transaction.setRazorpayOrderId(rs.getString("razorpay_order_id"));
 				transactions.add(transaction);
+				
 			}
 
 			ps.close();
@@ -48,10 +52,14 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public HistoryBean createHistory(HistoryBean details) throws TrainException {
+	public HistoryBean createHistory(HistoryBean details,String razorpayPaymentId, String razorpaySignature, String RazorpayOrderId) throws TrainException {
 		HistoryBean history = null;
-		String query = "INSERT INTO HISTORY VALUES(?,?,?,?,?,?,?,?)";
+		
+		String query = "INSERT INTO HISTORY VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 		try {
+			details.setRazorpay_payment_id(razorpayPaymentId);
+			details.setRazorpay_signature(razorpaySignature);
+			details.setRazorpayOrderId(RazorpayOrderId);
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement ps = con.prepareStatement(query);
 			String transactionId = UUID.randomUUID().toString();
@@ -63,6 +71,9 @@ public class BookingServiceImpl implements BookingService {
 			ps.setString(6, details.getTo_stn());
 			ps.setLong(7, details.getSeats());
 			ps.setDouble(8, details.getAmount());
+			ps.setString(9, details.getRazorpay_payment_id());
+            ps.setString(10, details.getRazorpay_signature());
+            ps.setString(11, details.getRazorpayOrderId());
 			int response = ps.executeUpdate();
 			if (response > 0) {
 				history = (HistoryBean) details;
@@ -77,5 +88,38 @@ public class BookingServiceImpl implements BookingService {
 		}
 		return history;
 	}
+	@Override
+	public HistoryBean getBookingByTransId(String transId) throws TrainException {
+	    HistoryBean transaction = null;
+	    String query = "SELECT * FROM HISTORY WHERE TRANSID=?";
+	    try {
+	        Connection con = DatabaseConnection.getConnection();
+	        PreparedStatement ps = con.prepareStatement(query);
+	        ps.setString(1, transId);
+	        ResultSet rs = ps.executeQuery();
+	        
+	        if (rs.next()) {
+	            transaction = new HistoryBean();
+	            transaction.setTransId(rs.getString("transid"));
+	            transaction.setFrom_stn(rs.getString("from_stn"));
+	            transaction.setTo_stn(rs.getString("to_stn"));
+	            transaction.setDate(rs.getString("date"));
+	            transaction.setMailId(rs.getString("mailid"));
+	            transaction.setSeats(rs.getInt("seats"));
+	            transaction.setAmount(rs.getDouble("amount"));
+	            transaction.setTr_no(rs.getString("tr_no"));
+	            transaction.setRazorpay_payment_id(rs.getString("razorpay_payment_id"));
+	            transaction.setRazorpay_signature(rs.getString("razorpay_signature"));
+	            transaction.setRazorpayOrderId(rs.getString("razorpay_order_id"));
+	        }
+
+	        ps.close();
+	    } catch (SQLException e) {
+	        System.out.println(e.getMessage());
+	        throw new TrainException(e.getMessage());
+	    }
+	    return transaction;
+	}
+
 
 }

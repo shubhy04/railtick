@@ -32,13 +32,13 @@ public class TicketBookingHistory extends HttpServlet {
             String customerId = TrainUtil.getCurrentUserEmail(req);
             List<HistoryBean> details = bookingService.getAllBookingsByCustomerId(customerId);
             
-            RequestDispatcher rd = req.getRequestDispatcher("UserViewTrains.jsp");
+            RequestDispatcher rd = req.getRequestDispatcher("BookingHistory.jsp");
             rd.include(req, res);
             pw.println("<div class='main'><p1 class='menu'>Booked Ticket History</p1></div>");
 
             if (!details.isEmpty()) {
                 pw.println("<div class='tab'><table><tr><th>Transaction ID</th><th>Train Number</th>"
-                        + "<th>From Station</th><th>To Station</th><th>Journey Date</th><th>Seat</th><th>Amount Paid</th><th>Details</th></tr>");
+                        + "<th>From Station</th><th>To Station</th><th>Journey Date</th><th>Seat</th><th>Amount Paid</th><th>Razorpay_payment_id</th><th>Razorpay_signature</th><th>RazorpayOrderId</th><th>Details</th></tr>");
 
                 for (HistoryBean trans : details) {
                     pw.println("<tr>" +
@@ -49,7 +49,10 @@ public class TicketBookingHistory extends HttpServlet {
                                 "<td>" + trans.getDate() + "</td>" +
                                 "<td>" + trans.getSeats() + "</td>" +
                                 "<td>" + trans.getAmount() + "</td>" +
-                                "<td><a href='PrintTicketDetails.jsp?transId=" + trans.getTransId() + "'>View Details</a></td>" +
+                                "<td>" + trans.getRazorpay_payment_id() + "</td>" +
+                                "<td>" + trans.getRazorpay_signature() + "</td>" +
+                                "<td>" + trans.getRazorpayOrderId() + "</td>" +
+                                "<td><a href='BookingDetailsServlet?transId=" + trans.getTransId() + "'>View Details</a></td>" +
                                 "</tr>");
                 }
                 pw.println("</table></div>");

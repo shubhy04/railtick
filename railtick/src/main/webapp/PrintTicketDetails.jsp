@@ -1,140 +1,84 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
+<%@ page import="com.railtick.beans.BookingDetails" %>
+<%@ page import="com.railtick.beans.HistoryBean" %>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ticket Details</title>
+    <title>Booking Details</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+            margin: 20px;
         }
 
-        .main {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .tab {
-            width: 60%;
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
             padding: 20px;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
             color: #333;
-            text-align: center;
-            margin-bottom: 20px;
         }
 
-        button {
-            padding: 12px;
-            background-color: #4CAF50;
-            color: white;
+        p {
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            color: #ff0000;
+            font-weight: bold;
+        }
+   		.print-button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        /* Print Styles */
-        @media print {
-            body {
-                background-color: white;
-            }
-
-            .tab {
-                width: 100%;
-                margin: 0;
-                box-shadow: none;
-            }
-
-            table, th, td {
-                border: 1px solid #000;
-            }
-
-            button {
-                display: none;
-            }
         }
     </style>
+    <script>
+        function printPage() {
+            window.print();
+        }
+    </script>
 </head>
 <body>
-    <div class="main">
-        <h1>Ticket Details</h1>
-    </div>
 
-    <div class="tab">
-        <table>
-            <tr>
-                <th>Transaction ID</th>
-                <td>${param.transId}</td> <!-- Retrieve the parameter from the URL -->
-            </tr>
-            <tr>
-                <th>Train Name</th>
-                <td>${requestScope.tr_no}</td>
-            </tr>
-            <tr>
-                <th>From Station</th>
-                <td>${requestScope.fr_stn}</td>
-            </tr>
-            <tr>
-                <th>To Station</th>
-                <td>${requestScope.to_stn}</td>
-            </tr>
-            <tr>
-                <th>Journey Date</th>
-                <td>${requestScope.date}</td>
-            </tr>
-            <tr>
-                <th>Seat</th>
-                <td>${requestScope.seats}</td>
-            </tr>
-            <tr>
-                <th>Amount Paid</th>
-                <td>${requestScope.amount}</td>
-            </tr>
-            <!-- Add more details as needed -->
-        </table>
-    </div>
+<div class="container">
+    <h1>Booking Details</h1>
 
-    <div class="main">
-        <button onclick="window.print()">Print Ticket</button>
-    </div>
+    <%
+        HistoryBean transaction = (HistoryBean) request.getAttribute("transaction");
+        if (transaction != null) {
+    %>
+        <p><strong>Transaction ID:</strong> <%= transaction.getTransId() %></p>
+        <p><strong>From Station:</strong> <%= transaction.getFrom_stn() %></p>
+        <p><strong>To Station:</strong> <%= transaction.getTo_stn() %></p>
+        <p><strong>Date:</strong> <%= transaction.getDate() %></p>
+        <p><strong>Mail ID:</strong> <%= transaction.getMailId() %></p>
+        <p><strong>Seats:</strong> <%= transaction.getSeats() %></p>
+        <p><strong>Amount:</strong> <%= transaction.getAmount() %></p>
+        <p><strong>Train Number:</strong> <%= transaction.getTr_no() %></p>
+        <p><strong>Razorpay_payment_id:</strong> <%= transaction.getRazorpay_payment_id() %></p>
+        <p><strong>Razorpay_signature:</strong> <%= transaction.getRazorpay_signature() %></p>
+        <p><strong>Razorpay_order_id:</strong> <%= transaction.getRazorpayOrderId() %></p>
+
+    <%
+        } else {
+    %>
+        <p class="error-message">No booking details found for the provided Transaction ID.</p>
+    <%
+        }
+    %>
+		<button class="print-button" onclick="printPage()">Print Details</button>
+</div>
+
 </body>
 </html>

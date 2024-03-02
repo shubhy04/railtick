@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +22,6 @@ import com.railtick.beans.TrainBean;
 import com.railtick.beans.TrainException;
 import com.railtick.constants.ResponseCode;
 import com.railtick.constants.UserRole;
-import com.railtick.entity.DatabaseConnection;
 import com.railtick.entity.TrainUtil;
 import com.railtick.service.TrainService;
 import com.railtick.serviceimpl.TrainServiceImpl;
@@ -49,7 +46,7 @@ public class BookTrainPayment extends HttpServlet {
 		sct.setAttribute("trainnumber", trainNo);
 		sct.setAttribute("journeydate", journeyDate);
 		sct.setAttribute("class", seatClass);
-		sct.setAttribute("berth", Berth);
+		sct.setAttribute("berth", Berth);;
 
 		try {
 			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -61,13 +58,14 @@ public class BookTrainPayment extends HttpServlet {
 
 			TrainBean train = trainService.getTrainById(trainNo);
 			TrainBean fare = trainService.getFareDetails(trainNo);
+			BookingStatus bookingStatus = getBookingStatus(train, seat);
 
 			if (train != null && fare != null) {
 				int avail = train.getSeats();
+				
 
-				if (seat > avail) {
-					pw.println("<div class='tab'><p1 class='menu red'>Only " + avail
-							+ " Seats are Available in this Train!</p1></div>");
+				if (bookingStatus == BookingStatus.NOT_AVAILABLE) {
+				    pw.println("<div class='tab'><p1 class='menu red'>Booking not available for the requested seats in this Train!</p1></div>");
 				} else {
 					avail = avail - seat;
 
@@ -101,12 +99,17 @@ public class BookTrainPayment extends HttpServlet {
 								+ "<tr><td>Date Of Journey:</td><td>" + date + "<tr><td>Berth:</td><td>" + Berth
 								+ "</td><td>Time(HH:MM):</td><td>11:23</td></tr><tr><td>Seats: </td><td>"
 								+ train.getSeats() + "</td><td>Class: </td><td>" + seatClass + "</td></tr>"
+								+ "<tr><td>Booking Status: </td><td style='color: "
+								+ getBookingStatus(train, seat).getColor() + "'>"
+								+ getBookingStatus(train, seat).getStatus() + "</td></tr>"
 								+ "</td><td>Amount:</td><td>&#8377; " + totalAmount + "</td></tr>" + "</table>"
 								+ "</p></div>";
 						req.getSession().setAttribute("content", content);
 						req.getSession().setAttribute("responseCode", responseCode);
 
-						// Store totalAmount in the session for use in Payment.jsp
+						
+						req.setAttribute("bookingStatus", bookingStatus);
+
 						req.getSession().setAttribute("totalAmount", totalAmount);
 
 						// Initialize Razorpay client
@@ -140,14 +143,58 @@ public class BookTrainPayment extends HttpServlet {
 			} else {
 				pw.println("<div class='tab'><p1 class='menu'>Invalid Train Number or Fare Details!</p1></div>");
 			}
-
 		} catch (Exception e) {
 			throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());
 		}
+
+		RequestDispatcher rd = req.getRequestDispatcher("Reciept.jsp");
+		rd.include(req, res);
 
 		sct.removeAttribute("seat");
 		sct.removeAttribute("trainNo");
 		sct.removeAttribute("journeyDate");
 	}
 
+	private BookingStatus getBookingStatus(TrainBean train, int bookedSeats) {
+		int availableSeats = train.getSeats();
+		int racThreshold = 10; // Set your RAC threshold as needed
+		int waitingListLimit = 15; // Set your waiting list limit as needed
+
+		if (availableSeats >= bookedSeats) {
+			return BookingStatus.AVAILABLE;
+		} else {
+			int remainingSeats = availableSeats;
+
+			if (remainingSeats >= bookedSeats) {
+				return BookingStatus.AVAILABLE;
+			} else if (remainingSeats + racThreshold >= bookedSeats) {
+				return BookingStatus.RAC;
+			} else if (remainingSeats + racThreshold + waitingListLimit >= bookedSeats) {
+				return BookingStatus.WAITING_LIST;
+			} else {
+				return BookingStatus.NOT_AVAILABLE;
+			}
+		}
+	}
+
+	private enum BookingStatus {
+		AVAILABLE("Available", "green"), RAC("RAC", "orange"), WAITING_LIST("Waiting List", "red"),
+		NOT_AVAILABLE("Not Available", "gray");
+
+		private final String status;
+		private final String color;
+
+		BookingStatus(String status, String color) {
+			this.status = status;
+			this.color = color;
+		}
+
+		public String getStatus() {
+			return status;
+		}
+
+		public String getColor() {
+			return color;
+		}
+	}
 }

@@ -166,6 +166,7 @@
                 // Extracting payment details
                 var paymentId = response.razorpay_payment_id;
                 var signature = response.razorpay_signature;
+                var orderid = response.razorpay_order_id;
 
                 // Displaying payment details
                 Swal.fire({
@@ -177,6 +178,7 @@
                     var form = $('<form method="post" action="booktrains"></form>');
                     form.append('<input type="hidden" name="razorpay_payment_id" value="' + paymentId + '">');
                     form.append('<input type="hidden" name="razorpay_signature" value="' + signature + '">');
+                    form.append('<input type="hidden" name="razorpay_order_id" value="' + orderid + '">');
                     $('body').append(form);
                     form.submit();
                 });
