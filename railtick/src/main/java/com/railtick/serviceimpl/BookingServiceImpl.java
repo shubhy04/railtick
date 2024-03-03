@@ -120,6 +120,69 @@ public class BookingServiceImpl implements BookingService {
 	    }
 	    return transaction;
 	}
+	
+	@Override
+	public boolean cancelBooking(String transId) throws TrainException {
+	    boolean cancellationStatus = false;
+	    String getBookingDetailsQuery = "SELECT * FROM HISTORY WHERE TRANSID=?";
+	    String updateTrainSeatsQuery = "UPDATE TRAIN SET SEATS = SEATS + ? WHERE TR_NO=?";
+	    String deleteBookingQuery = "DELETE FROM HISTORY WHERE TRANSID=?";
 
+	    try {
+	        Connection con = DatabaseConnection.getConnection();
+	        con.setAutoCommit(false); // Set auto-commit to false for transaction
+
+	        // Get booking details
+	        PreparedStatement getBookingDetailsPS = con.prepareStatement(getBookingDetailsQuery);
+	        getBookingDetailsPS.setString(1, transId);
+	        ResultSet bookingDetailsRS = getBookingDetailsPS.executeQuery();
+
+	        PreparedStatement updateTrainSeatsPS = null;  // Declare outside the if block
+
+	        if (bookingDetailsRS.next()) {
+	            String trNo = bookingDetailsRS.getString("tr_no");
+	            int bookedSeats = bookingDetailsRS.getInt("seats");
+	            double refundAmount = bookingDetailsRS.getDouble("amount");
+
+	            // Update train seats
+	            updateTrainSeatsPS = con.prepareStatement(updateTrainSeatsQuery);
+	            updateTrainSeatsPS.setInt(1, bookedSeats);
+	            updateTrainSeatsPS.setString(2, trNo);
+	            int updateTrainSeatsResponse = updateTrainSeatsPS.executeUpdate();
+
+	            // Delete booking record
+	            PreparedStatement deleteBookingPS = con.prepareStatement(deleteBookingQuery);
+	            deleteBookingPS.setString(1, transId);
+	            int deleteBookingResponse = deleteBookingPS.executeUpdate();
+
+	            // Check if both updates were successful
+	            if (updateTrainSeatsResponse > 0 && deleteBookingResponse > 0) {
+	                // Commit the transaction
+	                con.commit();
+	                cancellationStatus = true;
+	            } else {
+	                // Rollback if any update fails
+	                con.rollback();
+	            }
+	        }
+
+	        // Close prepared statements
+	        getBookingDetailsPS.close();
+
+	        // Close updateTrainSeatsPS if it was created
+	        if (updateTrainSeatsPS != null) {
+	            updateTrainSeatsPS.close();
+	        }
+
+	    } catch (SQLException e) {
+	        System.out.println(e.getMessage());
+	        throw new TrainException(e.getMessage());
+	    }
+
+	    return cancellationStatus;
+	}
 
 }
+
+
+

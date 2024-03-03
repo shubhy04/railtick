@@ -27,7 +27,6 @@ public class BookingHistoryPrint extends HttpServlet {
         String transId = request.getParameter("transId");
 
         // Call the service method to get the booking details
-       // TrainService trainService = new TrainService(); // Assuming TrainService is the class containing the service methods
         try {
             HistoryBean transaction = bookingService.getBookingByTransId(transId);
 

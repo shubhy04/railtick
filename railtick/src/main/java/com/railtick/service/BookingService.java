@@ -12,4 +12,6 @@ public interface BookingService {
 			String RazorpayOrderId) throws TrainException;
 
 	public HistoryBean getBookingByTransId(String transId) throws TrainException;
+
+	public boolean cancelBooking(String transId) throws TrainException;
 }
