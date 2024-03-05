@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -79,6 +80,7 @@ public class BookTrains extends HttpServlet {
             SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
             java.util.Date utilDate;
             String date = LocalDate.now().toString();
+            String time = LocalTime.now().toString();
             utilDate = inputFormat.parse(journeyDate);
             date = outputFormat.format(utilDate);
 
@@ -124,6 +126,7 @@ public class BookTrains extends HttpServlet {
                         bookingDetails.setSeats(seat);
                         bookingDetails.setMailId(userMailId);
                         bookingDetails.setDate(date);
+                        
 
                         HistoryBean transaction = bookingService.createHistory(bookingDetails, razorpayPaymentId,
                                 razorpaySignature, razorpayOrderId);
@@ -138,6 +141,7 @@ public class BookTrains extends HttpServlet {
                         req.setAttribute("from_stn", transaction.getFrom_stn());
                         req.setAttribute("to_stn", transaction.getTo_stn());
                         req.setAttribute("date", transaction.getDate());
+                        req.setAttribute("time", time);
                         req.setAttribute("berth", Berth);
                         req.setAttribute("seats", transaction.getSeats());
                         req.setAttribute("class", seatClass);
@@ -211,6 +215,7 @@ public class BookTrains extends HttpServlet {
                         req.setAttribute("from_stn", transaction.getFrom_stn());
                         req.setAttribute("to_stn", transaction.getTo_stn());
                         req.setAttribute("date", transaction.getDate());
+                        req.setAttribute("time", time);
                         req.setAttribute("berth", Berth);
                         req.setAttribute("seats", transaction.getSeats());
                         req.setAttribute("class", seatClass);
@@ -302,11 +307,12 @@ public class BookTrains extends HttpServlet {
 
     private void sendEmail(String recipient, HistoryBean transaction, TrainBean train, BookingStatus bookingStatus,
             String Berth, String seatClass) throws MessagingException {
+    	String time = LocalTime.now().toString();
         String subject = "Railway Ticket Booking Confirmation";
         String body = "Dear Customer,\n\n" + "Your railway ticket booking has been confirmed.\n"
                 + "Transaction ID: " + transaction.getTransId() + "\n" + "Train Name: " + train.getTr_name() + "\n"
                 + "From Station: " + transaction.getFrom_stn() + "\n" + "To Station: " + transaction.getTo_stn() + "\n"
-                + "Date of Journey: " + transaction.getDate() + "\n" + "Berth/Seat: " + Berth + "\n"
+                + "Date of Journey: " + transaction.getDate() + "\n" + "Time: " + time + "\n" + "Berth/Seat: " + Berth + "\n"
                 + "Number of Seats: " + transaction.getSeats() + "\n" + "Class: " + seatClass + "\n"
                 + "Booking Status: " + bookingStatus.getStatus() + "\n" + "Amount: " + transaction.getAmount() + "\n\n"
                 + "Thank you for choosing RailTick. Have a safe journey!";

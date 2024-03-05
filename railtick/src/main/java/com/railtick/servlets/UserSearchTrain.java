@@ -36,15 +36,11 @@ public class UserSearchTrain extends HttpServlet {
 			String trainNo = req.getParameter("trainnumber");
 			TrainBean train = trainService.getTrainById(trainNo);
 			if (train != null) {
+				req.setAttribute("trainData", train);  // Set train data as attribute
 				RequestDispatcher rd = req.getRequestDispatcher("TrainDisplay.jsp");
 				rd.include(req, res);
-				pw.println("<div class='tab'>" + "<table>" + "<tr><td class='blue'>Train Name :</td><td>"
-						+ train.getTr_name() + "</td></tr>" + "<tr><td class='blue'>Train Number :</td><td>"
-						+ train.getTr_no() + "</td></tr>" + "<tr><td class='blue'>From Station :</td><td>"
-						+ train.getFrom_stn() + "</td></tr>" + "<tr><td class='blue'>To Station :</td><td>"
-						+ train.getTo_stn() + "</td></tr>" + "<tr><td class='blue'>Available Seats:</td><td>"
-						+ train.getSeats() + "</td></tr>" + "<tr><td class='blue'>Fare (INR) :</td><td>"
-						+ train.getFare() + " RS</td></tr>" + "</table>" + "</div>");
+				
+				
 			} else {
 				RequestDispatcher rd = req.getRequestDispatcher("SearchTrains.jsp");
 				rd.include(req, res);

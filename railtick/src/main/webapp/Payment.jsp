@@ -1,156 +1,220 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RailTick - Payment</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f8f8;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            color: #333;
-        }
+<title>Payment Details</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- FontAwesome CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<style>
+body {
+	background-color: #f8f9fa;
+	font-family: 'Arial', sans-serif;
+	margin-bottom: 70px; /* Adjusted margin to accommodate the footer */
+}
 
-        .container {
-            max-width: 500px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            text-align: center;
-            transition: box-shadow 0.3s;
-            overflow: hidden;
-        }
+.navbar {
+	background-color: #343a40;
+	padding: 20px 0;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-        .container:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
+.navbar-brand {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #fff;
+}
 
-        h1 {
-            color: #3498db;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
+.navbar-logo {
+	font-size: 1.8rem;
+	color: #fff;
+	margin-right: 5px;
+}
 
-        p {
-            color: #555;
-            font-size: 16px;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
+.navbar-toggler-icon {
+	background-color: #fff;
+}
 
-        button {
-            background-color: #27ae60;
-            color: white;
-            padding: 12px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-weight: bold;
-        }
+.user-dropdown {
+	cursor: pointer;
+}
 
-        button:hover {
-            background-color: #218e54;
-        }
+.container {
+	max-width: 1200px;
+	margin-top: 20px;
+}
 
-        #loadingSpinner {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            z-index: 9999;
-        }
+.booking-details-container {
+	margin-top: 20px;
+	background-color: #fff;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-        #loadingSpinner img {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
+.table td, .table th {
+	border: 1px solid #dee2e6;
+	padding: 15px;
+	text-align: center;
+}
 
-        .details {
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            text-align: left;
-            transition: box-shadow 0.3s;
-        }
+.btn-pay-book {
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	padding: 15px 30px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
 
-        .details:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
+.btn-pay-book:hover {
+	background-color: #0056b3;
+}
 
-        .details table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
+.footer {
+	background-color: #343a40;
+	color: #fff;
+	
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
 
-        .details table, .details th, .details td {
-            border: 1px solid #ddd;
-        }
+/* Payment Information Styles */
+    .payment-info {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-        .details th, .details td {
-            padding: 12px;
-            text-align: left;
-        }
+    .payment-info h1 {
+        color: #007bff;
+    }
 
-        .details th {
-            background-color: #3498db;
-            color: white;
-        }
+    .payment-info p {
+        color: #343a40;
+    }
 
-        .details p {
-            margin-top: 20px;
-            font-size: 16px;
-            color: #555;
-            line-height: 1.6;
-        }
-    </style>
+    #razorpayBtn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-weight: bold;
+    }
+
+    #razorpayBtn:hover {
+        background-color: #0056b3;
+    }
+   
+    .table td.amount-value {
+        font-weight: bold;
+    }
+</style>
 </head>
 <body>
-    <!-- Display the content -->
-    <div class="details">
-        <% 
-            String content = (String) session.getAttribute("content");
-            if (content != null) { %>
-                <%= content %>
-        <% } %>
-    </div>
 
-    <div class="container">
-        <h1>RailTick - Payment</h1>
-        <p>Click the button below to proceed with the payment for your train ticket.</p>
-        <button id="razorpayBtn" onclick="initiateRazorpayPayment()">Proceed to Payment</button>
-        <div id="loadingSpinner" class="overlay">
-            <img src="loading.gif" alt="Loading Spinner">
-        </div>
-    </div>
+	<!-- Navigation Bar -->
+	<nav class="navbar navbar-expand-lg navbar-dark">
+		<div class="container">
+			<!-- Railway Icon -->
+			<span class="navbar-logo">&#128642;</span>
+			<!-- Railway Booking Text -->
+			<a class="navbar-brand" href="HomePage.jsp">RailTick</a>
+			<!-- Navbar Toggler Button -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNav" aria-controls="navbarNav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<!-- Navbar Items -->
+			<div class="collapse navbar-collapse justify-content-end"
+				id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link"
+						href="#featured-trains">Book Trains</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="#popular-destinations">Other Features</a></li>
+					<li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="#services">Services</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="#contact">Contact</a>
+					</li>
+					<!-- User Dropdown -->
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle user-dropdown" href="#"
+						id="userDropdown" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> <i
+							class="fas fa-user"></i>
+					</a>
+						<div class="dropdown-menu" aria-labelledby="userDropdown">
+							<a class="dropdown-item" href="viewuserprofile"><i
+								class="fas fa-user-circle"></i> View Profile</a> <a
+								class="dropdown-item" href="edituserprofile"><i
+								class="fas fa-edit"></i> Update Profile</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="userlogout"><i
+								class="fas fa-sign-out-alt"></i> Logout</a>
+						</div></li>
+					<!-- End User Dropdown -->
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <script>
+	<!-- Display the content -->
+	<div class="container booking-details-container">
+		<div>
+			<h2 class="text-center">Your Ticket Booking Information</h2>
+			<table class="table table-bordered">
+				<%
+				String content = (String) session.getAttribute("content");
+				if (content != null) {
+				%>
+				<%=content%>
+				<%
+				}
+				%>
+			</table>
+
+
+		</div>
+	</div>
+
+	<div class="payment-info">
+		 <button id="razorpayBtn" onclick="initiateRazorpayPayment()">
+            <span class="loading-spinner" id="loadingSpinner"></span>
+            Proceed to Payment
+        </button>
+	</div>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="container">
+			<p>&copy; 2024 RailTick. All rights reserved.</p>
+		</div>
+	</footer>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+	<script>
     function initiateRazorpayPayment() {
         var razorpayBtn = $('#razorpayBtn');
         
 
         // Fetch data from server-side
-        var totalAmount = <%= (Long)session.getAttribute("totalAmount") * 100 %>;
-        var razorpayOrderId = '<%= session.getAttribute("razorpayOrderId") %>';
+        var totalAmount = <%=(Long) session.getAttribute("totalAmount") * 100%>;
+        var razorpayOrderId = '<%=session.getAttribute("razorpayOrderId")%>';
 
         var options = {
             key: 'rzp_test_LSfhbrTgIOlWn2',

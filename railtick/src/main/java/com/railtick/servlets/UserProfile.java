@@ -1,6 +1,7 @@
 package com.railtick.servlets;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
@@ -28,7 +29,7 @@ public class UserProfile extends HttpServlet {
 
 		RequestDispatcher rd = req.getRequestDispatcher("UserProfile.jsp");
 		rd.include(req, res);
-		pw.println("<div class='tab'>" + "		<p1 class='menu'>" + "	Hello " + TrainUtil.getCurrentUserName(req)
+		pw.println("<div class='tab'>" + "	<p1 class='menu'>" + "	Hello " + TrainUtil.getCurrentUserName(req)
 				+ " ! Welcome to our new NITRTC Website" + "		</p1>" + "	</div>");
 		pw.println("<div class='main'><p1 class='menu'><a href='viewuserprofile'>View Profile</a></p1>&nbsp;"
 				+ "<p1 class='menu'><a href='edituserprofile'>Edit Profile</a></p1>&nbsp;"

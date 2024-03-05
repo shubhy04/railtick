@@ -29,8 +29,8 @@ public class UserLoginServlet extends HttpServlet {
 		if (ResponseCode.SUCCESS.toString().equalsIgnoreCase(responseMsg)) {
 			RequestDispatcher rd = req.getRequestDispatcher("HomePage.jsp");
 			rd.include(req, res);
-			pw.println("<div class='login-section'><p class='success-message'>Hello " + uName
-					+ " ! Welcome to our new RailTick Website</p></div>");
+//			pw.println("<div class='login-section'><p class='success-message'>Hello " + uName
+//					+ " ! Welcome to our new RailTick Website</p></div>");
 			
 		} else {
 			RequestDispatcher rd = req.getRequestDispatcher("Login.jsp");

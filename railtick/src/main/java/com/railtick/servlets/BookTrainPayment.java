@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -53,6 +54,7 @@ public class BookTrainPayment extends HttpServlet {
 			SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
 			java.util.Date utilDate;
 			String date = LocalDate.now().toString();
+			String time = LocalTime.now().toString();
 			utilDate = inputFormat.parse(journeyDate);
 			date = outputFormat.format(utilDate);
 
@@ -91,19 +93,20 @@ public class BookTrainPayment extends HttpServlet {
 					Long totalAmount = classFare * seat;
 					String responseCode = trainService.updateTrain(train);
 					if (ResponseCode.SUCCESS.toString().equalsIgnoreCase(responseCode)) {
-						String content = "<div class='tab'>" + "<p class='menu'>" + "<table>"
-								+ "</td></tr><tr><td>Train Name: </td><td>" + train.getTr_name()
-								+ "</td><td>Train No: </td><td>" + train.getTr_no()
-								+ "</td></tr><tr><td>Booked From: </td><td>" + train.getFrom_stn()
-								+ "</td><td>To Station: </td><td>" + train.getTo_stn() + "</td></tr>"
-								+ "<tr><td>Date Of Journey:</td><td>" + date + "<tr><td>Berth:</td><td>" + Berth
-								+ "</td><td>Time(HH:MM):</td><td>11:23</td></tr><tr><td>Seats: </td><td>"
-								+ train.getSeats() + "</td><td>Class: </td><td>" + seatClass + "</td></tr>"
-								+ "<tr><td>Booking Status: </td><td style='color: "
+						String content = "<table class= 'table table-bordered'>"
+								+ "<tr><th>Train Name: </th><td>" + train.getTr_name()+ "</td>" 
+								+ "<th>Train No: </th><td>" + train.getTr_no() 
+								+ "</td></tr><tr><th>Booked From: </th><td>" + train.getFrom_stn()
+								+ "</td><th>To Station: </th><td>" + train.getTo_stn() + "</td></tr>"
+								+ "<tr><th>Booking Status: </th><td style='color: "
 								+ getBookingStatus(train, seat).getColor() + "'>"
-								+ getBookingStatus(train, seat).getStatus() + "</td></tr>"
-								+ "</td><td>Amount:</td><td>&#8377; " + totalAmount + "</td></tr>" + "</table>"
-								+ "</p></div>";
+								+ getBookingStatus(train, seat).getStatus() + "</td>"
+								+ "<th>Date Of Journey:</th><td>" + date + "</td></tr><tr><th>Berth:</th><td>" + Berth
+								+ "</td><th>Time(HH:MM):</th><td>"+ time +"</td></tr><tr><th>Seats: </th><td>"
+								+ train.getSeats() + "</td><th>Class: </th><td>" + seatClass + "</td></tr>"
+								
+								+ "</td><th colspan='2' class='text-center'>Amount:</th><td colspan='4' class='text-center amount-value'>&#8377; " + totalAmount + "</td></tr>" + "</table>"
+								;
 						req.getSession().setAttribute("content", content);
 						req.getSession().setAttribute("responseCode", responseCode);
 
