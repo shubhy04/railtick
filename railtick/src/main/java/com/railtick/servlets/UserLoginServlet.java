@@ -27,16 +27,15 @@ public class UserLoginServlet extends HttpServlet {
 
 		String responseMsg = TrainUtil.login(req, res, UserRole.CUSTOMER, uName, pWord);
 		if (ResponseCode.SUCCESS.toString().equalsIgnoreCase(responseMsg)) {
+			req.setAttribute("successMessage", "Login successful. Welcome, " + uName + "!");
 			RequestDispatcher rd = req.getRequestDispatcher("HomePage.jsp");
 			rd.include(req, res);
-//			pw.println("<div class='login-section'><p class='success-message'>Hello " + uName
-//					+ " ! Welcome to our new RailTick Website</p></div>");
-			
+						
 		} else {
+			req.setAttribute("errorMessage", "Invalid username or password. Please try again.");
 			RequestDispatcher rd = req.getRequestDispatcher("Login.jsp");
 			rd.include(req, res);
-
-			pw.println("<div class='login-section'><p class='error-message'>" + responseMsg + "</p></div>");
+		
 
 		}
 

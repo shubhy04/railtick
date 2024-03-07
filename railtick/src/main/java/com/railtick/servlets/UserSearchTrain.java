@@ -36,7 +36,11 @@ public class UserSearchTrain extends HttpServlet {
 			String trainNo = req.getParameter("trainnumber");
 			TrainBean train = trainService.getTrainById(trainNo);
 			if (train != null) {
+				int hr = (int) (Math.random() * 24);
+                int min = (int) (Math.random() * 60);
+                String time = (hr < 10 ? ("0" + hr) : hr) + ":" + ((min < 10) ? "0" + min : min);
 				req.setAttribute("trainData", train);  // Set train data as attribute
+				req.setAttribute("time", time);
 				RequestDispatcher rd = req.getRequestDispatcher("TrainDisplay.jsp");
 				rd.include(req, res);
 				

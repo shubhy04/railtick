@@ -17,7 +17,6 @@ import com.railtick.constants.UserRole;
 import com.railtick.entity.TrainUtil;
 import com.railtick.service.TrainService;
 import com.railtick.serviceimpl.TrainServiceImpl;
-
 @WebServlet("/userviewtrainfwd")
 public class UserViewTrainfwdServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -31,39 +30,17 @@ public class UserViewTrainfwdServlet extends HttpServlet {
         try {
             List<TrainBean> trains = trainService.getAllTrains();
             if (trains != null && !trains.isEmpty()) {
-                RequestDispatcher rd = req.getRequestDispatcher("UserViewTrains.jsp");
-                rd.include(req, res);
-
-                pw.println("<div class='main'><p1 class='menu'>Running Trains</p1></div>");
-                pw.println("<div class='tab'><table><tr><th>Train Name</th><th>Train Number</th>"
-                        + "<th>From Station</th><th>To Station</th><th>Time</th><th>Seats Available</th><th>Fare (INR)</th><th>Booking</th></tr>");
-
-                for (TrainBean train : trains) {
-                    int hr = (int) (Math.random() * 24);
-                    int min = (int) (Math.random() * 60);
-                    String time = (hr < 10 ? ("0" + hr) : hr) + ":" + ((min < 10) ? "0" + min : min);
-
-                    pw.println("<tr>"
-                            + "<td><a href='view?trainNo=" + train.getTr_no() + "&fromStn=" + train.getFrom_stn()
-                            + "&toStn=" + train.getTo_stn() + "'>" + train.getTr_name() + "</a></td>"
-                            + "<td>" + train.getTr_no() + "</td>"
-                            + "<td>" + train.getFrom_stn() + "</td>"
-                            + "<td>" + train.getTo_stn() + "</td>"
-                            + "<td>" + time + "</td>"
-                            + "<td>" + train.getSeats() + "</td>"
-                            + "<td><a href='fare?trainNo=" + train.getTr_no()
-                            + "&fromStn=" + train.getFrom_stn() + "&toStn=" + train.getTo_stn()
-                            + "'><div class='red'>See fare</div></a></td>"
-                            + "<td><a href='booktrainbyref?trainNo=" + train.getTr_no()
-                            + "&fromStn=" + train.getFrom_stn() + "&toStn=" + train.getTo_stn()
-                            + "'><div class='red'>Book Now</div></a></td>"
-                            + "</tr>");
-                }
-                pw.println("</table></div>");
+            	int hr = (int) (Math.random() * 24);
+                int min = (int) (Math.random() * 60);
+                String time = (hr < 10 ? ("0" + hr) : hr) + ":" + ((min < 10) ? "0" + min : min);
+                req.setAttribute("trains", trains);
+                req.setAttribute("time", time);
+                RequestDispatcher rd = req.getRequestDispatcher("AllTrainsDisplay.jsp");
+                rd.forward(req, res);
             } else {
-                RequestDispatcher rd = req.getRequestDispatcher("UserViewTrains.jsp");
-                rd.include(req, res);
-                pw.println("<div class='main'><p1 class='menu red'> No Running Trains</p1></div>");
+                RequestDispatcher rd = req.getRequestDispatcher("AllTrainsDisplay.jsp");
+                rd.forward(req, res);
+                pw.println("<div class='error-message'><p1 class='err'> No Running Trains</p1></div>");
             }
         } catch (Exception e) {
             throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());

@@ -16,41 +16,40 @@ import com.railtick.constants.UserRole;
 import com.railtick.entity.TrainUtil;
 import com.railtick.service.TrainService;
 import com.railtick.serviceimpl.TrainServiceImpl;
-
 @WebServlet("/fare")
 public class fareClass extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+    TrainService trainService = new TrainServiceImpl();
 
-	TrainService trainService = new TrainServiceImpl();
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        processRequest(req, res);
+    }
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		res.setContentType("text/html");
-		PrintWriter pw = res.getWriter();
-		TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        processRequest(req, res);
+    }
 
-		try {
-			String trainNo = req.getParameter("trainNo");
-			TrainBean train = trainService.getFareDetails(trainNo);
-			if (train != null) {
-				RequestDispatcher rd = req.getRequestDispatcher("FareDisplay.jsp");
-				rd.include(req, res);
-				pw.println("<div class='main'><p1 class='menu'>Fare Detail</p1></div>");
-				pw.println("<div class='tab'>" + "<table>" + "<tr><td class='blue'>Train Number :</td><td>"
-						+ train.getTr_no() + "</td></tr>" + "<tr><td class='blue'>Sleeper:</td><td>"
-						+ train.getSleeper() + "</td></tr>" + "<tr><td class='blue'>General:</td><td>"
-						+ train.getGeneral() + "</td></tr>" + "<tr><td class='blue'>Ac Tier :</td><td>"
-						+ train.getAc_tier() + "</td></tr>" + "<tr><td class='blue'>Ac 2 Tier :</td><td>"
-						+ train.getAc_2_tier() + "</td></tr>" + "</table>" + "</div>");
-			} else {
-				RequestDispatcher rd = req.getRequestDispatcher("FareDisplay.jsp");
-				rd.include(req, res);
-				pw.println("<div class='tab'><p1 class='menu'>Train No." + req.getParameter("trainnumber")
-						+ " is Not Available !</p1></div>");
-			}
-		} catch (Exception e) {
-			throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());
-		}
+    private void processRequest(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        res.setContentType("text/html");
+        PrintWriter pw = res.getWriter();
+        TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
 
-	}
+        try {
+            String trainNo = req.getParameter("trainnumber");
+            TrainBean train = trainService.getFareDetails(trainNo);
 
+            if (train != null) {
+                req.setAttribute("trainnumber", trainNo);
+                req.setAttribute("train", train);
+                RequestDispatcher rd = req.getRequestDispatcher("FareDisplay.jsp");
+                rd.forward(req, res);
+            } else {
+                RequestDispatcher rd = req.getRequestDispatcher("FareDisplay.jsp");
+                rd.forward(req, res);
+                pw.println("<div class='error-message'><p1 class='err'>Train No." + req.getParameter("trainnumber") + " is Not Available !</p1></div>");
+            }
+        } catch (Exception e) {
+            throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());
+        }
+    }
 }

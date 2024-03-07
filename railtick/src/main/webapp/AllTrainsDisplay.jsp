@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <title>RailTick - Train Details</title>
     <style>
         body {
             background-color: #f8f9fa;
@@ -68,10 +69,6 @@
         .table-container th:hover {
             background-color: #0056b3;
         }
-        .form-class{
-       	margin-right:0; 
-       	padding-right:0;
-        }
 
         .btn-see-fare,
         .btn-book-train,
@@ -88,7 +85,6 @@
             text-align: center;
             position: absolute;
             width: 100%;
-            bottom: 0;
         }
 
         .error-message {
@@ -99,41 +95,9 @@
             border-radius: 5px;
         }
 
-        .history-details {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .err {
+            font-weight: bold;
         }
-
-        .history-details p {
-            margin: 10px 0;
-        }
-
-        .action-buttons {
-            margin-top: 20px;
-        }
-
-        .action-buttons button {
-            margin-right: 10px;
-        }
-
-        .footer {
-            background-color: #343a40;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-            position: absolute;
-            width: 100%;
-            bottom: auto;
-        }
-        @media print {
-    .action-buttons {
-        display: none !important;
-    }
-}
     </style>
     
 </head>
@@ -206,57 +170,43 @@
         </div>
     </nav>
 
-    <div class="container">
-        <div class="history-details">
-            <h2 class="text-center mb-4"><i class="fas fa-receipt"></i> Booking Details</h2>
-            <%
-                HistoryBean transaction = (HistoryBean) request.getAttribute("transaction");
-                if (transaction != null) {
-            %>
-                <p><strong>Transaction ID:</strong> <%= transaction.getTransId() %></p>
-                <p><strong>From Station:</strong> <%= transaction.getFrom_stn() %></p>
-                <p><strong>To Station:</strong> <%= transaction.getTo_stn() %></p>
-                <p><strong>Date:</strong> <%= transaction.getDate() %></p>
-                <p><strong>Mail ID:</strong> <%= transaction.getMailId() %></p>
-                <p><strong>Seats:</strong> <%= transaction.getSeats() %></p>
-                <p><strong>Amount:</strong> <%= transaction.getAmount() %></p>
-                <p><strong>Train Number:</strong> <%= transaction.getTr_no() %></p>
-                <p><strong>Razorpay_payment_id:</strong> <%= transaction.getRazorpay_payment_id() %></p>
-                <p><strong>Razorpay_signature:</strong> <%= transaction.getRazorpay_signature() %></p>
-                <p><strong>Razorpay_order_id:</strong> <%= transaction.getRazorpayOrderId() %></p>
-
-             <!-- Action Buttons -->
-<div class="action-buttons  row justify-content-center">
-    <!-- Home Button -->
-    <div class="col-md-2 ">
-        <a href="HomePage.jsp" class="btn btn-primary btn-block"><i class="fas fa-home"></i> Home</a>
-    </div>
-    <!-- Go Back Button -->
-    <div class="col-md-2 ">
-        <button class="btn btn-secondary btn-block" onclick="goBack()"><i class="fas fa-arrow-left"></i> Go Back</button>
-    </div>
-    <!-- Print Details Button -->
-    <div class="col-md-2 ">
-        <button class="btn btn-info btn-block" onclick="printPage()"><i class="fas fa-print"></i> Print Details</button>
-    </div>
-    <!-- Cancel Ticket Button -->
-    <div class="col-md-2">
-        <form id="cancelForm" action="cancelBooking" method="post" onsubmit="return confirmCancel()">
-            <input type="hidden" name="transId" value="<%= transaction.getTransId() %>">
-            <button class="btn btn-danger btn-block" type="submit"><i class="fas fa-times"></i> Cancel Ticket</button>
-        </form>
-    </div>
-</div>
-
-            <%
-                } else {
-            %>
-                <!-- Error message for no booking details -->
-                <p class="error-message">No booking details found for the provided Transaction ID.</p>
-            <%
-                }
-            %>
+    <div class="container table-container">
+        <div class="mb-4">
+            <!-- Home Button -->
+            <a href="HomePage.jsp" class="btn btn-primary btn-home"><i class="fas fa-home"></i> Home</a>
+            <!-- Go Back Button -->
+            <button class="btn btn-secondary btn-go-back" onclick="goBack()"><i class="fas fa-arrow-left"></i> Go Back</button>
         </div>
+        <h2 class="text-center mb-4">History Details</h2>
+        <%
+            HistoryBean transaction = (HistoryBean) request.getAttribute("transaction");
+            if (transaction != null) {
+        %>
+            <p class="info"><strong>Transaction ID:</strong> <%= transaction.getTransId() %></p>
+            <p class="info"><strong>From Station:</strong> <%= transaction.getFrom_stn() %></p>
+            <p class="info"><strong>To Station:</strong> <%= transaction.getTo_stn() %></p>
+            <p class="info"><strong>Date:</strong> <%= transaction.getDate() %></p>
+            <p class="info"><strong>Mail ID:</strong> <%= transaction.getMailId() %></p>
+            <p class="info"><strong>Seats:</strong> <%= transaction.getSeats() %></p>
+            <p class="info"><strong>Amount:</strong> <%= transaction.getAmount() %></p>
+            <p class="info"><strong>Train Number:</strong> <%= transaction.getTr_no() %></p>
+            <p class="info"><strong>Razorpay_payment_id:</strong> <%= transaction.getRazorpay_payment_id() %></p>
+            <p class="info"><strong>Razorpay_signature:</strong> <%= transaction.getRazorpay_signature() %></p>
+            <p class="info"><strong>Razorpay_order_id:</strong> <%= transaction.getRazorpayOrderId() %></p>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-info" onclick="printPage()"><i class="fas fa-print"></i> Print Details</button>
+                <!-- Ticket Cancel Form -->
+                <form id="cancelForm" action="cancelBooking" method="post" onsubmit="return confirmCancel()">
+                    <input type="hidden" name="transId" value="<%= transaction.getTransId() %>">
+                    <button class="btn btn-danger" type="submit"><i class="fas fa-times"></i> Cancel Ticket</button>
+                </form>
+            </div>
+        <% } else { %>
+            <!-- Error message for no booking details -->
+            <p class="error-message">No booking details found for the provided Transaction ID.</p>
+        <% } %>
     </div>
 
     <!-- Footer -->

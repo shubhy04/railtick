@@ -1,12 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
-    <title>User Profile - RailTick</title>
+    <title>Edit User Profile - RailTick</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- FontAwesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <style>
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+ <style>
         body {
             background-color: #f8f9fa;
             font-family: 'Arial', sans-serif;
@@ -29,6 +31,14 @@
         .container {
             max-width: 800px;
             margin: 20px auto;
+        }
+
+        .tab {
+            background-color: #343a40;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         table {
@@ -55,53 +65,17 @@
             color: #fff;
         }
 
-        .profile-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-
-        .profile-heading {
-            font-size: 2rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #007bff;
-        }
-
-        .profile-subheading {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #007bff;
-        }
-
-        .profile-table {
+        input[type="text"], input[type="submit"] {
             width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
+            padding: 10px;
+            margin: 5px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 5px;
         }
 
-        .profile-table, .profile-table th, .profile-table td {
-            border: 1px solid #dee2e6;
-        }
-
-        .profile-table th, .profile-table td {
-            padding: 15px;
-            text-align: left;
-        }
-
-        .profile-table th {
-            background-color: #6c757d; /* Lightened color */
-            color: #fff;
-        }
-
-        .update-profile-btn {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
+        input[type="submit"] {
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -110,9 +84,13 @@
             transition: background-color 0.3s;
         }
 
-        .update-profile-btn:hover {
+        input[type="submit"]:hover {
             background-color: #0056b3;
         }
+        p {
+    margin-top: 0;
+    margin-bottom: 0rem;
+}
 
         .footer {
             background-color: #343a40;
@@ -120,6 +98,10 @@
             padding: 20px 0;
             text-align: center;
             margin-top: 50px;
+        }
+
+        .error-message {
+            color: red;
         }
     </style>
 </head>
@@ -192,37 +174,45 @@
     </div>
 </nav>
 
-<!-- User Profile Container -->
-<div class="container profile-container">
-    <h2 class="profile-heading">Hello <%= request.getAttribute("userName") %>! Welcome to RailTick</h2>
-    <p class="profile-subheading">User Profile View</p>
-    <table class="profile-table">
-        <tr>
-            <th>User Name</th>
-            <td><%= ((com.railtick.beans.UserBean)request.getAttribute("userProfile")).getMailId() %></td>
-        </tr>
-        <tr>
-            <th>First Name</th>
-            <td><%= ((com.railtick.beans.UserBean)request.getAttribute("userProfile")).getFName() %></td>
-        </tr>
-        <tr>
-            <th>Last Name</th>
-            <td><%= ((com.railtick.beans.UserBean)request.getAttribute("userProfile")).getLName() %></td>
-        </tr>
-        <tr>
-            <th>Address</th>
-            <td><%= ((com.railtick.beans.UserBean)request.getAttribute("userProfile")).getAddr() %></td>
-        </tr>
-        <tr>
-            <th>Phone No</th>
-            <td><%= ((com.railtick.beans.UserBean)request.getAttribute("userProfile")).getPhNo() %></td>
-        </tr>
-        <tr>
-            <th>Mail Id</th>
-            <td><%= ((com.railtick.beans.UserBean)request.getAttribute("userProfile")).getMailId() %></td>
-        </tr>
-    </table>
-    <a href="edituserprofile" class="update-profile-btn"><i class="fas fa-edit"></i> Update Profile</a>
+<!-- Edit User Profile Container -->
+<div class="container">
+    <div class="tab">
+        <p>Profile Update</p>
+    </div>
+    <form action="updateuserprofile" method="post" onsubmit="return validateForm()">
+        <table>
+            <tr>
+                <td>User Name :</td>
+                <td><input type="text" name="username" value="<%= request.getAttribute("username") %>" disabled></td>
+            </tr>
+            <tr>
+                <td>First Name :</td>
+                <td><input type="text" name="firstname" id="firstname" value="<%= request.getAttribute("firstname") %>"></td>
+                <td><span class="error-message" id="firstname-error"></span></td>
+            </tr>
+            <tr>
+                <td>Last Name :</td>
+                <td><input type="text" name="lastname" id="lastname" value="<%= request.getAttribute("lastname") %>"></td>
+                <td><span class="error-message" id="lastname-error"></span></td>
+            </tr>
+            <tr>
+                <td>Address :</td>
+                <td><input type="text" name="address" id="address" value="<%= request.getAttribute("address") %>"></td>
+                <td><span class="error-message" id="address-error"></span></td>
+            </tr>
+            <tr>
+                <td>Phone No:</td>
+                <td><input type="text" name="phone" id="phone" value="<%= request.getAttribute("phone") %>"></td>
+                <td><span class="error-message" id="phone-error"></span></td>
+            </tr>
+            <tr>
+   				 
+    			<td><input type="hidden" name="mail" id="email" value="<%= request.getAttribute("username") %>"></td>
+    			
+</tr>
+        </table>
+        <input type="submit" name="update" value="Update Profile">
+    </form>
 </div>
 
 <!-- Footer -->
@@ -236,5 +226,51 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+
+<script>
+    function validateForm() {
+        var firstname = document.getElementById("firstname").value.trim();
+        var lastname = document.getElementById("lastname").value.trim();
+        var address = document.getElementById("address").value.trim();
+        var phone = document.getElementById("phone").value.trim();
+
+        // Reset error messages
+        document.getElementById("firstname-error").innerHTML = "";
+        document.getElementById("lastname-error").innerHTML = "";
+        document.getElementById("address-error").innerHTML = "";
+        document.getElementById("phone-error").innerHTML = "";
+
+        var isValid = true;
+
+        // Validate First Name
+        if (firstname === "") {
+            document.getElementById("firstname-error").innerHTML = "First Name is required.";
+            isValid = false;
+        }
+
+        // Validate Last Name
+        if (lastname === "") {
+            document.getElementById("lastname-error").innerHTML = "Last Name is required.";
+            isValid = false;
+        }
+
+        // Validate Address
+        if (address === "") {
+            document.getElementById("address-error").innerHTML = "Address is required.";
+            isValid = false;
+        }
+
+        // Validate Phone Number
+        if (phone === "") {
+            document.getElementById("phone-error").innerHTML = "Phone Number is required.";
+            isValid = false;
+        }
+
+        return isValid;
+    }
+    
+</script>
 </body>
 </html>

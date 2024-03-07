@@ -13,7 +13,7 @@
 body {
 	background-color: #f8f9fa;
 	font-family: 'Arial', sans-serif;
-	margin-bottom: 70px; /* Adjusted margin to accommodate the footer */
+	
 }
 
 .navbar {
@@ -80,8 +80,8 @@ body {
 	color: #fff;
 	
 	text-align: center;
-	position: fixed;
-	bottom: 0;
+	position: absolute;
+
 	width: 100%;
 }
 
@@ -108,6 +108,7 @@ body {
         cursor: pointer;
         transition: background-color 0.3s;
         font-weight: bold;
+        margin-bottom: 15px;
     }
 
     #razorpayBtn:hover {
@@ -203,15 +204,14 @@ body {
 		</div>
 	</footer>
 
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 	<script>
     function initiateRazorpayPayment() {
         var razorpayBtn = $('#razorpayBtn');
-        
-
+       
         // Fetch data from server-side
         var totalAmount = <%=(Long) session.getAttribute("totalAmount") * 100%>;
         var razorpayOrderId = '<%=session.getAttribute("razorpayOrderId")%>';

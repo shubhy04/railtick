@@ -22,44 +22,35 @@ import com.railtick.entity.TrainUtil;
  */
 @WebServlet("/useravail")
 public class UserAvailServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private TrainService trainService = new TrainServiceImpl();
+    private static final long serialVersionUID = 1L;
+    private TrainService trainService = new TrainServiceImpl();
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		res.setContentType("text/html");
-		PrintWriter pw = res.getWriter();
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        res.setContentType("text/html");
+        PrintWriter pw = res.getWriter();
 
-		TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
+        TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
 
-		try {
+        try {
+            String trainNo = req.getParameter("trainnumber");
 
-			String trainNo = req.getParameter("trainno");
-			TrainBean train = trainService.getTrainById(trainNo);
-			if (train != null) {
-				RequestDispatcher rd = req.getRequestDispatcher("Availability.jsp");
-				rd.include(req, res);
-				pw.println(
-						"<div class='tab'>" + "		<p1 class='menu'>" + "	Hello " + TrainUtil.getCurrentUserName(req)
-								+ " ! Welcome to our new Railtick Website" + "		</p1>" + "	</div>");
-				pw.println("<div class='main'><p1 class='menu'>Available Seats are <p2 class=\"red\"> "
-						+ train.getSeats() + " Seats</p2></p1></div>");
-				pw.println("<div class='tab'>" + "<table>" + "<tr><td class='blue'>Train Name :</td><td>"
-						+ train.getTr_name() + "</td></tr>" + "<tr><td class='blue'>Train Number :</td><td>"
-						+ train.getTr_no() + "</td></tr>" + "<tr><td class='blue'>From Station :</td><td>"
-						+ train.getFrom_stn() + "</td></tr>" + "<tr><td class='blue'>To Station :</td><td>"
-						+ train.getTo_stn() + "</td></tr>" + "<tr><td class='blue'>Available Seats:</td><td>"
-						+ train.getSeats() + "</td></tr>" + "<tr><td class='blue'>Fare (INR) :</td><td>"
-						+ train.getFare() + " RS</td></tr>" + "</table>" + "</div>");
-			} else {
-				RequestDispatcher rd = req.getRequestDispatcher("Availability.jsp");
-				rd.include(req, res);
+            if (trainNo != null && !trainNo.isEmpty()) {
+                TrainBean train = trainService.getTrainById(trainNo);
 
-				pw.println("<div class='tab'><p1 class='menu'>Train No." + trainNo + " is Not Available !</p1></div>");
-			}
-		} catch (Exception e) {
-			throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());
-		}
+                if (train != null) {
+                    req.setAttribute("successMessage", "Train No." + trainNo + "Seats available : " + train.getSeats());
+                } else {
+                    req.setAttribute("errorMessage", "Train No. " + trainNo + " is Not Available!");
+                }
+            } else {
+                req.setAttribute("errorMessage", "Invalid Train Number!");
+            }
 
-	}
+            RequestDispatcher rd = req.getRequestDispatcher("Availability.jsp");
+            rd.forward(req, res);
 
+        } catch (Exception e) {
+            throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());
+        }
+    }
 }

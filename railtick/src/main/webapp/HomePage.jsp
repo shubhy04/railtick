@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- SweetAlert CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+ 
   <title>RailTick - Home Page</title>
   <style>
     body {
@@ -160,11 +163,14 @@
               <i class="fas fa-user"></i>
             </a>
             <div class="dropdown-menu" aria-labelledby="userDropdown">
-              <a class="dropdown-item" href="viewuserprofile">View Profile</a>
-              <a class="dropdown-item" href="edituserprofile">Update Profile</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="userlogout">Logout</a>
-            </div>
+                        <a class="dropdown-item" href="viewuserprofile"><i
+                                class="fas fa-user-circle"></i> View Profile</a>
+                        <a class="dropdown-item" href="edituserprofile"><i
+                                class="fas fa-edit"></i> Update Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="userlogout"><i
+                                class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
           </li>
           <!-- End User Dropdown -->
         </ul>
@@ -332,6 +338,22 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
+  <!-- SweetAlert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        $(document).ready(function() {
+            <% String updateMessage = (String) request.getAttribute("updateMessage"); %>
+            <% if (updateMessage != null) { %>
+                <% if ("SUCCESS".equalsIgnoreCase(updateMessage)) { %>
+                    Swal.fire('Success', 'Your Profile has Been Successfully Updated', 'success');
+                <% } else { %>
+                    Swal.fire('Error', 'Please Enter the valid Information', 'error');
+                <% } %>
+            <% } %>
+        });
+    </script>
   <!-- Smooth Scroll -->
   <script>
     $('a[href*="#"]:not([href="#"])').on('click', function () {

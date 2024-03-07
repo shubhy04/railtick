@@ -1,7 +1,6 @@
 package com.railtick.servlets;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -35,35 +34,22 @@ public class TrainBwStn extends HttpServlet {
             List<TrainBean> trains = trainService.getTrainsBetweenStations(fromStation, toStation);
 
             if (trains != null && !trains.isEmpty()) {
+                int hr = (int) (Math.random() * 24);
+                int min = (int) (Math.random() * 60);
+                String time = (hr < 10 ? ("0" + hr) : hr) + ":" + ((min < 10) ? "0" + min : min);
+
+                req.setAttribute("trains", trains);
+                req.setAttribute("time", time);
                 RequestDispatcher rd = req.getRequestDispatcher("TrainBwStnDisplay.jsp");
                 rd.include(req, res);
-                pw.println("<div class='main'><p1 class='menu'>Trains Between Station "
-                        + req.getParameter("fromstation") + " and " + req.getParameter("tostation") + "</p1></div>");
-                pw.println("<div class='tab'><table><tr><th>Train Name</th><th>Train No</th>"
-                        + "<th>From Stn</th><th>To Stn</th><th>Time</th><th>Seats</th><th>Fare (INR)</th><th>Action</th></tr>");
-
-                for (TrainBean train : trains) {
-                    int hr = (int) (Math.random() * 24);
-                    int min = (int) (Math.random() * 60);
-                    String time = (hr < 10 ? ("0" + hr) : hr) + ":" + ((min < 10) ? "0" + min : min);
-
-                    pw.println("" + "<tr><td>" + train.getTr_name() + "</td>" + "<td>" + train.getTr_no() + "</td>"
-                            + "<td>" + train.getFrom_stn() + "</td>" + "<td>" + train.getTo_stn() + "</td>" + "<td>"
-                            + time + "</td>" + "<td>" + train.getSeats() + "</td>" + "<td>" + train.getFare()
-                            + " RS</td><td><a href='booktrainbyref?trainNo=" + train.getTr_no() + "&fromStn="
-                            + train.getFrom_stn() + "&toStn=" + train.getTo_stn()
-                            + "'><div class='red'>Book Now</div></a></td>" + "</tr>");
-                }
-
-                pw.println("</table></div>");
             } else {
                 RequestDispatcher rd = req.getRequestDispatcher("TrainBwStn.jsp");
                 rd.include(req, res);
-                pw.println("<div class='tab'><p1 class='menu'>There are no trains Between "
+                pw.println("<div class='error-message'><p1 class='err'>There are no trains Between "
                         + req.getParameter("fromstation") + " and " + req.getParameter("tostation") + "</p1></div>");
             }
         } catch (Exception e) {
             throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());
-		}
-	}
+        }
+    }
 }

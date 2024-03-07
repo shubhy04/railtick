@@ -82,9 +82,10 @@
     .footer {
       background-color: #343a40;
       color: #fff;
+      bottom: 0;
       padding: 20px 0;
       text-align: center;
-      position: fixed;
+      position: absolute;
       bottom: 0;
       width: 100%;
     }
@@ -92,52 +93,73 @@
 </head>
 <body>
 
-  <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-      <!-- Railway Icon -->
-      <span class="navbar-logo">&#128642;</span>
-      <!-- Railway Booking Text -->
-      <a class="navbar-brand" href="HomePage.jsp">RailTick</a>
-      <!-- Navbar Toggler Button -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- Navbar Items -->
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#featured-trains">Book Trains</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#popular-destinations">Other Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#testimonials">Testimonials</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#services">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
-          </li>
-          <!-- User Dropdown -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle user-dropdown" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-user"></i>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="userDropdown">
-              <a class="dropdown-item" href="viewuserprofile">View Profile</a>
-              <a class="dropdown-item" href="edituserprofile">Update Profile</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="userlogout">Logout</a>
-            </div>
-          </li>
-          <!-- End User Dropdown -->
-        </ul>
-      </div>
+        <!-- Railway Icon -->
+        <span class="navbar-logo">&#128642;</span>
+        <!-- Railway Booking Text -->
+        <a class="navbar-brand" href="HomePage.jsp">RailTick</a>
+        <!-- Navbar Toggler Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Navbar Items -->
+        <div class="collapse navbar-collapse justify-content-end"
+             id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="HomePage.jsp">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="featured-trains">Book Trains</a></li>
+				<!-- Search Train Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchTrainDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Search Train
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="searchTrainDropdown">
+                        <a class="dropdown-item" href="search-by-number"><i class="fas fa-search"></i> Search by Number</a>
+                        <a class="dropdown-item" href="search-by-name"><i class="fas fa-search"></i> Search by Name</a>
+                    </div>
+                </li>
+                <!-- End Search Train Dropdown -->
+                <!-- Other Features Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="otherFeaturesDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Other Features
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="otherFeaturesDropdown">
+                        <a class="dropdown-item" href="fare-enquiry"><i class="fas fa-dollar-sign"></i> Fare Enquiry</a>
+                        <a class="dropdown-item" href="seat-availability"><i class="fas fa-chair"></i> Seat Availability</a>
+                        <a class="dropdown-item" href="booking-history"><i class="fas fa-history"></i> Booking History</a>
+                    </div>
+                </li>
+                <!-- End Other Features Dropdown -->
+               
+                <!-- User Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle user-dropdown" href="#"
+                       id="userDropdown" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="viewuserprofile"><i
+                                class="fas fa-user-circle"></i> View Profile</a>
+                        <a class="dropdown-item" href="edituserprofile"><i
+                                class="fas fa-edit"></i> Update Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="userlogout"><i
+                                class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </li>
+                <!-- End User Dropdown -->
+            </ul>
+        </div>
     </div>
-  </nav>
+</nav>
 
   <!-- Train Details Table -->
   <div class="container table-container">
@@ -149,6 +171,7 @@
           <th>Train Number</th>
           <th>From Station</th>
           <th>To Station</th>
+          <th>Time</th>
           <th>Seats</th>
           <th>Fare </th>
         </tr>
@@ -157,6 +180,7 @@
            
         <% 
             TrainBean trainData = (TrainBean) request.getAttribute("trainData");
+        String time = (String) request.getAttribute("time");
             if (trainData != null) {
         %>
             <tr>
@@ -164,6 +188,7 @@
                 <td><%= trainData.getTr_no() %></td>
                 <td><%= trainData.getFrom_stn() %></td>
                 <td><%= trainData.getTo_stn() %></td>
+				<td><%= generateRandomTime() %></td>
                 <td><%= trainData.getSeats() %></td>
                 <td><a class="btn btn-primary btn-see-fare" href='fare?trainNo=<%= trainData.getTr_no() %>&fromStn=<%= trainData.getFrom_stn() %>&toStn=<%= trainData.getTo_stn() %>'>See fare</a></td>
             </tr>
@@ -177,6 +202,14 @@
         <% 
             } 
         %>
+        <%!
+  // Function to generate random time
+  String generateRandomTime() {
+    int hr = (int) (Math.random() * 24);
+    int min = (int) (Math.random() * 60);
+    return (hr < 10 ? ("0" + hr) : hr) + ":" + ((min < 10) ? "0" + min : min);
+  }
+%>
       </tbody>
     </table>
   </div>
