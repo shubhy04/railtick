@@ -209,72 +209,71 @@ body {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 	<script>
-    function initiateRazorpayPayment() {
-        var razorpayBtn = $('#razorpayBtn');
-       
-        // Fetch data from server-side
-        var totalAmount = <%=(Long) session.getAttribute("totalAmount") * 100%>;
-        var razorpayOrderId = '<%=session.getAttribute("razorpayOrderId")%>';
+	function initiateRazorpayPayment() {
+	    var razorpayBtn = $('#razorpayBtn');
 
-        var options = {
-            key: 'rzp_test_LSfhbrTgIOlWn2',
-            amount: totalAmount,
-            currency: 'INR',
-            name: 'RailTick',
-            description: 'Train Booking',
-            image: 'your_logo_url.png',
-            order_id: razorpayOrderId,
-            handler: function (response) {
-                console.log('Payment successful!', response);
+	    // Fetch data from server-side
+	    var totalAmount = <%= (Long) session.getAttribute("totalAmount") * 100 %>;
+	    var razorpayOrderId = '<%= session.getAttribute("razorpayOrderId") %>';
 
-                // Extracting payment details
-                var paymentId = response.razorpay_payment_id;
-                var signature = response.razorpay_signature;
-                var orderid = response.razorpay_order_id;
+	    var form = $('<form method="post" action="booktrains" id="razorpayForm"></form>');
+	    form.append('<input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id" value="">');
+	    form.append('<input type="hidden" name="razorpay_signature" id="razorpay_signature" value="">');
+	    form.append('<input type="hidden" name="razorpay_order_id" id="razorpay_order_id" value="">');
+	    $('body').append(form);
 
-                // Displaying payment details
-                Swal.fire({
-                    title: 'Congrats!',
-                    text: 'Payment Successful\nPayment ID: ' + paymentId + '\nSignature: ' + signature,
-                    icon: 'success',
-                }).then((result) => {
-                    // Add the payment details to the form data if needed
-                    var form = $('<form method="post" action="booktrains"></form>');
-                    form.append('<input type="hidden" name="razorpay_payment_id" value="' + paymentId + '">');
-                    form.append('<input type="hidden" name="razorpay_signature" value="' + signature + '">');
-                    form.append('<input type="hidden" name="razorpay_order_id" value="' + orderid + '">');
-                    $('body').append(form);
-                    form.submit();
-                });
-            },
-            prefill: {
-                name: 'Customer Name',
-                email: 'customer@example.com',
-                contact: '9876543210'
-            },
-            customer: {
-                name: 'Customer Name',
-                contact: '9876543210',
-                email: 'customer@example.com'
-            },
-            theme: {
-                color: '#007bff'
-            }
-        };
+	    var options = {
+	        key: 'rzp_test_LSfhbrTgIOlWn2',
+	        amount: totalAmount,
+	        currency: 'INR',
+	        name: 'RailTick',
+	        description: 'Train Booking',
+	        image: 'your_logo_url.png',
+	        order_id: razorpayOrderId,
+	        handler: function (response) {
+	            console.log('Payment successful!', response);
 
-        var rzp = new Razorpay(options);
+	            // Extracting payment details
+	            var paymentId = response.razorpay_payment_id;
+	            var signature = response.razorpay_signature;
+	            var orderId = response.razorpay_order_id;
 
-        rzp.on('payment.failed', function (response) {
-            console.log('Payment failed!', response.error.description);
-            Swal.fire({
-                title: 'Payment Failed',
-                text: response.error.description,
-                icon: 'error',
-            });
-        });
+	            // Set values to hidden fields
+	            $('#razorpay_payment_id').val(paymentId);
+	            $('#razorpay_signature').val(signature);
+	            $('#razorpay_order_id').val(orderId);
 
-        rzp.open();
-    }
+	            // Submit the form
+	            document.getElementById("razorpayForm").submit();
+	        },
+	        prefill: {
+	            name: 'Customer Name',
+	            email: 'customer@example.com',
+	            contact: '9876543210'
+	        },
+	        customer: {
+	            name: 'Customer Name',
+	            contact: '9876543210',
+	            email: 'customer@example.com'
+	        },
+	        theme: {
+	            color: '#007bff'
+	        }
+	    };
+
+	    var rzp = new Razorpay(options);
+
+	    rzp.on('payment.failed', function (response) {
+	        console.log('Payment failed!', response.error.description);
+	        Swal.fire({
+	            title: 'Payment Failed',
+	            text: response.error.description,
+	            icon: 'error',
+	        });
+	    });
+
+	    rzp.open();
+	}
     </script>
 </body>
 </html>

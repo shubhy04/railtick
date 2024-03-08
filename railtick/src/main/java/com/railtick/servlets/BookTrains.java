@@ -1,5 +1,6 @@
 package com.railtick.servlets;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -64,6 +65,7 @@ public class BookTrains extends HttpServlet {
 
         RequestDispatcher rd = req.getRequestDispatcher("Reciept.jsp");
         rd.include(req, res);
+        
 
         ServletContext sct = req.getServletContext();
 

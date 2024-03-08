@@ -90,6 +90,6 @@
     
     <p>${cancellationStatus}</p>
     
-    <p><a href="index.jsp">Back to Home</a></p>
+    <p><a href="HomePage.jsp">Back to Home</a></p>
 </body>
 </html>
