@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>RailTick - Search Trains</title>
   <style>
+    body {
+      background-color: #FFF7F1;
+      color: #403d39;
+    }
+
     .search-box {
       margin-top: 50px;
     }
@@ -29,18 +34,19 @@
     }
 
     .btn-search {
-      background-color: #007bff;
-      border-color: #007bff;
+      background-color: #403d39;
+      border-color: #403d39;
+      color: #fffcf2;
     }
 
     .btn-search:hover {
-      background-color: #0056b3;
-      border-color: #0056b3;
+      background-color: #252422;
+      border-color: #252422;
     }
 
     .footer {
-      background-color: #343a40;
-      color: #fff;
+      background-color: #403d39;
+      color: #fffcf2;
       padding: 20px 0;
       text-align: center;
       position: fixed;

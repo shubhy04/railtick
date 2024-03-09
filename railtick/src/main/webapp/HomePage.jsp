@@ -9,122 +9,144 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
  
   <title>RailTick - Home Page</title>
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
+<style>
+  body {
+    background-color: #FFF7F1;
+    color: #403d39;
+  }
 
-    .navbar {
-      background-color: #343a40;
-      padding: 20px 0;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+  .navbar {
+  
+    background-color: #252422;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-    .navbar-brand {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
+  .navbar-brand {
+    color: #fffcf2;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
 
-    .navbar-logo {
-      font-size: 1.8rem;
-      color: #fff;
-      margin-right: 5px;
-    }
+  .navbar-logo {
+    color: #fffcf2;
+  }
 
-    .navbar-toggler-icon {
-      background-color: #fff;
-    }
+  .navbar-toggler-icon {
+    background-color: #fffcf2;
+  }
 
-    .user-dropdown {
-      cursor: pointer;
-    }
+  .user-dropdown {
+    cursor: pointer;
+  }
+	.jumbotron {
+    background-color: #f6eee9;
+    background-image: url('train.jpg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #403d39;
+    font-weight: bold; /* Added font-weight property */
+    text-align: center;
+    padding: 150px 0;
+    margin-bottom: 0;
+}
 
-    .jumbotron {
-      background-image: url('https://img.freepik.com/free-photo/urban-landscape-tokyo-city-subway-station_23-2149347212.jpg?t=st=1709562465~exp=1709566065~hmac=c6b9dd47e6283dda1766c84af96cfa9e276a95317499b75881890fef57027df1&w=996');
-      background-size: cover;
-      color: #fff;
-      text-align: center;
-      padding: 150px 0;
-      margin-bottom: 0;
-    }
 
-    .search-box {
-      margin-top: 50px;
-    }
 
-    .card {
-      margin: 20px 0;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s;
-    }
+  .search-box {
+    margin-top: 50px;
+  }
 
-    .card:hover {
-      transform: scale(1.02);
-    }
+  .card {
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    
+  }
 
-    .card-img-top {
-      height: 200px;
-      object-fit: cover;
-    }
+  .card:hover {
+    transform: scale(1.02);
+  }
 
-    .destination-section {
-      padding: 50px 0;
-    }
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    
+  }
 
-    .testimonial-section {
-      background-color: #fff;
-      padding: 50px 0;
-    }
+  .destination-section {
+ 
+    padding: 50px 0;
+    background-color: #FFF7F1;
+  }
 
-    .testimonial-card {
-      border: 1px solid #e9ecef;
-      border-radius: 10px;
-      padding: 20px;
-      margin: 20px 0;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+  .testimonial-section {
+    
+    padding: 50px 0;
+  }
 
-    .testimonial-card p {
-      margin-bottom: 0;
-    }
+  .testimonial-card {
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
 
-    .cta-section {
-      background-color: #343a40;
-      color: #fff;
-      padding: 50px 0;
-      text-align: center;
-    }
+  .testimonial-card p {
+    margin-bottom: 0;
+  }
 
-    .cta-icon {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
+  .cta-section {
+    background-color: #403d39;
+    color: #fffcf2;
+    padding: 50px 0;
+    text-align: center;
+  }
 
-    .services-section {
-      background-color: #fff;
-      padding: 50px 0;
-    }
+  .cta-icon {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fffcf2;
+  }
 
-    .services-icon {
-      font-size: 4rem;
-      color: #343a40;
-      margin-bottom: 20px;
-    }
+  .services-section {
+    
+    padding: 50px 0;
+  }
 
-    .contact-section {
-      background-color: #343a40;
-      color: #fff;
-      padding: 50px 0;
-      text-align: center;
-    }
+  .services-icon {
+    font-size: 4rem;
+    color: #403d39;
+    margin-bottom: 20px;
+  }
 
-    .footer {
-      background-color: #343a40;
-      color: #fff;
-      padding: 20px 0;
-      text-align: center;
-    }
-  </style>
+  .contact-section {
+    background-color: #e8ddd4;
+    color: #fffcf2;
+    padding: 50px 0;
+    text-align: center;
+  }
+  .btn-primary {
+    background-color: #403d39;
+    color: #fffcf2;
+    border: 1px solid #403d39;
+  }
+
+  .btn-primary:hover {
+    background-color: #252422;
+    border: 1px solid #252422;
+  }
+
+  .footer {
+    background-color: #403d39;
+    color: #fffcf2;
+    padding: 20px 0;
+    text-align: center;
+  }
+</style>
+
 </head>
 <body>
 
@@ -200,11 +222,11 @@
 
   <!-- Featured Trains -->
   <div id="featured-trains" class="container">
-    <h2 class="text-center mb-4">Book Trains</h2>
+    <h2 class="text-center">Book Trains</h2>
     <div class="row">
       <div class="col-md-4">
         <div class="card">
-          <img src="train1.jpg" class="card-img-top" alt="Train 1">
+          <img src="booktrain.jpg" class="card-img-top" alt="Train 1">
           <div class="card-body">
             <h5 class="card-title">View Trains </h5>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -214,7 +236,7 @@
       </div>
       <div class="col-md-4">
         <div class="card">
-          <img src="train2.jpg" class="card-img-top" alt="Train 2">
+          <img src="https://img.freepik.com/free-vector/train-station-scene-with-steam-locomotive_1308-94853.jpg?t=st=1710009177~exp=1710012777~hmac=86e09be60f704af0bf268fde30b403b1a2bfbd556ee3bc3fbf2202c71a572fb5&w=1060" class="card-img-top" alt="Train 2">
           <div class="card-body">
             <h5 class="card-title">Search Trains </h5>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -224,7 +246,7 @@
       </div>
       <div class="col-md-4">
         <div class="card">
-          <img src="train3.jpg" class="card-img-top" alt="Train 3">
+          <img src="trainno.jpg" class="card-img-top" alt="Train 3">
           <div class="card-body">
             <h5 class="card-title">Search by TrainNo </h5>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -236,13 +258,13 @@
   </div>
 
   <!-- Popular Destinations -->
-  <div id="popular-destinations" class="destination-section">
+  <div id="popular-destinations" class="destination-section ">
     <div class="container">
-      <h2 class="text-center mb-4">Other Features</h2>
+      <h2 class="text-center">Other Features</h2>
       <div class="row">
         <div class="col-md-4 destination-card">
           <div class="card">
-            <img src="destination1.jpg" class="card-img-top" alt="Destination 1">
+            <img src="https://img.freepik.com/free-vector/flat-design-train-ticket-template_52683-115394.jpg?w=900&t=st=1710006983~exp=1710007583~hmac=c488078c7658aa9d2c78129013c94342f39ca822f372169250b220263f527416" class="card-img-top" alt="Destination 1">
             <div class="card-body">
               <h5 class="card-title">Fare Enquiry</h5>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -252,7 +274,7 @@
         </div>
         <div class="col-md-4 destination-card">
           <div class="card">
-            <img src="destination2.jpg" class="card-img-top" alt="Destination 2">
+            <img src="https://img.freepik.com/free-vector/train-wagon-interior-with-empty-seats-luggage-shelf-3d-isometric-vector-illustration_1284-81207.jpg?t=st=1710010041~exp=1710013641~hmac=a772d1997d8e5120eb279a8de60a15dcc60e9277aed49bf433d2c3998be3325e&w=740" class="card-img-top" alt="Destination 2">
             <div class="card-body">
               <h5 class="card-title">Seat Availability</h5>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -262,7 +284,7 @@
         </div>
         <div class="col-md-4 destination-card">
           <div class="card">
-            <img src="destination3.jpg" class="card-img-top" alt="Destination 3">
+            <img src="https://img.freepik.com/free-vector/hand-drawn-train-ticket-template_23-2150447626.jpg?t=st=1710009999~exp=1710013599~hmac=d839eb8b5535eda3451ffdb8c5cff2ac33fbce26ec3512dd9b81eb89e843b166&w=1060" class="card-img-top" alt="Destination 3">
             <div class="card-body">
               <h5 class="card-title">Ticket Booking History</h5>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>

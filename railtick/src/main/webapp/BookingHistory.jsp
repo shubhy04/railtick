@@ -23,13 +23,17 @@
     }
 
     .table-container th {
-      background-color: #007bff;
+      background-color: #403d39;
       color: #fff;
       cursor: pointer;
     }
+    .table-container tbody tr {
+      background-color: #ccc5b9;
+    }
 
-    .table-container th:hover {
-      background-color: #0056b3;
+    .table-container tbody tr:hover {
+      background-color: #fffcf2;
+/*       background-color: #ddd; */
     }
 
     .btn-see-fare,
@@ -60,12 +64,22 @@
       color: #fff;
       background-color: #5cb85c;
       border-color: #4cae4c;
+      
     }
 
     .btn-view-details {
-      color: #fff;
-      background-color: #007bff;
+      background-color: #403d39;
+      color: #fffcf2;
       border-color: #007bff;
+      text-decoration: none;
+    }
+    
+    .btn-view-details:hover,
+    .btn-view-details:active,
+    .btn-view-details:focus {
+      background-color: #252422;
+      border: 1px solid #252422;
+      color: #fffcf2; /* Adjusted text color on hover */
     }
 
     .footer {

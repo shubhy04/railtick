@@ -7,35 +7,37 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 <style>
     body {
-      background-color: #f8f9fa;
-    /*  margin-bottom: 60px;  Adjusted to accommodate the footer */
-    }
+    background-color: #FFF7F1;
+    color: #403d39;
+  }
 
-    .navbar {
-      background-color: #343a40;
-      padding: 20px 0;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+  .navbar {
+  
+    background-color: #252422;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-    .navbar-brand {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
+  .navbar-brand {
+    color: #fffcf2;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
 
-    .navbar-logo {
-      font-size: 1.8rem;
-      color: #fff;
+  .navbar-logo {
+  font-size: 1.5rem;
+   
       margin-right: 5px;
-    }
+    color: #fffcf2;
+  }
 
-    .navbar-toggler-icon {
-      background-color: #fff;
-    }
+  .navbar-toggler-icon {
+    background-color: #fffcf2;
+  }
 
-    .user-dropdown {
-      cursor: pointer;
-    }
-
+  .user-dropdown {
+    cursor: pointer;
+  }
     .container {
       max-width: 1200px;
     }

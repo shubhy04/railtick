@@ -10,6 +10,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>RailTick - Train Details</title>
   <style>
+    body {
+      background-color: #FFF7F1;
+      color: #403d39;
+    }
+
     .table-container {
       margin-top: 20px;
     }
@@ -20,51 +25,68 @@
       margin-top: 20px;
     }
 
-    .table-container th, .table-container td {
+    .table-container th,
+    .table-container td {
       padding: 12px;
       border: 1px solid #dee2e6;
       text-align: left;
     }
 
     .table-container th {
-      background-color: #007bff;
+      background-color: #403d39;
       color: #fff;
       cursor: pointer;
     }
 
-    .table-container th:hover {
-      background-color: #0056b3;
+    .table-container tbody tr {
+      background-color: #ccc5b9;
     }
 
-    .btn-see-fare {
-      display: block;
-      
+    .table-container tbody tr:hover {
+      background-color: #fffcf2;
+/*       background-color: #ddd; */
     }
-
+  .btn-see-fare,
     .btn-book-train {
       display: block;
-      
+      background-color: #403d39;
+      color: #fffcf2;
+      border: 1px solid #403d39;
+      margin-top: 5px;
+      transition: background-color 0.3s;
+      text-decoration: none;
     }
 
+    .btn-see-fare:hover,
+    .btn-book-train:hover,
+    .btn-see-fare:active,
+    .btn-book-train:active,
+    .btn-see-fare:focus,
+    .btn-book-train:focus {
+      background-color: #252422;
+      border: 1px solid #252422;
+      color: #fffcf2; /* Adjusted text color on hover */
+    }
     .footer {
-      background-color: #343a40;
-      color: #fff;
+      background-color: #403d39;
+      color: #fffcf2;
       padding: 20px 0;
       text-align: center;
       position: absolute;
       width: 100%;
-      
+     
     }
+
     .error-message {
-        background-color: #ffdddd;
-        color: #dc3545;
-        padding: 10px;
-        margin-top: 20px;
-        border-radius: 5px;
+      background-color: #ffdddd;
+      color: #dc3545;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 5px;
     }
 
     .err {
-        font-weight: bold;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -102,8 +124,8 @@
                 <td><%= train.getTo_stn() %></td>
                 <td><%= generateRandomTime() %></td>
                 <td><%= train.getSeats() %></td>
-<td><a class="btn btn-primary btn-see-fare" href='fare?trainnumber=<%= train.getTr_no() %>&fromStn=<%= train.getFrom_stn() %>&toStn=<%= train.getTo_stn() %>'>See fare</a></td>
-                <td><a class="btn btn-success btn-book-train" href='booktrainbyref?trainNo=<%= train.getTr_no() %>&fromStn=<%= train.getFrom_stn() %>&toStn=<%= train.getTo_stn() %>'>Book Now</a> </td>
+<td><a class="btn btn-see-fare" href='fare?trainnumber=<%= train.getTr_no() %>&fromStn=<%= train.getFrom_stn() %>&toStn=<%= train.getTo_stn() %>'>See fare</a></td>
+                <td><a class="btn  btn-book-train" href='booktrainbyref?trainNo=<%= train.getTr_no() %>&fromStn=<%= train.getFrom_stn() %>&toStn=<%= train.getTo_stn() %>'>Book Now</a> </td>
                
             </tr>
             <% } %>

@@ -6,7 +6,10 @@
     <!-- Include SweetAlert library -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
-       
+        body {
+            background-color: #FFF7F1;
+            color: #403d39;
+        }
 
         .table-container {
             margin-top: 20px;
@@ -25,13 +28,13 @@
         }
 
         .table-container th {
-            background-color: #007bff;
+            background-color: #403d39;
             color: #fff;
             cursor: pointer;
         }
 
         .table-container th:hover {
-            background-color: #0056b3;
+            background-color: #252422;
         }
         .form-class{
        	margin-right:0; 
@@ -47,8 +50,8 @@
         }
 
         .footer {
-            background-color: #343a40;
-            color: #fff;
+            background-color: #403d39;
+            color: #fffcf2;
             padding: 20px 0;
             text-align: center;
             position: absolute;
@@ -86,26 +89,26 @@
         }
 
         .footer {
-            background-color: #343a40;
-            color: #fff;
+            background-color: #403d39;
+            color: #fffcf2;
             padding: 20px 0;
             text-align: center;
             position: absolute;
             width: 100%;
             bottom: auto;
         }
+
         @media print {
-    .action-buttons {
-        display: none !important;
-    }
-}
+            .action-buttons {
+                display: none !important;
+            }
+        }
     </style>
-    
 </head>
 <body>
 <%@include file="global/navbar.jsp"%>
 
-    <div class="container">
+    <div class="container mt-4">
         <div class="history-details">
             <h2 class="text-center mb-4"><i class="fas fa-receipt"></i> Booking Details</h2>
             <%
@@ -124,28 +127,28 @@
                 <p><strong>Razorpay_signature:</strong> <%= transaction.getRazorpay_signature() %></p>
                 <p><strong>Razorpay_order_id:</strong> <%= transaction.getRazorpayOrderId() %></p>
 
-             <!-- Action Buttons -->
-<div class="action-buttons  row justify-content-center">
-    <!-- Home Button -->
-    <div class="col-md-2 ">
-        <a href="HomePage.jsp" class="btn btn-primary btn-block"><i class="fas fa-home"></i> Home</a>
-    </div>
-    <!-- Go Back Button -->
-    <div class="col-md-2 ">
-        <button class="btn btn-secondary btn-block" onclick="goBack()"><i class="fas fa-arrow-left"></i> Go Back</button>
-    </div>
-    <!-- Print Details Button -->
-    <div class="col-md-2 ">
-        <button class="btn btn-info btn-block" onclick="printPage()"><i class="fas fa-print"></i> Print Details</button>
-    </div>
-    <!-- Cancel Ticket Button -->
-    <div class="col-md-2">
-        <form id="cancelForm" action="cancelBooking" method="post" onsubmit="return confirmCancel()">
-            <input type="hidden" name="transId" value="<%= transaction.getTransId() %>">
-            <button class="btn btn-danger btn-block" type="submit"><i class="fas fa-times"></i> Cancel Ticket</button>
-        </form>
-    </div>
-</div>
+                <!-- Action Buttons -->
+                <div class="action-buttons  row justify-content-center">
+                    <!-- Home Button -->
+                    <div class="col-md-2 ">
+                        <a href="HomePage.jsp" class="btn btn-primary btn-block"><i class="fas fa-home"></i> Home</a>
+                    </div>
+                    <!-- Go Back Button -->
+                    <div class="col-md-2 ">
+                        <button class="btn btn-secondary btn-block" onclick="goBack()"><i class="fas fa-arrow-left"></i> Go Back</button>
+                    </div>
+                    <!-- Print Details Button -->
+                    <div class="col-md-2 ">
+                        <button class="btn btn-info btn-block" onclick="printPage()"><i class="fas fa-print"></i> Print Details</button>
+                    </div>
+                    <!-- Cancel Ticket Button -->
+                    <div class="col-md-2">
+                        <form id="cancelForm" action="cancelBooking" method="post" onsubmit="return confirmCancel()">
+                            <input type="hidden" name="transId" value="<%= transaction.getTransId() %>">
+                            <button class="btn btn-danger btn-block" type="submit"><i class="fas fa-times"></i> Cancel Ticket</button>
+                        </form>
+                    </div>
+                </div>
 
             <%
                 } else {
