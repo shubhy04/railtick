@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>RailTick - Search Trains</title>
   <style>
-   
     .search-box {
       margin-top: 50px;
     }
@@ -51,15 +50,13 @@
   </style>
 </head>
 <body>
-
 <%@include file="global/navbar.jsp"%>
-
   <!-- Search Trains Form -->
   <div class="container search-box">
     <div class="row justify-content-center">
       <div class="col-md-6 form-container">
-        <h2 class="text-center mb-4">Fare Enquiry</h2>
-        <form action="fare" method="post">
+        <h2 class="text-center mb-4">Search Train</h2>
+        <form action="searchtrainservlet" method="post">
           <div class="form-group">
             <label for="trainNumber">Enter Train Number:</label>
             <input type="text" name="trainnumber" class="form-control" id="trainNumber" placeholder="Train Number" required>
@@ -77,6 +74,5 @@
       <p>&copy; 2024 RailTick. All rights reserved.</p>
     </div>
   </footer>
-
 </body>
 </html>

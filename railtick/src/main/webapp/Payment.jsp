@@ -3,49 +3,7 @@
 <html>
 <head>
 <title>Payment Details</title>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- FontAwesome CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 <style>
-body {
-	background-color: #f8f9fa;
-	font-family: 'Arial', sans-serif;
-	
-}
-
-.navbar {
-	background-color: #343a40;
-	padding: 20px 0;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-brand {
-	font-size: 1.5rem;
-	font-weight: bold;
-	color: #fff;
-}
-
-.navbar-logo {
-	font-size: 1.8rem;
-	color: #fff;
-	margin-right: 5px;
-}
-
-.navbar-toggler-icon {
-	background-color: #fff;
-}
-
-.user-dropdown {
-	cursor: pointer;
-}
-
-.container {
-	max-width: 1200px;
-	margin-top: 20px;
-}
 
 .booking-details-container {
 	margin-top: 20px;
@@ -121,55 +79,7 @@ body {
 </style>
 </head>
 <body>
-
-	<!-- Navigation Bar -->
-	<nav class="navbar navbar-expand-lg navbar-dark">
-		<div class="container">
-			<!-- Railway Icon -->
-			<span class="navbar-logo">&#128642;</span>
-			<!-- Railway Booking Text -->
-			<a class="navbar-brand" href="HomePage.jsp">RailTick</a>
-			<!-- Navbar Toggler Button -->
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarNav" aria-controls="navbarNav"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<!-- Navbar Items -->
-			<div class="collapse navbar-collapse justify-content-end"
-				id="navbarNav">
-				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link"
-						href="#featured-trains">Book Trains</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="#popular-destinations">Other Features</a></li>
-					<li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#services">Services</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#contact">Contact</a>
-					</li>
-					<!-- User Dropdown -->
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle user-dropdown" href="#"
-						id="userDropdown" role="button" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <i
-							class="fas fa-user"></i>
-					</a>
-						<div class="dropdown-menu" aria-labelledby="userDropdown">
-							<a class="dropdown-item" href="viewuserprofile"><i
-								class="fas fa-user-circle"></i> View Profile</a> <a
-								class="dropdown-item" href="edituserprofile"><i
-								class="fas fa-edit"></i> Update Profile</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="userlogout"><i
-								class="fas fa-sign-out-alt"></i> Logout</a>
-						</div></li>
-					<!-- End User Dropdown -->
-				</ul>
-			</div>
-		</div>
-	</nav>
+<%@include file="global/navbar.jsp"%>
 
 	<!-- Display the content -->
 	<div class="container booking-details-container">
@@ -204,9 +114,6 @@ body {
 		</div>
 	</footer>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 	<script>
 	function initiateRazorpayPayment() {

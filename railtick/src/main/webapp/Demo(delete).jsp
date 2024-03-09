@@ -3,5 +3,5 @@
 		To Station: <input type="text" name="tostation"><br /> <br />
 		<input type="submit" value=" SEARCH TRAIN "><br />
 	</form>
-	   <%@include file="global/navbar_home.jsp"%>
+	   <%@include file="global/navbar.jsp"%>
 	

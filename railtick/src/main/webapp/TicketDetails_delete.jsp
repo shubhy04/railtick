@@ -57,5 +57,6 @@
     <div class="main">
         <button onclick="window.print()">Print Ticket</button>
     </div>
+    
 </body>
 </html>

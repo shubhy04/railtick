@@ -16,7 +16,7 @@
     </style>
 </head>
 <body>
-   <%@include file="global/navbar_home.jsp"%>
+   <%@include file="global/navbar.jsp"%>
     <div class="container">
         <div class='menu'>Booking Details</div>
         <table>
