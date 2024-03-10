@@ -3,16 +3,9 @@
 <head>
     <title>Edit User Profile - RailTick</title>
  <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            margin-bottom:0px;
-        }
 
         .tab {
-            background-color: #343a40;
+            background-color: #403d39;
             color: #fff;
             padding: 10px;
             text-align: center;
@@ -38,12 +31,11 @@
             padding: 15px;
             text-align: left;
         }
-
-        th {
-            background-color: #6c757d; /* Lightened color */
-            color: #fff;
+ 		th {
+            background-color: #ccc5b9; 
+            color: #403d39;
         }
-
+       
         input[type="text"], input[type="submit"] {
             width: 100%;
             padding: 10px;
@@ -55,8 +47,8 @@
         }
 
         input[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
+            background-color: #403d39;
+            color: #fffcf2;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -64,24 +56,26 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
+			background-color: #252422;        }
         p {
     margin-top: 0;
     margin-bottom: 0rem;
 }
+.profile-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
 
-          .footer {
-      background-color: #343a40;
-      color: #fff;
-      bottom: 0;
-      padding: 20px 0;
-      text-align: center;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-    }
-
+   .footer {
+            background-color: #403d39;
+      		color: #fffcf2;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
         .error-message {
             color: red;
         }
@@ -90,35 +84,35 @@
 <body>
 <%@include file="global/navbar.jsp"%>
 
-
+<div class="container profile-container">
 <!-- Edit User Profile Container -->
-<div class="container">
+
     <div class="tab">
         <p>Profile Update</p>
     </div>
     <form action="updateuserprofile" method="post" onsubmit="return validateForm()">
         <table>
             <tr>
-                <td>User Name :</td>
+                <th>User Name :</th>
                 <td><input type="text" name="username" value="<%= request.getAttribute("username") %>" disabled></td>
             </tr>
             <tr>
-                <td>First Name :</td>
+                <th>First Name :</th>
                 <td><input type="text" name="firstname" id="firstname" value="<%= request.getAttribute("firstname") %>"></td>
                 <td><span class="error-message" id="firstname-error"></span></td>
             </tr>
             <tr>
-                <td>Last Name :</td>
+                <th>Last Name :</th>
                 <td><input type="text" name="lastname" id="lastname" value="<%= request.getAttribute("lastname") %>"></td>
                 <td><span class="error-message" id="lastname-error"></span></td>
             </tr>
             <tr>
-                <td>Address :</td>
+                <th>Address :</th>
                 <td><input type="text" name="address" id="address" value="<%= request.getAttribute("address") %>"></td>
                 <td><span class="error-message" id="address-error"></span></td>
             </tr>
             <tr>
-                <td>Phone No:</td>
+                <th>Phone No:</th>
                 <td><input type="text" name="phone" id="phone" value="<%= request.getAttribute("phone") %>"></td>
                 <td><span class="error-message" id="phone-error"></span></td>
             </tr>
@@ -131,6 +125,7 @@
         <input type="submit" name="update" value="Update Profile">
     </form>
 </div>
+
 
 <!-- Footer -->
 <footer class="footer">

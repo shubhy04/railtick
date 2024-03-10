@@ -4,12 +4,24 @@
 <head>
     <title>Booking Details</title>
     <style>
+        body {
+            background-color: #FFF7F1;
+            color: #403d39;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
         .booking-details-container {
             margin-top: 20px;
             background-color: #fff;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .booking-details-container th {
+            background-color: #ccc5b9;
+            cursor: pointer;
         }
 
         .table td, .table th {
@@ -19,9 +31,9 @@
         }
 
         .btn-pay-book {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
+            background-color: #403d39 !important;
+            color: #fffcf2 !important;
+            border: none !important;
             padding: 15px 30px;
             border-radius: 5px;
             cursor: pointer;
@@ -29,29 +41,30 @@
         }
 
         .btn-pay-book:hover {
-            background-color: #0056b3;
+            background-color: #252422 !important;
         }
-        .error-message {
-        background-color: #ffdddd;
-        color: #dc3545;
-        padding: 10px;
-        margin-top: 20px;
-        border-radius: 5px;
-    }
 
-    .err {
-        font-weight: bold;
-    }
+        .error-message {
+            background-color: #ffdddd;
+            color: #dc3545;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .err {
+            font-weight: bold;
+        }
 
         .footer {
-      background-color: #343a40;
-      color: #fff;
-      padding: 20px 0;
-      text-align: center;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-    }   
+            background-color: #403d39;
+            color: #fffcf2;
+            padding: 20px 0;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
 <body>

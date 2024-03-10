@@ -46,7 +46,7 @@
       background-color: #fffcf2;
 /*       background-color: #ddd; */
     }
-  .btn-see-fare,
+  	.btn-see-fare,
     .btn-book-train {
       display: block;
       background-color: #403d39;

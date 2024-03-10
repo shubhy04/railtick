@@ -35,10 +35,19 @@
   .navbar-toggler-icon {
     background-color: #fffcf2;
   }
-
+  
   .user-dropdown {
     cursor: pointer;
   }
+  
+.user-dropdown .dropdown-menu a.dropdown-item {
+    color: #252422 !important; /* Change this color to your desired color */
+}
+
+.user-dropdown .dropdown-menu a.dropdown-item:hover {
+    background-color: #e8ddd4 !important; /* Change this color to your desired hover color */
+    color: #252422 !important; /* Change this color to your desired hover text color */
+}
 	.jumbotron {
     background-color: #f6eee9;
     background-image: url('train.jpg');
@@ -129,13 +138,13 @@
     text-align: center;
   }
   .btn-primary {
-    background-color: #403d39;
-    color: #fffcf2;
+    background-color: #403d39 !important;
+    color: #fffcf2 !important;
     border: 1px solid #403d39;
   }
 
   .btn-primary:hover {
-    background-color: #252422;
+    background-color: #252422 !important;
     border: 1px solid #252422;
   }
 
@@ -209,9 +218,9 @@
       <div class="col-md-6 search-box">
         <form action="searchtrainservlet" method="post">
           <div class="input-group mb-3">
-            <input type="text" name="trainnumber" class="form-control" placeholder="Enter Train Number" aria-label="Enter Train Number" aria-describedby="basic-addon2">
+            <input type="text" name="trainnumber" class="form-control" placeholder="Enter Train Number" aria-label="Enter Train Number" aria-describedby="basic-addon2" required>
             <div class="input-group-append">
-              <button class="btn btn-primary" type="submit">Search</button>
+              <button class="btn btn-primary" type="submit" >Search</button>
             </div>
           </div>
         </form>

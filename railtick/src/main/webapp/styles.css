@@ -81,3 +81,77 @@ body {
       font-weight: bold;
     }
 
+    
+    
+    
+    
+  .navbar {
+  
+    background-color: #252422;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-brand {
+    color: #fffcf2;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .navbar-logo {
+    color: #fffcf2;
+  }
+
+  .navbar-toggler-icon {
+    background-color: #fffcf2;
+  }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #403d39;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #403d39;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #252422;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .error-message{
+            color: #dc3545;
+            text-align: center;
+            margin-top: 15px;
+            
+        }
+        .success-message{
+            color: #28a745;
+            text-align: center;
+            margin-top: 15px;
+            
+        }

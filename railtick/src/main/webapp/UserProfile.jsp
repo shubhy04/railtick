@@ -3,9 +3,8 @@
 <head>
     <title>User Profile - RailTick</title>
     <style>
-       
-
-        table {
+          
+ table {
             width: 100%;
             margin-top: 20px;
             border-collapse: collapse;
@@ -25,8 +24,8 @@
         }
 
         th {
-            background-color: #6c757d; /* Lightened color */
-            color: #fff;
+            background-color: #403d39;
+      		color: #fff;
         }
 
         .profile-container {
@@ -42,14 +41,14 @@
             font-weight: bold;
             text-align: center;
             margin-bottom: 20px;
-            color: #007bff;
+            color: #403d39;
         }
 
         .profile-subheading {
             font-size: 1.5rem;
             font-weight: bold;
             margin-bottom: 20px;
-            color: #007bff;
+            color: #403d39;
         }
 
         .profile-table {
@@ -68,16 +67,16 @@
         }
 
         .profile-table th {
-            background-color: #6c757d; /* Lightened color */
-            color: #fff;
+            background-color: #ccc5b9; 
+            color: #403d39;
         }
 
         .update-profile-btn {
             display: block;
             margin: 20px auto;
             padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
+            background-color: #403d39;
+            color: #fffcf2;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -85,12 +84,13 @@
         }
 
         .update-profile-btn:hover {
-            background-color: #0056b3;
+            background-color: #252422;
         }
 
+
         .footer {
-            background-color: #343a40;
-            color: #fff;
+            background-color: #403d39;
+      		color: #fffcf2;
             padding: 20px 0;
             text-align: center;
             margin-top: 50px;

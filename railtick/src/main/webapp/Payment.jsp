@@ -4,49 +4,48 @@
 <head>
 <title>Payment Details</title>
 <style>
+   body {
+            background-color: #FFF7F1;
+            color: #403d39;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-.booking-details-container {
-	margin-top: 20px;
-	background-color: #fff;
-	padding: 30px;
-	border-radius: 10px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+        .booking-details-container {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .booking-details-container th {
+            background-color: #ccc5b9;
+            cursor: pointer;
+        }
 
-.table td, .table th {
-	border: 1px solid #dee2e6;
-	padding: 15px;
-	text-align: center;
-}
+        .table td, .table th {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            text-align: center;
+        }
+        .amount-value {
+   			 background-color: #ccc5b9; 
+  		}
+  		.footer {
+            background-color: #403d39;
+            color: #fffcf2;
+            padding: 20px 0;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
 
-.btn-pay-book {
-	background-color: #007bff;
-	color: #fff;
-	border: none;
-	padding: 15px 30px;
-	border-radius: 5px;
-	cursor: pointer;
-	transition: background-color 0.3s;
-}
-
-.btn-pay-book:hover {
-	background-color: #0056b3;
-}
-
-.footer {
-	background-color: #343a40;
-	color: #fff;
-	
-	text-align: center;
-	position: absolute;
-
-	width: 100%;
-}
-
-/* Payment Information Styles */
     .payment-info {
         text-align: center;
         margin-top: 20px;
+        
     }
 
     .payment-info h1 {
@@ -58,8 +57,9 @@
     }
 
     #razorpayBtn {
-        background-color: #007bff;
-        color: #fff;
+       background-color: #403d39 ;
+       color: #fffcf2 ;
+        margin-bottom: 20px;      
         border: none;
         padding: 15px 30px;
         border-radius: 5px;
@@ -70,7 +70,7 @@
     }
 
     #razorpayBtn:hover {
-        background-color: #0056b3;
+        background-color: #252422;
     }
    
     .table td.amount-value {

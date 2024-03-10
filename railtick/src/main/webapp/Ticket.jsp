@@ -8,8 +8,8 @@
 <title>Train Ticket</title>
 <style>
         .footer {
-            background-color: #343a40;
-            color: #fff;
+            background-color: #403d39;
+            color: #fffcf2;
             padding: 20px 0;
             text-align: center;
             position: absolute;
@@ -42,7 +42,7 @@ th, td {
 }
 
 th {
-	background-color: #f2f2f2;
+	background-color: #ccc5b9;
 }
 
 h1 {
@@ -54,7 +54,7 @@ h1 {
 button {
 	margin-top: 10px;
 	padding: 15px;
-	background-color: #4CAF50;
+	background-color: #403d39;
 	color: white;
 	border: none;
 	border-radius: 5px;
@@ -65,7 +65,7 @@ button {
 }
 
 button:hover {
-	background-color: #45a049;
+	background-color: #252422;
 }
 
 /* Print Styles */
@@ -148,14 +148,14 @@ button:hover {
 					<%=request.getAttribute("bookingStatus")%>
 				</td>
 			</tr>
-	<tr>
-    <th>Seat Numbers (Coach):</th>
-   <td colspan="3"> 
-       <% for (String seatNumber : (List<String>) request.getAttribute("actualSeatNumbers")) { %> 
-            <%= seatNumber %><br> 
-        <% } %> 
-   </td>
-</tr>
+<!-- 	<tr> -->
+<!--     <th>Seat Numbers (Coach):</th> -->
+<!--    <td colspan="3">  -->
+<%--        <% for (String seatNumber : (List<String>) request.getAttribute("actualSeatNumbers")) { %>  --%>
+<%--             <%= seatNumber %><br>  --%>
+<%--         <% } %>  --%>
+<!--    </td> -->
+<!-- </tr> -->
 			<tr>
 				<th>Amount Paid:</th>
 				<td colspan="3">&#8377; <%=request.getAttribute("amount")%></td>

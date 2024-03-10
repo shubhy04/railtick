@@ -8,32 +8,46 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <style>
-        body {
-            background: url('your-background-image.jpg') fixed;
+         body {
+            background:url('https://img.freepik.com/free-photo/old-city-view_1417-1737.jpg?t=st=1710060682~exp=1710064282~hmac=efb7f3a109df4dd107540f78b4d28c27e760072b3565b8b72c3e2af374eef09e&w=900') fixed; /* Replace 'your-background-image.jpg' with the path to your image */
             background-size: cover;
-            opacity: 0.9;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: rgba(255, 255, 255, 0.7); /* Adjust the opacity here */
         }
+        
+    
+    
+  .navbar {
+  
+    background-color: #252422;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-        .navbar {
-            background-color: #343a40;
-            padding: 20px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+  .navbar-brand {
+    color: #fffcf2;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
 
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #fff;
-        }
+  .navbar-logo {
+    color: #fffcf2;
+  }
+
+  .navbar-toggler-icon {
+    background-color: #fffcf2;
+  }
 
         .card {
-            border: 1px solid #ddd;
+        
+            border: 0px !important;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .card-header {
-            background-color: #007bff;
+            background-color: #403d39;
             color: #fff;
             text-align: center;
             padding: 15px;
@@ -50,24 +64,49 @@
         }
 
         .btn-primary {
-            background-color: #007bff;
+            background-color: #403d39;
             border: none;
         }
 
         .btn-primary:hover {
-            background-color: #0056b3;
+            background-color: #252422;
         }
 
-        .error-message {
+        .forgot-password {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .error-message{
             color: #dc3545;
             text-align: center;
             margin-top: 15px;
+            
+        }
+        .success-message{
+            color: #28a745;
+            text-align: center;
+            margin-top: 15px;
+            
+        }
+
+        /* Show/hide password */
+        .input-group-append {
+            cursor: pointer;
+        }
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 1; /* Adjusted z-index to keep it above the input field */
         }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="#">RailTick</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"

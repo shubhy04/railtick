@@ -5,23 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>RailTick - Search Trains</title>
     <style>
-       
-        .search-box {
-            margin-top: 50px;
-        }
+           body {
+      background-color: #FFF7F1;
+      color: #403d39;
+    }
 
-        .form-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    .search-box {
+     text-align:center;
+      margin-top: 50px;
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+    .form-container {
+       background-color: #ccc5b9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        .form-group label {
+    .form-group {
+      position: relative;
+    }
+.form-group label {
             font-weight: bold;
             display: block;
             margin-bottom: 5px;
@@ -33,37 +37,36 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+    .form-group i {
+      position: absolute;
+      top: 72%;
+      right: 15px;
+      transform: translateY(-50%);
+      color: #ccc;
+    }
 
-        .form-group i {
-            position: absolute;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            color: #ccc;
-        }
+     .btn-search {
+    background-color: #403d39 !important;
+    border-color: #403d39 !important;
+    color: #fffcf2 !important;
+    transition: background-color 0.3s;
+  }
 
-        .btn-search {
-            background-color: #007bff;
-            border-color: #007bff;
-            width: 100%;
-            padding: 12px;
-            font-size: 1.2rem;
-        }
+  .btn-search:hover {
+    background-color: #252422 !important;
+    border-color: #252422 !important;
+  }
 
-        .btn-search:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
 
-        .footer {
-            background-color: #343a40;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
+    .footer {
+      background-color: #403d39;
+      color: #fffcf2;
+      padding: 20px 0;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
     </style>
 </head>
 <body>

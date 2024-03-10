@@ -32,12 +32,9 @@
     }
 
     .table-container tbody tr:hover {
-      background-color: #fffcf2;
-/*       background-color: #ddd; */
+	  background-color: #ddd; 
     }
 
-    .btn-see-fare,
-    .btn-book-train,
     .btn-view-details {
       display: inline-block;
       padding: 6px 12px;
@@ -50,41 +47,26 @@
       vertical-align: middle;
       cursor: pointer;
       background-image: none;
-      border: 1px solid transparent;
-      border-radius: 4px;
-    }
-
-    .btn-see-fare {
-      color: #fff;
-      background-color: #5bc0de;
-      border-color: #46b8da;
-    }
-
-    .btn-book-train {
-      color: #fff;
-      background-color: #5cb85c;
-      border-color: #4cae4c;
       
     }
 
+
     .btn-view-details {
-      background-color: #403d39;
-      color: #fffcf2;
-      border-color: #007bff;
+      background-color: #403d39 !important;
+      color: #fffcf2 !important;
       text-decoration: none;
     }
     
     .btn-view-details:hover,
     .btn-view-details:active,
     .btn-view-details:focus {
-      background-color: #252422;
-      border: 1px solid #252422;
-      color: #fffcf2; /* Adjusted text color on hover */
+      background-color: #252422 !important;
+      color: #fffcf2 !important; /* Adjusted text color on hover */
     }
 
     .footer {
-      background-color: #343a40;
-      color: #fff;
+      background-color: #403d39;
+      color: #fffcf2;
       padding: 20px 0;
       text-align: center;
       position: absolute;

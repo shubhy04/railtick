@@ -44,7 +44,7 @@ public class TrainUtil {
 			// Add the sessionId to the cookie with key as sessionId
 			Cookie cookie = new Cookie("sessionIdFor" + userRole.toString(), UUID.randomUUID().toString());
 
-			cookie.setMaxAge(900); // Expires after 20 MIN
+			cookie.setMaxAge(1200); // Expires after 20 MIN
 
 			// add the cookie to the response
 			response.addCookie(cookie);

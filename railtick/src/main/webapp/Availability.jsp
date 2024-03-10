@@ -6,13 +6,18 @@
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>RailTick - Seat Availability</title>
   <style>
-  
+  body {
+      background-color: #FFF7F1;
+      color: #403d39;
+    }
+
     .search-box {
+     text-align:center;
       margin-top: 50px;
     }
 
     .form-container {
-      background-color: #fff;
+       background-color: #ccc5b9;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -30,19 +35,22 @@
       color: #ccc;
     }
 
-    .btn-search {
-      background-color: #007bff;
-      border-color: #007bff;
-    }
+     .btn-search {
+    background-color: #403d39 !important;
+    border-color: #403d39 !important;
+    color: #fffcf2 !important;
+    transition: background-color 0.3s;
+  }
 
-    .btn-search:hover {
-      background-color: #0056b3;
-      border-color: #0056b3;
-    }
+  .btn-search:hover {
+    background-color: #252422 !important;
+    border-color: #252422 !important;
+  }
+
 
     .footer {
-      background-color: #343a40;
-      color: #fff;
+      background-color: #403d39;
+      color: #fffcf2;
       padding: 20px 0;
       text-align: center;
       position: fixed;

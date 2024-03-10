@@ -10,33 +10,44 @@
    
     <style>
         body {
-            background-image: url('https://img.freepik.com/free-photo/shot-electric-train-railway_181624-2754.jpg?t=st=1709658565~exp=1709662165~hmac=fa608edfe68b6d88c0ab5ab6e86bf3cc3eff2a3c332092f64597bd6153d9a8ac&w=900'); /* Replace 'your-background-image.jpg' with the path to your image */
+            background-image: url('https://img.freepik.com/free-photo/old-city-view_1417-1737.jpg?t=st=1710060682~exp=1710064282~hmac=efb7f3a109df4dd107540f78b4d28c27e760072b3565b8b72c3e2af374eef09e&w=900'); /* Replace 'your-background-image.jpg' with the path to your image */
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-color: rgba(255, 255, 255, 0.7); /* Adjust the opacity here */
         }
+    
+    
+  .navbar {
+  
+    background-color: #252422;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-        .navbar {
-            background-color: #343a40;
-            padding: 20px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+  .navbar-brand {
+    color: #fffcf2;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
 
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #fff;
-        }
+  .navbar-logo {
+    color: #fffcf2;
+  }
+
+  .navbar-toggler-icon {
+    background-color: #fffcf2;
+  }
 
         .card {
-            border: 1px solid #ddd;
+        
+            border: 0px !important;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .card-header {
-            background-color: #007bff;
+            background-color: #403d39;
             color: #fff;
             text-align: center;
             padding: 15px;
@@ -53,12 +64,12 @@
         }
 
         .btn-primary {
-            background-color: #007bff;
+            background-color: #403d39;
             border: none;
         }
 
         .btn-primary:hover {
-            background-color: #0056b3;
+            background-color: #252422;
         }
 
         .forgot-password {
@@ -95,7 +106,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="#">RailTick</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"

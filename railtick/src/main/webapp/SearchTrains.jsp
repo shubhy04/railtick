@@ -11,11 +11,12 @@
     }
 
     .search-box {
+     text-align:center;
       margin-top: 50px;
     }
 
     .form-container {
-      background-color: #fff;
+       background-color: #ccc5b9;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -33,16 +34,18 @@
       color: #ccc;
     }
 
-    .btn-search {
-      background-color: #403d39;
-      border-color: #403d39;
-      color: #fffcf2;
-    }
+     .btn-search {
+    background-color: #403d39 !important;
+    border-color: #403d39 !important;
+    color: #fffcf2 !important;
+    transition: background-color 0.3s;
+  }
 
-    .btn-search:hover {
-      background-color: #252422;
-      border-color: #252422;
-    }
+  .btn-search:hover {
+    background-color: #252422 !important;
+    border-color: #252422 !important;
+  }
+
 
     .footer {
       background-color: #403d39;
