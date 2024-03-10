@@ -134,7 +134,7 @@ public class BookTrains extends HttpServlet {
                                 razorpaySignature, razorpayOrderId);
 
                         BookingStatus bookingStatus = getBookingStatus(train, transaction);
-                        List<String> actualSeatNumbers = calculateSeatNumbers(bookingStatus, transaction.getSeats());
+                        List<String> actualSeatNumbers = calculateSeatNumbers(bookingStatus, transaction.getSeats(), seatClass);
 
                         // Set ticket details as request attributes
                         req.setAttribute("transId", transaction.getTransId());
@@ -204,7 +204,7 @@ public class BookTrains extends HttpServlet {
                                 razorpaySignature, razorpayOrderId);
 
                         BookingStatus bookingStatus = getBookingStatus(train, transaction);
-                        List<String> actualSeatNumbers = calculateSeatNumbers(bookingStatus, transaction.getSeats());
+                        List<String> actualSeatNumbers = calculateSeatNumbers(bookingStatus, transaction.getSeats(), seatClass);
 
                         pw.println("<div class='tab'><p class='menu green'>" + seat
                                 + " Seats Booked Successfully!<br/><br/> Your Transaction Id is: "
@@ -272,9 +272,26 @@ public class BookTrains extends HttpServlet {
             }
         }
     }
-
-    private List<String> calculateSeatNumbers(BookingStatus bookingStatus, int bookedSeats) {
+    private List<String> calculateSeatNumbers(BookingStatus bookingStatus, int bookedSeats, String seatClass) {
         List<String> seatNumbers = new ArrayList<>();
+
+        String classAbbreviation;
+        switch (seatClass) {
+            case "Sleeper(SL)":
+                classAbbreviation = "SL";
+                break;
+            case "Second Sitting(2S)":
+                classAbbreviation = "2S";
+                break;
+            case "AC First Class(1A)":
+                classAbbreviation = "1A";
+                break;
+            case "AC 2 Tier(2A)":
+                classAbbreviation = "2A";
+                break;
+            default:
+                classAbbreviation = "N/A";
+        }
 
         switch (bookingStatus) {
             case CONFIRMED:
@@ -297,7 +314,7 @@ public class BookTrains extends HttpServlet {
                         default:
                             statusAbbreviation = "N/A";
                     }
-                    seatNumbers.add(statusAbbreviation + "/S" + coachNumber + "/" + seatWithinCoach);
+                    seatNumbers.add(statusAbbreviation + "/" + classAbbreviation + "-" + coachNumber + "/"+ seatWithinCoach);
                 }
                 break;
             default:
@@ -306,6 +323,8 @@ public class BookTrains extends HttpServlet {
 
         return seatNumbers;
     }
+
+
 
     private void sendEmail(String recipient, HistoryBean transaction, TrainBean train, BookingStatus bookingStatus,
             String Berth, String seatClass) throws MessagingException {

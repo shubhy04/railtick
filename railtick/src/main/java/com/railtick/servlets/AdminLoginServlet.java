@@ -16,28 +16,47 @@ import com.railtick.beans.TrainException;
 
 @WebServlet("/adminlogin")
 public class AdminLoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        PrintWriter pw = res.getWriter();
+        res.setContentType("text/html");
 
-		PrintWriter pw = res.getWriter();
-		res.setContentType("text/html");
-		String uName = req.getParameter("uname");
-		String pWord = req.getParameter("pword");
-		try {
-			String message = TrainUtil.login(req, res, UserRole.ADMIN, uName, pWord);
-			if ("SUCCESS".equalsIgnoreCase(message)) {
-				RequestDispatcher rd = req.getRequestDispatcher("AdminHome.jsp");
-				rd.include(req, res);
-				
-			} else {
-				RequestDispatcher rd = req.getRequestDispatcher("AdminLogin.jsp");
-				rd.include(req, res);
-				pw.println("<div class='login-section'><p class='error-message'>" + message + "</p></div>");
+        // Server-side validation
+        String errorMessage = validateRequestParameters(req);
+        if (errorMessage != null) {
+            RequestDispatcher rd = req.getRequestDispatcher("AdminLogin.jsp");
+            rd.include(req, res);
+            pw.println("<div class='login-section'><p class='error-message'>" + errorMessage + "</p></div>");
+            return;
+        }
 
-			}
-		} catch (Exception e) {
-			throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());
-		}
-	}
+        String uName = req.getParameter("uname");
+        String pWord = req.getParameter("pword");
+
+        try {
+            String message = TrainUtil.login(req, res, UserRole.ADMIN, uName, pWord);
+            if ("SUCCESS".equalsIgnoreCase(message)) {
+                RequestDispatcher rd = req.getRequestDispatcher("AdminHome.jsp");
+                rd.include(req, res);
+            } else {
+                RequestDispatcher rd = req.getRequestDispatcher("AdminLogin.jsp");
+                rd.include(req, res);
+                pw.println("<div class='login-section'><p class='error-message'>" + message + "</p></div>");
+            }
+        } catch (Exception e) {
+            throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());
+        }
+    }
+
+    // Server-side validation method
+    private String validateRequestParameters(HttpServletRequest req) {
+        String uName = req.getParameter("uname");
+        String pWord = req.getParameter("pword");
+
+        if (uName == null || uName.trim().isEmpty() || pWord == null || pWord.trim().isEmpty()) {
+            return "Username and Password are required.";
+        }
+        return null;
+    }
 }

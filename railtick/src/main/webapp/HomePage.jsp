@@ -366,14 +366,24 @@
   </footer>
 
   <!-- Bootstrap JS and Popper.js -->
+  
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   
   <!-- SweetAlert JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Welcome, <%= request.getParameter("uname") %>!',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
 
     <script>
+    
         $(document).ready(function() {
             <% String updateMessage = (String) request.getAttribute("updateMessage"); %>
             <% if (updateMessage != null) { %>

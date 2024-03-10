@@ -148,14 +148,14 @@ button:hover {
 					<%=request.getAttribute("bookingStatus")%>
 				</td>
 			</tr>
-<!-- 	<tr> -->
-<!--     <th>Seat Numbers (Coach):</th> -->
-<!--    <td colspan="3">  -->
-<%--        <% for (String seatNumber : (List<String>) request.getAttribute("actualSeatNumbers")) { %>  --%>
-<%--             <%= seatNumber %><br>  --%>
-<%--         <% } %>  --%>
-<!--    </td> -->
-<!-- </tr> -->
+			<tr> 
+     			<th>Seat Numbers (Coach):</th> 
+ 				<td colspan="3">  
+       			<% for (String seatNumber : (List<String>) request.getAttribute("actualSeatNumbers")) { %>  
+          		 <%= seatNumber %><br>  
+      			 <% } %>  
+  				</td>
+			 </tr> 
 			<tr>
 				<th>Amount Paid:</th>
 				<td colspan="3">&#8377; <%=request.getAttribute("amount")%></td>

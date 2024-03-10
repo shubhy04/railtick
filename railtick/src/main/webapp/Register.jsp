@@ -203,23 +203,51 @@
         var phone = document.getElementById("phone").value;
         var termsCheck = document.getElementById("termsCheck").checked;
 
-        // Basic validations, you may enhance as needed
-        if (
-            username.trim() === "" ||
-            password.trim() === "" ||
-            firstname.trim() === "" ||
-            lastname.trim() === "" ||
-            address.trim() === "" ||
-            phone.trim() === "" ||
-            !termsCheck
-        ) {
-            alert("Please fill in all required fields and accept the terms and conditions.");
+        // Email validation
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(username)) {
+            alert("Please enter a valid email address.");
+            return false;
+        }
+
+        // Password validation (at least 8 characters with a mix of letters and numbers)
+        var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        if (!passwordRegex.test(password)) {
+            alert("Password must be at least 8 characters long and contain both letters and numbers.");
+            return false;
+        }
+
+        // Name validation (only letters and spaces allowed)
+        var nameRegex = /^[a-zA-Z\s]+$/;
+        if (!nameRegex.test(firstname) || !nameRegex.test(lastname)) {
+            alert("Please enter valid first and last names (only letters and spaces are allowed).");
+            return false;
+        }
+
+        // Address validation (alphanumeric with spaces)
+        var addressRegex = /^[a-zA-Z0-9\s]+$/;
+        if (!addressRegex.test(address)) {
+            alert("Please enter a valid address (only letters, numbers, and spaces are allowed).");
+            return false;
+        }
+
+        // Phone number validation (exactly 10 digits)
+        var phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(phone)) {
+            alert("Please enter a valid 10-digit phone number.");
+            return false;
+        }
+
+        // Terms and conditions check
+        if (!termsCheck) {
+            alert("Please accept the terms and conditions.");
             return false;
         }
 
         return true;
     }
 </script>
+
 
 </body>
 </html>
