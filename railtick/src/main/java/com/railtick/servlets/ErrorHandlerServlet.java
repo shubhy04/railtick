@@ -58,9 +58,9 @@ public class ErrorHandlerServlet extends HttpServlet {
 		System.out.println("=============================");
 
 		if (statusCode == 401) {
+			req.setAttribute("errorMessage", errorMessage);
 			RequestDispatcher rd = req.getRequestDispatcher("Login.jsp");
 			rd.include(req, res);
-			pw.println("<div class='tab'><p1 class='menu'>" + errorMessage + "</p1></div>");
 
 		} else {
 			RequestDispatcher rd = req.getRequestDispatcher("error.jsp");

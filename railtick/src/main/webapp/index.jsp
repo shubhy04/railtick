@@ -26,11 +26,19 @@
     color: #fffcf2;
     font-size: 1.5rem;
     font-weight: bold;
+    margin-right: 0rem !important;
   }
 
   .navbar-logo {
     color: #fffcf2;
   }
+  .navbar-logo img {
+    height: 45px !important; /* Set the desired height */
+    width: auto !important; /* Let the width adjust automatically to maintain aspect ratio */
+    max-width: none; /* Override max-width property */
+    object-fit: contain; /* Maintain aspect ratio */
+  }
+
 
   .navbar-toggler-icon {
     background-color: #fffcf2;
@@ -163,10 +171,10 @@
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
       <!-- Railway Icon -->
-      <span class="navbar-logo">&#128642;</span>
       <!-- Railway Booking Text -->
       <a class="navbar-brand" href="HomePage.jsp">RailTick</a>
       <!-- Navbar Toggler Button -->
+    <span class="navbar-logo"><img src="RT_logo.png" alt="RailTick Logo" style="height: 24px; width: 24px;"></span>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -287,7 +295,7 @@
             <div class="card-body">
               <h5 class="card-title">Seat Availability</h5>
               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              <a href="useravailfwd" class="btn btn-primary">Check</a>
+              <a href="Availability.jsp" class="btn btn-primary">Check</a>
             </div>
           </div>
         </div>
@@ -371,16 +379,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   
-<!--   <!-- SweetAlert JS --> -->
-<!--     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
-<!--     <script> -->
-//         Swal.fire({
-//             icon: 'success',
-<%--             title: 'Welcome, <%= request.getParameter("uname") %>!', --%>
-//             showConfirmButton: false,
-//             timer: 3000
-//         });
-<!--     </script> -->
+ 
 
     <script>
     

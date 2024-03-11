@@ -29,7 +29,7 @@ public class UserSearchTrain extends HttpServlet {
 		res.setContentType("text/html");
 		PrintWriter pw = res.getWriter();
 
-		TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
+	//	TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
 
 		try {
 

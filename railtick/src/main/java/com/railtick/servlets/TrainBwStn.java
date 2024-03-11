@@ -26,8 +26,6 @@ public class TrainBwStn extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         res.setContentType("text/html");
         PrintWriter pw = res.getWriter();
-        TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
-
         try {
             String fromStation = req.getParameter("fromstation");
             String toStation = req.getParameter("tostation");

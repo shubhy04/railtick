@@ -20,22 +20,18 @@ import com.railtick.beans.TrainException;
 public class UserRegServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private UserService userService = new UserServiceImpl(UserRole.CUSTOMER);
-
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         res.setContentType("text/html");
         PrintWriter pw = res.getWriter();
-
         try {
             // Client-side validation
             String errorMessage = validateRequestParameters(req);
             if (errorMessage != null) {
-                // Set error message in request attribute
                 req.setAttribute("errorMessage", errorMessage);
                 RequestDispatcher rd = req.getRequestDispatcher("Register.jsp");
                 rd.forward(req, res);
                 return;
             }
-
             UserBean user = new UserBean();
             user.setMailId(req.getParameter("mailid"));
             user.setPWord(req.getParameter("pword"));
@@ -43,22 +39,17 @@ public class UserRegServlet extends HttpServlet {
             user.setLName(req.getParameter("lastname"));
             user.setAddr(req.getParameter("address"));
             user.setPhNo(Long.parseLong(req.getParameter("phoneno")));
-
             String message = userService.registerUser(user);
             if ("SUCCESS".equalsIgnoreCase(message)) {
-                // Set success message in request attribute
                 req.setAttribute("successMessage", "User Registered Successfully!");
                 RequestDispatcher rd = req.getRequestDispatcher("Login.jsp");
                 rd.forward(req, res);
             } else {
-                // Set error message in request attribute
                 req.setAttribute("errorMessage", message);
                 RequestDispatcher rd = req.getRequestDispatcher("Register.jsp");
                 rd.forward(req, res);
             }
-
         } catch (Exception e) {
-            // Handle exceptions
             throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());
         }
     }

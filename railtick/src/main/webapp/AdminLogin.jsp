@@ -26,15 +26,21 @@
   }
 
   .navbar-brand {
-    color: #fffcf2;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
+	color: #fffcf2;
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin-right: 0rem !important;
+}
 
-  .navbar-logo {
-    color: #fffcf2;
+.navbar-logo {
+	color: #fffcf2;
+}
+.navbar-logo img {
+    height: 45px !important; /* Set the desired height */
+    width: auto !important; /* Let the width adjust automatically to maintain aspect ratio */
+    max-width: none; /* Override max-width property */
+    object-fit: contain; /* Maintain aspect ratio */
   }
-
   .navbar-toggler-icon {
     background-color: #fffcf2;
   }
@@ -109,6 +115,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="#">RailTick</a>
+            <span class="navbar-logo"><img src="RT_logo.png" alt="RailTick Logo" style="height: 24px; width: 24px;"></span>
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

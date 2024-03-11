@@ -18,7 +18,7 @@ public class UserSearchFwd extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		res.setContentType("text/html");
-		TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
+		//TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
 		RequestDispatcher rd = req.getRequestDispatcher("SearchTrains.jsp");
 		rd.forward(req, res);
 

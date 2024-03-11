@@ -20,12 +20,9 @@ public class UserLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        PrintWriter pw = res.getWriter();
         res.setContentType("text/html");
         String uName = req.getParameter("uname");
         String pWord = req.getParameter("pword");
-
-        // Server-side validation
         String errorMessage = validateRequestParameters(uName, pWord);
         if (errorMessage != null) {
             req.setAttribute("errorMessage", errorMessage);
@@ -33,11 +30,9 @@ public class UserLoginServlet extends HttpServlet {
             rd.include(req, res);
             return;
         }
-
         String responseMsg = TrainUtil.login(req, res, UserRole.CUSTOMER, uName, pWord);
         if (ResponseCode.SUCCESS.toString().equalsIgnoreCase(responseMsg)) {
             req.setAttribute("successMessage", "Login successful. Welcome, " + uName + "!");
-            // Forward to a JSP that includes the SweetAlert script
             RequestDispatcher rd = req.getRequestDispatcher("HomePage.jsp");
             rd.forward(req, res);
         } else {
