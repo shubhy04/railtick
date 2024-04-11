@@ -5,31 +5,20 @@
 <%@ page import="java.io.IOException" %>
 
 <%
-    // Assume you have set the email credentials and host details in your application.
-     String email = (String) session.getAttribute("mailid"); // Replace "userEmail" with your session attribute name
-
-    
-   
+     String email = (String) session.getAttribute("mailid"); 
     String from = "railtick0@gmail.com";
     String to = email;
     String subject = "Cancellation Confirmation";
 
-    // Get the cancellation status from the request or session attribute
     String cancellationStatus = (String) request.getAttribute("cancellationStatus");
-
-    // HTML content for the email
     String emailContent = "<h2>Cancellation Confirmation</h2>"
-            + "<p>" + cancellationStatus + "</p>"
-            + "<p><a href='index.jsp'>Back to Home</a></p>";
-
-    // Set up JavaMail properties
+            + "<p>" + cancellationStatus + "</p>";
     Properties properties = new Properties();
     properties.put("mail.smtp.host", "smtp.gmail.com");
     properties.put("mail.smtp.auth", "true");
     properties.put("mail.smtp.starttls.enable", "true");
     properties.put("mail.smtp.port", "587");
 
-    // Get the default Session object for sending emails
     Session mailSession = Session.getInstance(properties,
         new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -38,58 +27,95 @@
         });
 
     try {
-        // Create a default MimeMessage object.
         MimeMessage message = new MimeMessage(mailSession);
-
-        // Set From: header field of the header.
         message.setFrom(new InternetAddress(from));
-
-        // Set To: header field of the header.
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-        // Set Subject: header field
         message.setSubject(subject);
-
-        // Now set the actual message
         message.setContent(emailContent, "text/html");
-
-        // Send message
         Transport.send(message);
     } catch (MessagingException e) {
-        // Handle the exception appropriately
         e.printStackTrace();
     }
 %>
-
 <html>
+
 <head>
     <title>RT-Cancellation Confirmation</title>
     <style>
         body {
+            background-color: #FFF7F1;
+            color: #403d39;
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+        }
+  .conti {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
         }
 
-        h2 {
-            color: #333;
+        .conti h2 {
+            color: #403d39;
+            margin-bottom: 20px;
+            text-align:center;
         }
 
+
+        .footer {
+            background-color: #403d39;
+            color: #fffcf2;
+            padding: 20px 0;
+            text-align: center;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .content {
+            margin-top: 30px;
+        }
+
+        .content-info {
+            background-color: #f2f2f2;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .content-info p {
+            margin: 0;
+            text-align:center;
+        }
         p {
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-
-        a {
-            text-decoration: none;
-            color: #007BFF;
+            margin: 0;
+            text-align:center;
         }
     </style>
 </head>
 <body>
+<%@include file="global/navbar.jsp"%>
+
+<div class="conti">
     <h2>Cancellation Confirmation</h2>
-    
-    <p>${cancellationStatus}</p>
-    
+    <div class="content-info">
+        <p>Your ticket cancellation request has been processed successfully.</p>
+        <p>A confirmation email has been sent to your registered Email </p>
+    </div>
+    <p >${cancellationStatus}</p>
     <p><a href="HomePage.jsp">Back to Home</a></p>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2024 RailTick. All rights reserved.</p>
+    </div>
+</footer>
+
 </body>
+
 </html>

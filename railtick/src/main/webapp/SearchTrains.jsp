@@ -45,6 +45,15 @@
     background-color: #252422 !important;
     border-color: #252422 !important;
   }
+.error-message {
+	color: red;
+	margin-top: 10px;
+
+}
+.err{
+
+	margin-bottom: 0px !important;
+}
 
 
     .footer {
@@ -72,6 +81,16 @@
             <i class="fas fa-train"></i>
           </div>
           <button type="submit" class="btn btn-primary btn-search">Search</button>
+          	<div class="error-message">
+						<p class="err">
+							<%
+							String errorMessage = (String) request.getAttribute("errorMessage");
+							if (errorMessage != null) {
+								out.println(errorMessage);
+							}
+							%>
+						</p>
+					</div>
         </form>
       </div>
     </div>
@@ -83,5 +102,8 @@
       <p>&copy; 2024 RailTick. All rights reserved.</p>
     </div>
   </footer>
+  
+  
+  
 </body>
 </html>

@@ -115,7 +115,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">RailTick</a>
+        <a class="navbar-brand" href="index.jsp">RailTick</a>
             <span class="navbar-logo"><img src="RT_logo.png" alt="RailTick Logo" style="height: 24px; width: 24px;"></span>
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"

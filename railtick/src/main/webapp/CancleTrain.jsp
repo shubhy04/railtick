@@ -85,9 +85,8 @@ input[type="submit"]:hover {
 		<p class='menu'>Train Cancellation</p>
 	</div>
 	<form class="tab" action="admincancletrain" method="post">
-		<label>Train Number:</label> <input type="text" id="trainno"
-			name="trainno" required> <input type="submit"
-			value=" CANCLE TRAIN "> 
+		Train Number:<input type="text" name="trainno"><br />
+		<br /> <input type="submit" value=" CANCLE TRAIN ">
 	</form>
 	<a href="AdminHome.jsp"
 			class="goback-btn">HOME</a>

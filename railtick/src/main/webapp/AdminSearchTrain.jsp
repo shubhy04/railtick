@@ -141,19 +141,16 @@ input {
 <title>RT-AdminSearchTrain</title>
 </head>
 <body>
+<%@include file="global/AdminNavbar.jsp"%>
 	<div class="title">
 		<p class="me">Search Trains</p>
 	</div>
-<!-- 	<form action="adminsearchtrain" class="tsearch" method="post"> -->
-<!-- 		<br /> TrainNumber: <input type="text" name="trainnumber"><br /> -->
-<!-- 		<br /> <input type="submit" value=" SEARCH TRAIN "><br /> -->
-<!-- 	</form> -->
-
 	<form id="trainSearchForm" class="train-search"
 		action="adminsearchtrain" method="post">
 		<label for="trainNumber">Enter Train Number:</label> <input
 			type="text" id="trainNumber" name="trainnumber" required>
 		<button type="submit" class="search-button">SEARCH TRAIN</button>
 	</form>
+
 </body>
 </html>

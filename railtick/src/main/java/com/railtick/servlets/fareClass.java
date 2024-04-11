@@ -20,20 +20,15 @@ import com.railtick.serviceimpl.TrainServiceImpl;
 public class fareClass extends HttpServlet {
     private static final long serialVersionUID = 1L;
     TrainService trainService = new TrainServiceImpl();
-
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         processRequest(req, res);
     }
-
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         processRequest(req, res);
     }
-
     private void processRequest(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         res.setContentType("text/html");
         PrintWriter pw = res.getWriter();
-     //   TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
-
         try {
             String trainNo = req.getParameter("trainnumber");
             TrainBean train = trainService.getFareDetails(trainNo);

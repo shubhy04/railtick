@@ -23,6 +23,9 @@ public class UserLoginServlet extends HttpServlet {
         res.setContentType("text/html");
         String uName = req.getParameter("uname");
         String pWord = req.getParameter("pword");
+     // Inside doPost method after successful login
+        req.getSession().setAttribute("loginSuccess", true);
+
         String errorMessage = validateRequestParameters(uName, pWord);
         if (errorMessage != null) {
             req.setAttribute("errorMessage", errorMessage);
@@ -41,6 +44,7 @@ public class UserLoginServlet extends HttpServlet {
             rd.include(req, res);
         }
     }
+    
 
     // Server-side validation method
     private String validateRequestParameters(String uName, String pWord) {

@@ -145,7 +145,12 @@ input {
 	<div class="title">
 		<p class="me">Update Trains</p>
 	</div>
-
+	<form id="trainUpdateForm" class="train-search"
+		action="adminupdatetrain" method="post">
+		<label for="trainNumber">Enter Train Number:</label> <input
+			type="text" id="trainNumber" name="trainnumber" required>
+		<button type="submit" class="search-button">SEARCH TRAIN</button>
+	</form>
 
 </body>
 </html>

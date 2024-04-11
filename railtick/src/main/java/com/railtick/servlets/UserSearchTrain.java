@@ -46,9 +46,9 @@ public class UserSearchTrain extends HttpServlet {
 				
 				
 			} else {
-				RequestDispatcher rd = req.getRequestDispatcher("SearchTrains.jsp");
-				rd.include(req, res);
-				pw.println("<div class='error-message'><p1 class='menu'>Train No." + trainNo + " is Not Available !</p1></div>");
+				req.setAttribute("errorMessage","Train No." + trainNo + " is Not Available !");
+        	    RequestDispatcher rd = req.getRequestDispatcher("SearchTrains.jsp");
+        	    rd.include(req, res);
 			}
 		} catch (Exception e) {
 			throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());

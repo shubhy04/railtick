@@ -258,8 +258,8 @@ public class BookTrains extends HttpServlet {
             return BookingStatus.CONFIRMED;
         } else {
             int remainingSeats = availableSeats;
-            int racThreshold = 10; // Set your RAC threshold as needed
-            int waitingListLimit = 15; // Set your waiting list limit as needed
+            int racThreshold = 11; // Set your RAC threshold as needed
+            int waitingListLimit = 21; // Set your waiting list limit as needed
 
             if (remainingSeats >= bookedSeats) {
                 return BookingStatus.CONFIRMED;

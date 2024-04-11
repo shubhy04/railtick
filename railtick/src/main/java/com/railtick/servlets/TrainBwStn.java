@@ -41,10 +41,9 @@ public class TrainBwStn extends HttpServlet {
                 RequestDispatcher rd = req.getRequestDispatcher("TrainBwStnDisplay.jsp");
                 rd.include(req, res);
             } else {
-                RequestDispatcher rd = req.getRequestDispatcher("TrainBwStn.jsp");
-                rd.include(req, res);
-                pw.println("<div class='error-message'><p1 class='err'>There are no trains Between "
-                        + req.getParameter("fromstation") + " and " + req.getParameter("tostation") + "</p1></div>");
+            	 req.setAttribute("errorMessage", "There are no trains between " + fromStation + " and " + toStation);
+            	    RequestDispatcher rd = req.getRequestDispatcher("TrainBwStn.jsp");
+            	    rd.include(req, res);
             }
         } catch (Exception e) {
             throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());

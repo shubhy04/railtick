@@ -92,9 +92,10 @@ tr:hover {
 
 </style>
 <meta charset="UTF-8">
-<title>RT-ViewTrains</title>
+<title>RT-AdminViewTrains</title>
 </head>
 <body>
+<%@include file="global/AdminNavbar.jsp"%>
 
 </body>
 </html>

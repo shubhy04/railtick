@@ -16,6 +16,10 @@ body {
 	color: #403d39;
 }
 
+.table td, .table th {
+	vertical-align: middle !important;
+}
+
 .table-container {
 	margin-top: 20px;
 }
@@ -55,6 +59,7 @@ body {
 	margin-top: 5px;
 	transition: background-color 0.3s;
 	text-decoration: none;
+	width: 120px;
 }
 
 .btn-see-fare:hover, .btn-book-train:hover, .btn-see-fare:active,
@@ -120,13 +125,36 @@ body {
 					<td><%=train.getFrom_stn()%></td>
 					<td><%=train.getTo_stn()%></td>
 					<td><%=generateRandomTime()%></td>
-					<td><%=train.getSeats()%></td>
+					<%
+					int seats = train.getSeats();
+					String seatStatus = "";
+					if (seats >= 1) {
+						seatStatus = String.valueOf(seats);
+					} else if (seats > -10) {
+						seatStatus = "RAC";
+					} else if (seats > -30) {
+						seatStatus = "Waiting";
+					} else {
+						seatStatus = "Regret";
+					}
+					%>
+					<td><%=seatStatus%></td>
 					<td><a class="btn btn-see-fare"
 						href='fare?trainnumber=<%=train.getTr_no()%>&fromStn=<%=train.getFrom_stn()%>&toStn=<%=train.getTo_stn()%>'>See
 							fare</a></td>
-					<td><a class="btn  btn-book-train"
-						href='booktrainbyref?trainNo=<%=train.getTr_no()%>&fromStn=<%=train.getFrom_stn()%>&toStn=<%=train.getTo_stn()%>'>Book
-							Now</a></td>
+					<td>
+        <!-- Conditionally render the button based on seat status -->
+        <% if (!seatStatus.equals("Regret")) { %>
+            <a class="btn btn-book-train"
+               href='booktrainbyref?trainNo=<%=train.getTr_no()%>&fromStn=<%=train.getFrom_stn()%>&toStn=<%=train.getTo_stn()%>'>
+                Book Now
+            </a>
+        <% } else { %>
+            <button class="btn btn-book-train" disabled>
+                Book Now
+            </button>
+        <% } %>
+    </td>
 				</tr>
 				<%
 				}

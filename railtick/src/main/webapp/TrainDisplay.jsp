@@ -68,12 +68,28 @@
       width: 100%;
       bottom:0;   
     }
+        .table td, .table th {
+    vertical-align: middle !important;
+}
     .error-message {
       background-color: #ffdddd;
       color: #dc3545;
       padding: 10px;
       margin-top: 20px;
       border-radius: 5px;
+    }
+    .go-back-button {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .go-back-button i {
+      color: #403d39;
+    }
+    .go-back-button a {
+      color: #403d39; 
+    }
+    .go-back-button a:hover {
+      color: #403d39; 
     }
 
     .err {
@@ -97,6 +113,7 @@
           <th>Time</th>
           <th>Seats</th>
           <th>Fare </th>
+          <th>Action </th>
         </tr>
       </thead>
       <tbody>
@@ -114,6 +131,7 @@
 				<td><%= generateRandomTime() %></td>
                 <td><%= trainData.getSeats() %></td>
                 <td><a class="btn btn-primary btn-see-fare" href='fare?trainnumber=<%= trainData.getTr_no() %>&fromStn=<%= trainData.getFrom_stn() %>&toStn=<%= trainData.getTo_stn() %>'>See fare</a></td>
+            	<td><a class="btn btn-success btn-book-train" href='booktrainbyref?trainNo=<%= trainData.getTr_no() %>&fromStn=<%= trainData.getFrom_stn() %>&toStn=<%= trainData.getTo_stn() %>'>Book Now</a></td>
             </tr>
         <% 
             } else {
@@ -136,11 +154,8 @@
       </tbody>
     </table>
   </div>
-  
-
-  <!-- Book Train Button -->
-  <div class="container">
-   <a class="btn btn-success btn-book-train" href='booktrainbyref?trainNo=<%= trainData.getTr_no() %>&fromStn=<%= trainData.getFrom_stn() %>&toStn=<%= trainData.getTo_stn() %>'>Book Now</a>
+   <div class="go-back-button">
+    <a href="#" onclick="history.back()"><i class="fas fa-arrow-left"></i> Go back</a>
   </div>
 
   <!-- Footer -->
@@ -149,6 +164,8 @@
       <p>&copy; 2024 RailTick. All rights reserved.</p>
     </div>
   </footer>
+  
+  
 
   
 </body>

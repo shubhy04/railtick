@@ -7,36 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RT-AddTrains</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .main {
-            text-align: center;
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .menu {
-            margin: 0;
-            font-size: 24px;
-        }
+
+      .title {
+	background-color: #333;
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+	font-size: 2em;
+}
+.me {
+	font-size: 1.5em;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
         .tab {
-            max-width: 400px;
-            margin: 20px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
-        }
+    max-width: 400px;
+    margin: 20px auto; /* Center horizontally with auto margins */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
         input[type="text"] {
             width: calc(100% - 16px);
             padding: 12px;
@@ -76,9 +68,10 @@
     </style>
 </head>
 <body>
+<%@include file="global/AdminNavbar.jsp"%>
 
-    <div class='main'>
-        <p class='menu'> Add Trains </p>
+    <div class='title'>
+        <p class='me'> Add Trains </p>
     </div>
     <form class="tab" action="adminaddtrain" method="post">
         <label>Train Number:</label>

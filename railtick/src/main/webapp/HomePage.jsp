@@ -26,11 +26,19 @@
     color: #fffcf2;
     font-size: 1.5rem;
     font-weight: bold;
+    margin-right: 0rem !important;
   }
 
   .navbar-logo {
-    color: #fffcf2;
+	color: #fffcf2;
+}
+.navbar-logo img {
+    height: 45px !important; /* Set the desired height */
+    width: auto !important; /* Let the width adjust automatically to maintain aspect ratio */
+    max-width: none; /* Override max-width property */
+    object-fit: contain; /* Maintain aspect ratio */
   }
+
 
   .navbar-toggler-icon {
     background-color: #fffcf2;
@@ -163,10 +171,9 @@
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
       <!-- Railway Icon -->
-      <span class="navbar-logo">&#128642;</span>
       <!-- Railway Booking Text -->
       <a class="navbar-brand" href="HomePage.jsp">RailTick</a>
-      <!-- Navbar Toggler Button -->
+            <span class="navbar-logo"><img src="RT_logo.png" alt="RailTick Logo" style="height: 24px; width: 24px;"></span>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -238,7 +245,7 @@
           <img src="booktrain.jpg" class="card-img-top" alt="Train 1">
           <div class="card-body">
             <h5 class="card-title">View Trains </h5>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p class="card-text">Discover information about available trains and their routes.</p>
             <a href="userviewtrainfwd" class="btn btn-primary">Book Now</a>
           </div>
         </div>
@@ -248,7 +255,7 @@
           <img src="https://img.freepik.com/free-vector/train-station-scene-with-steam-locomotive_1308-94853.jpg?t=st=1710009177~exp=1710012777~hmac=86e09be60f704af0bf268fde30b403b1a2bfbd556ee3bc3fbf2202c71a572fb5&w=1060" class="card-img-top" alt="Train 2">
           <div class="card-body">
             <h5 class="card-title">Search Trains </h5>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p class="card-text">Check the list of trains between your preferred stations.</p>
             <a href="TrainBwStn.jsp" class="btn btn-primary">Search</a>
           </div>
         </div>
@@ -257,8 +264,8 @@
         <div class="card">
           <img src="trainno.jpg" class="card-img-top" alt="Train 3">
           <div class="card-body">
-            <h5 class="card-title">Search by TrainNo </h5>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h5 class="card-title">Search by Train No </h5>
+            <p class="card-text">Search the desired trains between your preferred stations by train number .</p>
             <a href="usersearchtrain" class="btn btn-primary">Search</a>
           </div>
         </div>
@@ -276,7 +283,7 @@
             <img src="https://img.freepik.com/free-vector/flat-design-train-ticket-template_52683-115394.jpg?w=900&t=st=1710006983~exp=1710007583~hmac=c488078c7658aa9d2c78129013c94342f39ca822f372169250b220263f527416" class="card-img-top" alt="Destination 1">
             <div class="card-body">
               <h5 class="card-title">Fare Enquiry</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p class="card-text">Check the fare prices of all the coaches of desired train.</p>
               <a href="Fare.jsp" class="btn btn-primary">Check</a>
             </div>
           </div>
@@ -286,8 +293,8 @@
             <img src="https://img.freepik.com/free-vector/train-wagon-interior-with-empty-seats-luggage-shelf-3d-isometric-vector-illustration_1284-81207.jpg?t=st=1710010041~exp=1710013641~hmac=a772d1997d8e5120eb279a8de60a15dcc60e9277aed49bf433d2c3998be3325e&w=740" class="card-img-top" alt="Destination 2">
             <div class="card-body">
               <h5 class="card-title">Seat Availability</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              <a href="useravailfwd" class="btn btn-primary">Check</a>
+              <p class="card-text">Ensure the availability of seats for your chosen train.</p>
+              <a href="Availability.jsp" class="btn btn-primary">Check</a>
             </div>
           </div>
         </div>
@@ -296,7 +303,7 @@
             <img src="https://img.freepik.com/free-vector/hand-drawn-train-ticket-template_23-2150447626.jpg?t=st=1710009999~exp=1710013599~hmac=d839eb8b5535eda3451ffdb8c5cff2ac33fbce26ec3512dd9b81eb89e843b166&w=1060" class="card-img-top" alt="Destination 3">
             <div class="card-body">
               <h5 class="card-title">Ticket Booking History</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p class="card-text">Review your past ticket bookings and travel history.</p>
               <a href="bookingdetails" class="btn btn-primary">Check</a>
             </div>
           </div>
@@ -354,7 +361,7 @@
       <h2 class="text-center mb-4">Contact Us</h2>
       <p class="text-center">Have questions or need assistance? Contact our support team.</p>
       <p class="text-center"><i class="fas fa-envelope"></i> info@railtick0@gmail.com</p>
-      <p class="text-center"><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+      <p class="text-center"><i class="fas fa-phone"></i>+91 9594698507</p>
     </div>
   </div>
 
@@ -366,21 +373,19 @@
   </footer>
 
   <!-- Bootstrap JS and Popper.js -->
+  <!-- SweetAlert2 CSS -->
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<!-- SweetAlert2 JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  
   
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   
-<!--   <!-- SweetAlert JS --> -->
-<!--     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
-<!--     <script> -->
-//         Swal.fire({
-//             icon: 'success',
-<%--             title: 'Welcome, <%= request.getParameter("uname") %>!', --%>
-//             showConfirmButton: false,
-//             timer: 3000
-//         });
-<!--     </script> -->
 
     <script>
     
@@ -410,5 +415,16 @@
       }
     });
   </script>
+<!-- Add this code inside the <script> tag at the bottom of your HomePage.jsp file -->
+<script>
+    $(document).ready(function() {
+        <% if (session.getAttribute("loginSuccess") != null && (boolean) session.getAttribute("loginSuccess")) { %>
+            Swal.fire('Success', '<%= request.getAttribute("successMessage") %>', 'success');
+            <% session.setAttribute("loginSuccess", false); %>
+        <% } %>
+    });
+</script>
+
+  
 </body>
 </html>

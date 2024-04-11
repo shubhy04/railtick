@@ -135,7 +135,7 @@
 	        currency: 'INR',
 	        name: 'RailTick',
 	        description: 'Train Booking',
-	        image: 'your_logo_url.png',
+	        image: 'Logo.jpg',
 	        order_id: razorpayOrderId,
 	        handler: function (response) {
 	            console.log('Payment successful!', response);
@@ -152,11 +152,6 @@
 
 	            // Submit the form
 	            document.getElementById("razorpayForm").submit();
-	        },
-	        prefill: {
-	            name: 'Customer Name',
-	            email: 'customer@example.com',
-	            contact: '9876543210'
 	        },
 	        customer: {
 	            name: 'Customer Name',

@@ -9,6 +9,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
   <title>RailTick - Train Details</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
   <style>
   body {
       background-color: #FFF7F1;
@@ -18,6 +20,9 @@
     .table-container {
       margin-top: 20px;
     }
+    .table td, .table th {
+    vertical-align: middle !important;
+}
 
     .table-container table {
       width: 100%;
@@ -70,6 +75,19 @@
       position: absolute;
       width: 100%;
       bottom:0;   
+    }
+    .go-back-button {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .go-back-button i {
+      color: #403d39;
+    }
+    .go-back-button a {
+      color: #403d39; 
+    }
+    .go-back-button a:hover {
+      color: #403d39; 
     }
     .error-message {
       background-color: #ffdddd;
@@ -145,6 +163,10 @@
 %>
       </tbody>
     </table>
+    
+  </div>
+    <div class="go-back-button">
+    <a href="#" onclick="history.back()"><i class="fas fa-arrow-left"></i> Go back</a>
   </div>
 
   <!-- Footer -->

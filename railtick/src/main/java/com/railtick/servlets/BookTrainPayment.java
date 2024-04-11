@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.Random;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -14,7 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
@@ -37,6 +37,9 @@ public class BookTrainPayment extends HttpServlet {
 		res.setContentType("text/html");
 		TrainUtil.validateUserAuthorization(req, UserRole.CUSTOMER);
 		PrintWriter pw = res.getWriter();
+		Random random = new Random();
+		int hour = random.nextInt(24); 
+		int minute = random.nextInt(60); 
 		int seat = Integer.parseInt(req.getParameter("seats"));
 		String trainNo = req.getParameter("trainnumber");
 		String journeyDate = req.getParameter("journeydate");
@@ -55,7 +58,7 @@ public class BookTrainPayment extends HttpServlet {
 			SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
 			java.util.Date utilDate;
 			String date = LocalDate.now().toString();
-			String time = LocalTime.now().toString();
+			String time = String.format("%02d:%02d", hour, minute); 
 			utilDate = inputFormat.parse(journeyDate);
 			date = outputFormat.format(utilDate);
 
@@ -65,10 +68,9 @@ public class BookTrainPayment extends HttpServlet {
 
 			if (train != null && fare != null) {
 				int avail = train.getSeats();
-				
-
 				if (bookingStatus == BookingStatus.NOT_AVAILABLE) {
-				    pw.println("<div class='tab'><p1 class='menu red'>Booking not available for the requested seats in this Train!</p1></div>");
+				    req.setAttribute("errorMessage", "Booking not available for the requested seats in this Train because seats are full!");
+				    
 				} else {
 					avail = avail - seat;
 
@@ -104,23 +106,20 @@ public class BookTrainPayment extends HttpServlet {
 								+ getBookingStatus(train, seat).getStatus() + "</td>"
 								+ "<th>Date Of Journey:</th><td>" + date + "</td></tr><tr><th>Berth:</th><td>" + Berth
 								+ "</td><th>Time(HH:MM):</th><td>"+ time +"</td></tr><tr><th>Seats: </th><td>"
-								+ train.getSeats() + "</td><th>Class: </th><td>" + seatClass + "</td></tr>"
+								+ seat + "</td><th>Class: </th><td>" + seatClass + "</td></tr>"
 								
 								+ "</td><th colspan='2' class='text-center'>Amount:</th><td colspan='4' class='text-center amount-value'>&#8377; " + totalAmount + "</td></tr>" + "</table>"
 								;
 						req.getSession().setAttribute("content", content);
 						req.getSession().setAttribute("responseCode", responseCode);
 
-						
 						req.setAttribute("bookingStatus", bookingStatus);
 
 						req.getSession().setAttribute("totalAmount", totalAmount);
 
-						// Initialize Razorpay client
 						RazorpayClient razorpay = new RazorpayClient("rzp_test_LSfhbrTgIOlWn2",
 								"gGenJAHiwaWcS261meEZa5kK");
 
-						// Create a Razorpay order
 						JSONObject orderRequest = new JSONObject();
 						orderRequest.put("amount", totalAmount * 100); // Amount in paise
 						orderRequest.put("currency", "INR");
@@ -129,11 +128,8 @@ public class BookTrainPayment extends HttpServlet {
 
 						Order order = razorpay.orders.create(orderRequest);
 
-						// Extract Razorpay order ID
 						String razorpayOrderId = order.get("id");
 
-						// Store Razorpay order ID in the session for verification during payment
-						// success callback
 						req.getSession().setAttribute("razorpayOrderId", razorpayOrderId);
 
 						// Redirect to the Razorpay payment page
@@ -145,7 +141,7 @@ public class BookTrainPayment extends HttpServlet {
 					}
 				}
 			} else {
-				pw.println("<div class='tab'><p1 class='menu'>Invalid Train Number or Fare Details!</p1></div>");
+				pw.println("<div class='tab'><p1 class='menu'>Invalid Train Number</p1></div>");
 			}
 		} catch (Exception e) {
 			throw new TrainException(422, this.getClass().getName() + "_FAILED", e.getMessage());
@@ -161,8 +157,8 @@ public class BookTrainPayment extends HttpServlet {
 
 	private BookingStatus getBookingStatus(TrainBean train, int bookedSeats) {
 		int availableSeats = train.getSeats();
-		int racThreshold = 10; // Set your RAC threshold as needed
-		int waitingListLimit = 15; // Set your waiting list limit as needed
+		int racThreshold = 10; // Dummy RAC threshold 
+		int waitingListLimit = 20;// Dummy waiting list limi 
 
 		if (availableSeats >= bookedSeats) {
 			return BookingStatus.AVAILABLE;

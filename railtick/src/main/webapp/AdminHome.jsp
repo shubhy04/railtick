@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
     <link rel="stylesheet" href="Admin.css">
 </head>
+<%@include file="global/AdminNavbar.jsp"%>
 <body class="bg-light">
     <header class="bg-dark text-white text-center py-2">
         <div class="container">
@@ -54,23 +55,12 @@
             </div>
 
             <div class="col-md-4 mb-3">
-                <div class="card bg-primary text-white rounded shadow">
-                    <div class="card-body text-center">
-                        <i class="fas fa-trash fa-3x mb-2"></i>
-                        <h5 class="card-title">Delete Train</h5>
-                        <p class="card-text">Remove a train from the system.</p>
-                        <a href="cancletrainfwd" class="btn btn-outline-light btn-sm">Delete Train</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-3">
                 <div class="card bg-secondary text-white rounded shadow">
                     <div class="card-body text-center">
                         <i class="fas fa-edit fa-3x mb-2"></i>
                         <h5 class="card-title">Update Train Details</h5>
                         <p class="card-text">Edit and update information for existing trains.</p>
-                        <a href="updatetrain" class="btn btn-outline-light btn-sm">Update Train Details</a>
+                        <a href="Adupdatetrain.jsp" class="btn btn-outline-light btn-sm">Update Train Details</a>
                     </div>
                 </div>
             </div>

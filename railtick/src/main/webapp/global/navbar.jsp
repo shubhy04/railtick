@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Navbar_Home</title>
+<title>RailTick</title>
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 <style>
@@ -78,7 +78,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="searchTrainDropdown">
                         <a class="dropdown-item" href="usersearchtrain"><i class="fas fa-search"></i> Search by Number</a>
-                        <a class="dropdown-item" href="trainbwstnfwd"><i class="fas fa-search"></i> Search by Name</a>
+                        <a class="dropdown-item" href="TrainBwStn.jsp"><i class="fas fa-search"></i> Search by Name</a>
                     </div>
                 </li>
                 <!-- End Search Train Dropdown -->
@@ -89,8 +89,8 @@
                         Other Features
                     </a>
                     <div class="dropdown-menu" aria-labelledby="otherFeaturesDropdown">
-                        <a class="dropdown-item" href="fareenqfwd"><i class="fas fa-dollar-sign"></i> Fare Enquiry</a>
-                        <a class="dropdown-item" href="useravailfwd"><i class="fas fa-chair"></i> Seat Availability</a>
+                        <a class="dropdown-item" href="Fare.jsp"><i class="fas fa-dollar-sign"></i> Fare Enquiry</a>
+                        <a class="dropdown-item" href="Availability.jsp"><i class="fas fa-chair"></i> Seat Availability</a>
                         <a class="dropdown-item" href="bookingdetails"><i class="fas fa-history"></i> Booking History</a>
                     </div>
                 </li>
